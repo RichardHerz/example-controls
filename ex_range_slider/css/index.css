@@ -1,0 +1,120 @@
+input {
+ display: block;
+ position: absolute;
+ text-align: center;
+}
+
+input, button {
+ text-align: center;
+}
+
+/* do NOT write general style for div since interferes
+    with plotting by jquery.flot.js */
+
+p {
+ display: block;
+ text-align: left;
+}
+
+label {
+ display: block;
+ position: absolute;
+}
+
+img {
+ display: block;
+ position: absolute;
+}
+
+select {
+ display: block;
+ position: absolute;
+}
+
+canvas {
+ display: block;
+ position: absolute;
+ text-align: left;
+}
+
+::-ms-tooltip {
+ display: none;
+}
+
+#field_output_field {
+ position: absolute;
+ left: 62px;
+ top: 257px;
+ width: 384px;
+ height: 139px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: outset;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#field_output_label {
+ position: absolute;
+ left: 90px;
+ top: 230px;
+ width: 91px;
+ height: 24px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#field_example_label {
+ position: absolute;
+ left: 59px;
+ top: 45px;
+ width: 371px;
+ height: 91px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: outset;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#range_range_slider {
+ left: 68px;
+ top: 195px;
+ width: 249px;
+ height: 24px;
+}
+
+#field_range_value {
+ position: absolute;
+ left: 247px;
+ top: 159px;
+ width: 68px;
+ height: 21px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#field_range_label {
+ position: absolute;
+ left: 63px;
+ top: 158px;
+ width: 181px;
+ height: 23px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
