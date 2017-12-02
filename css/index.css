@@ -1,0 +1,11 @@
+#field_example_label {
+ position: absolute;
+ left: 59px;
+ top: 45px;
+ width: 371px;
+ height: 91px;
+ visibility: visible;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}

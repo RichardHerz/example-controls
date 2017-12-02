@@ -69,20 +69,6 @@ canvas {
  font-size: 16px;
 }
 
-#field_example_label {
- position: absolute;
- left: 59px;
- top: 45px;
- width: 371px;
- height: 91px;
- border-width: 2px;
- visibility: visible;
- border-style: outset;
- opacity: 1;
- LCvScrollbar: false;
- font-size: 16px;
-}
-
 #button_Run {
  position: absolute;
  left: 66px;
@@ -106,4 +92,3 @@ canvas {
  border-style: outset;
  opacity: 1;
 }
-

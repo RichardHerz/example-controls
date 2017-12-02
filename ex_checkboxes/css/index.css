@@ -41,20 +41,6 @@ canvas {
  display: none;
 }
 
-#field_example_label {
- position: absolute;
- left: 59px;
- top: 45px;
- width: 371px;
- height: 91px;
- border-width: 2px;
- visibility: visible;
- border-style: outset;
- opacity: 1;
- LCvScrollbar: false;
- font-size: 16px;
-}
-
 #checkbox_Check_1_LABEL {
  width: 82px;
  height: 23px;
