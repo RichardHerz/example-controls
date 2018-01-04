@@ -1,96 +1,33 @@
-input {
- display: block;
- position: absolute;
- text-align: center;
-}
-
-input, button {
- text-align: center;
-}
-
-/* do NOT write general style for div since interferes
-    with plotting by jquery.flot.js */
-
-p {
- display: block;
- text-align: left;
-}
-
-label {
- display: block;
- position: absolute;
-}
-
-img {
- display: block;
- position: absolute;
-}
-
-select {
- display: block;
- position: absolute;
-}
-
-canvas {
- display: block;
- position: absolute;
- text-align: left;
-}
-
-::-ms-tooltip {
- display: none;
+#checkbox_Check_1 {
+ transform: scale(2);
 }
 
 #checkbox_Check_1_LABEL {
- width: 82px;
+ width: 102px;
  height: 23px;
  left: 130px;
  top: 173px;
 }
 
 #checkbox_Check_1_SPAN {
- margin-left: 22px;
- line-height: 18px;
- font-size: 16px;
+ margin-left: 28px;
+ line-height: 22px;
+ font-size: 20px;
+}
+
+#checkbox_Check_2 {
+ transform: scale(2);
 }
 
 #checkbox_Check_2_LABEL {
- width: 82px;
+ width: 102px;
  height: 23px;
  left: 130px;
- top: 204px;
+ top: 224px;
 }
 
 #checkbox_Check_2_SPAN {
- margin-left: 22px;
- line-height: 18px;
- font-size: 16px;
-}
-
-#field_output_label {
- position: absolute;
- left: 90px;
- top: 230px;
- width: 91px;
- height: 24px;
- border-width: 2px;
- visibility: visible;
- border-style: none;
- opacity: 1;
- LCvScrollbar: false;
- font-size: 16px;
-}
-
-#field_output_field {
- position: absolute;
- left: 62px;
- top: 257px;
- width: 384px;
- height: 139px;
- border-width: 2px;
- visibility: visible;
- border-style: outset;
- opacity: 1;
- LCvScrollbar: false;
- font-size: 16px;
+ margin-left: 28px;
+ line-height: 22px;
+ font-size: 20px;
 }
