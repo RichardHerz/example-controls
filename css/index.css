@@ -1,3 +1,46 @@
+input {
+ display: block;
+ position: absolute;
+ text-align: center;
+}
+
+input, button {
+ text-align: center;
+}
+
+/* do NOT write general style for div since interferes
+    with plotting by jquery.flot.js */
+
+p {
+ display: block;
+ text-align: left;
+}
+
+label {
+ display: block;
+ position: absolute;
+}
+
+img {
+ display: block;
+ position: absolute;
+}
+
+select {
+ display: block;
+ position: absolute;
+}
+
+canvas {
+ display: block;
+ position: absolute;
+ text-align: left;
+}
+
+::-ms-tooltip {
+ display: none;
+}
+
 #field_example_label {
  position: absolute;
  left: 59px;
@@ -5,6 +48,34 @@
  width: 371px;
  height: 91px;
  visibility: visible;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#field_output_label {
+ position: absolute;
+ left: 93px;
+ top: 324px;
+ width: 91px;
+ height: 24px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+ font-size: 16px;
+}
+
+#field_output_field {
+ position: absolute;
+ left: 65px;
+ top: 353px;
+ width: 384px;
+ height: 139px;
+ border-width: 2px;
+ visibility: visible;
+ border-style: outset;
  opacity: 1;
  LCvScrollbar: false;
  font-size: 16px;
