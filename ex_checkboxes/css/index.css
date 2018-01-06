@@ -2,32 +2,32 @@
  transform: scale(2);
 }
 
+#checkbox_Check_2 {
+ transform: scale(2);
+}
+
 #checkbox_Check_1_LABEL {
- width: 102px;
+ width: 122px;
  height: 23px;
  left: 130px;
  top: 173px;
 }
 
-#checkbox_Check_1_SPAN {
- margin-left: 28px;
- line-height: 22px;
- font-size: 20px;
-}
-
-#checkbox_Check_2 {
- transform: scale(2);
-}
-
 #checkbox_Check_2_LABEL {
- width: 102px;
+ width: 122px;
  height: 23px;
  left: 130px;
  top: 224px;
 }
 
+#checkbox_Check_1_SPAN {
+ margin-left: 36px;
+ line-height: 22px;
+ font-size: 20px;
+}
+
 #checkbox_Check_2_SPAN {
- margin-left: 28px;
+ margin-left: 36px;
  line-height: 22px;
  font-size: 20px;
 }

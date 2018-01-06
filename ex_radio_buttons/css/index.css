@@ -3,8 +3,8 @@
  position: absolute;
  left: 132px;
  top: 170px;
- width: 141px;
- height: 65px;
+ width: 180px;
+ height: 90px;
  visibility: visible;
  border-width: 2px;
  border-style: outset;
@@ -12,28 +12,36 @@
  LCvScrollbar: false;
 }
 
-#radio_Radio_button_1_LABEL {
- width: 139px;
- height: 23px;
- left: 6px;
- top: 6px;
+#radio_Radio_button_1 {
+ transform: scale(2);
 }
 
-#radio_Radio_button_1_SPAN {
- margin-left: 22px;
- line-height: 22px;
- font-size: 16px;
+#radio_Radio_button_2 {
+ transform: scale(2);
+}
+
+#radio_Radio_button_1_LABEL {
+ width: 160px;
+ height: 23px;
+ left: 12px;
+ top: 12px;
 }
 
 #radio_Radio_button_2_LABEL {
- width: 139px;
+ width: 160px;
  height: 23px;
- left: 6px;
- top: 36px;
+ left: 12px;
+ top: 52px;
+}
+
+#radio_Radio_button_1_SPAN {
+ margin-left: 34px;
+ line-height: 22px;
+ font-size: 20px;
 }
 
 #radio_Radio_button_2_SPAN {
- margin-left: 22px;
+ margin-left: 34px;
  line-height: 22px;
- font-size: 16px;
+ font-size: 20px;
 }
