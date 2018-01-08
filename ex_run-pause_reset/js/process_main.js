@@ -98,9 +98,6 @@ function runSimulation() {
     startDate = new Date(); // need this here
     startMs = startDate.getTime();
 
-    // NEW - MOVE THE REPEAT THAT STEPS THE CATALYST LAYER INTO
-    // THE UPDATE STATE METHOD OF THE CATALYST
-
     updateProcessUnits(resetFlag);
 
     // repeating updateProcessUnits must finish before
