@@ -1,3 +1,17 @@
+#div_checkbox_group_1 {
+ display: block;
+ position: absolute;
+ left: 60px;
+ top: 160px;
+ width: 200px;
+ height: 100px;
+ visibility: visible;
+ border-width: 2px;
+ border-style: outset;
+ opacity: 1;
+ LCvScrollbar: false;
+}
+
 #checkbox_Check_1 {
  transform: scale(2);
 }
@@ -9,15 +23,15 @@
 #checkbox_Check_1_LABEL {
  width: 122px;
  height: 23px;
- left: 130px;
- top: 173px;
+ left: 30px;
+ top: 20px;
 }
 
 #checkbox_Check_2_LABEL {
  width: 122px;
  height: 23px;
- left: 130px;
- top: 224px;
+ left: 30px;
+ top: 60px;
 }
 
 #checkbox_Check_1_SPAN {

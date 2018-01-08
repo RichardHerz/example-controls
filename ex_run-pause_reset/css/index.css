@@ -1,23 +1,25 @@
 #button_Run {
  position: absolute;
  left: 66px;
- top: 190px;
- width: 82px;
- height: 23px;
+ top: 250px;
+ width: 111px;
+ height: 47px;
  visibility: visible;
  border-width: 2px;
  border-style: outset;
  opacity: 1;
+ font-size: 18px;
 }
 
 #button_Reset {
  position: absolute;
- left: 165px;
- top: 190px;
- width: 82px;
- height: 23px;
+ left: 201px;
+ top: 250px;
+ width: 111px;
+ height: 47px;
  visibility: visible;
  border-width: 2px;
  border-style: outset;
  opacity: 1;
+ font-size: 18px;
 }

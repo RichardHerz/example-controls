@@ -1,6 +1,6 @@
 #range_range_slider {
- left: 68px;
- top: 195px;
+ left: 72px;
+ top: 210px;
  width: 249px;
  height: 24px;
 }
@@ -16,7 +16,7 @@
  border-style: none;
  opacity: 1;
  LCvScrollbar: false;
- font-size: 16px;
+ font-size: 20px;
 }
 
 #field_range_label {
@@ -30,5 +30,5 @@
  border-style: none;
  opacity: 1;
  LCvScrollbar: false;
- font-size: 16px;
+ font-size: 20px;
 }
