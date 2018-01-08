@@ -14,6 +14,7 @@ input, button {
 p {
  display: block;
  text-align: left;
+ font-size: 20px;
 }
 
 label {
@@ -50,7 +51,7 @@ canvas {
  visibility: visible;
  opacity: 1;
  LCvScrollbar: false;
- font-size: 16px;
+ font-size: 20px;
 }
 
 #field_output_label {
@@ -64,7 +65,7 @@ canvas {
  border-style: none;
  opacity: 1;
  LCvScrollbar: false;
- font-size: 16px;
+ font-size: 20px;
 }
 
 #field_output_field {
@@ -78,5 +79,5 @@ canvas {
  border-style: outset;
  opacity: 1;
  LCvScrollbar: false;
- font-size: 16px;
+ font-size: 20px;
 }

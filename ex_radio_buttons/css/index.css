@@ -1,10 +1,10 @@
 #div_radio_group_1 {
  display: block;
  position: absolute;
- left: 132px;
- top: 170px;
- width: 180px;
- height: 90px;
+ left: 60px;
+ top: 210px;
+ width: 200px;
+ height: 100px;
  visibility: visible;
  border-width: 2px;
  border-style: outset;
@@ -24,14 +24,14 @@
  width: 160px;
  height: 23px;
  left: 12px;
- top: 12px;
+ top: 18px;
 }
 
 #radio_Radio_button_2_LABEL {
  width: 160px;
  height: 23px;
  left: 12px;
- top: 52px;
+ top: 62px;
 }
 
 #radio_Radio_button_1_SPAN {
