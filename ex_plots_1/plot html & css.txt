@@ -1,0 +1,83 @@
+==================== NOTES ON JAVASCRIPT ===================== 
+
+Consider using existing plotting scripts and not extracting parts into an example file... 
+
+Arrays that hold data for x-y data plotting are stripData and profileData and are initialized in process_plot_info.js by calling initialization function in process_plotter.js (initializing in process_units.js did not work - see comment there) 
+
+The data in the stripData and profileData arrays are updated by the process units in process_units.js. 
+
+The strip and profile plots only differ in that a complete new data set is filled at each time for profile plots, whereas only one new data point pushed in and old out for strip plots, and these updates are done in process_units.js. 
+
+The plots are defined in process_plot_info.js. 
+
+The plots are plotted by call in process_main.js and executed by functions in process_plotter.js. 
+
+FOR SPACE-TIME COLOR PLOT
+
+Array spaceTimeData is defined as a GLOBAL and initialized in process_spacetime.js. Array spaceTimeData is updated in process_units.js. Array spaceTimeData is converted to color values and plotted in process_spacetime.js in function plotSpaceTimePlot.
+
+====================== HTML ===================================
+
+IN HEAD
+
+<!-- load main JAVASCRIPT for this lab -->
+<script language="javascript" src="js/process_main.js" type="text/javascript"></script>
+<script language="javascript" src="js/process_interface.js" type="text/javascript"></script>
+<script language="javascript" src="js/process_units.js" type="text/javascript"></script>
+<script language="javascript" src="js/process_plotter.js" type="text/javascript"></script>
+<script language="javascript" src="js/process_plot_info.js" type="text/javascript"></script>
+<script language="javascript" src="js/process_spacetime.js" type="text/javascript"></script>
+
+<!-- load flot PLOTTING LIBRARY -->
+<!-- need full jquery.js for flot.js to work -->
+<script language="javascript" src="js/jquery.js" type="text/javascript"></script>
+<script language="javascript" src="js/flot_library/jquery.flot.js" type="text/javascript"></script>
+<script language="javascript" src="js/flot_library/jquery.flot.axislabels.js" type="text/javascript"></script>
+  
+IN BODY BLANK DIV FOR X-Y PLOT 
+
+   <div id="div_plotCanvasInlet_1195">
+   </div> <!-- end of div div_plotCanvasInlet_1195 --> 
+   
+IN BODY BLANK CANVAS FOR COLOR PLOT 
+
+<canvas id="canvas_CANVAS_rate"></canvas> 
+
+====================== CSS ===================================
+
+#div_plotCanvasInlet_1195 {
+ display: block;
+ position: absolute;
+ left: 425px;
+ /*top: 181px;*/
+ top: 141px;
+ width: 526px;
+ height: 120px;
+ visibility: visible;
+ border-width: 2px;
+ background-color: rgb(102,255,255);
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+} 
+
+#canvas_CANVAS_rate {
+ position: absolute;
+ left: 450px; /* 454px */
+ /*top: 700px;*/
+  top: 660px;
+ width: 499px; /* 495px */
+ height: 80px;
+ visibility: visible;
+ border-width: 0px;
+ background-color: rgb(0,255,0);
+ border-style: outset;
+ opacity: 1;
+}
+
+====================== CSS =================================== 
+
+
+
+
+  

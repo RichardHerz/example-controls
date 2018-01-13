@@ -1,0 +1,28 @@
+#div_plot_group_1 {
+ display: block;
+ position: absolute;
+ left: 60px;
+ top: 160px;
+ width: 546px;
+ height: 140px;
+ visibility: visible;
+ border-width: 2px;
+ border-style: outset;
+ opacity: 1;
+ LCvScrollbar: false;
+}
+
+#div_plotCanvas_1 {
+ display: block;
+ position: absolute;
+ left: 10px;
+ top: 10px;
+ width: 526px;
+ height: 120px;
+ visibility: visible;
+ border-width: 2px;
+ background-color: rgb(102,255,255);
+ border-style: none;
+ opacity: 1;
+ LCvScrollbar: false;
+}
