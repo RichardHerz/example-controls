@@ -1,15 +1,15 @@
 #div_plot_group_1 {
- display: block;
- position: absolute;
- left: 60px;
- top: 160px;
- width: 546px;
- height: 140px;
- visibility: visible;
- border-width: 2px;
- border-style: outset;
- opacity: 1;
- LCvScrollbar: false;
+  display: block;
+  position: absolute;
+  left: 60px;
+  top: 300px;
+  width: 546px;
+  height: 240px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: outset;
+  opacity: 1;
+  LCvScrollbar: false;
 }
 
 #div_plotCanvas_1 {
@@ -18,11 +18,91 @@
  left: 10px;
  top: 10px;
  width: 526px;
- height: 120px;
+ height: 220px;
  visibility: visible;
  border-width: 2px;
  background-color: rgb(102,255,255);
  border-style: none;
  opacity: 1;
  LCvScrollbar: false;
+}
+
+#div_run_reset_group {
+  display: block;
+  position: absolute;
+  left: 60px;
+  top: 120px;
+  width: 337;
+  height: 100px;
+  visibility: visible;
+  border-width: 0px;
+  border-style: outset;
+  opacity: 1;
+  LCvScrollbar: false;
+}
+
+#button_Run {
+ position: absolute;
+ left: 66px;
+ top: 20px;
+ width: 111px;
+ height: 47px;
+ visibility: visible;
+ border-width: 2px;
+ border-style: outset;
+ opacity: 1;
+ font-size: 18px;
+}
+
+#button_Reset {
+ position: absolute;
+ left: 201px;
+ top: 20px;
+ width: 111px;
+ height: 47px;
+ visibility: visible;
+ border-width: 2px;
+ border-style: outset;
+ opacity: 1;
+ font-size: 18px;
+}
+
+#div_checkbox_group_1 {
+ display: block;
+ position: absolute;
+ left: 60px;
+ top: 200px;
+ width: 337px;
+ height: 51px;
+ visibility: visible;
+ border-width: 2px;
+ border-style: outset;
+ opacity: 1;
+ LCvScrollbar: false;
+}
+
+#checkbox_sine_wave_LABEL {
+ width: 158px;
+ height: 39px;
+ left: 20px;
+ top: 14px;
+}
+
+#checkbox_sine_wave_SPAN {
+ margin-left: 22px;
+ line-height: 18px;
+ font-size: 16px;
+}
+
+#checkbox_sawtooth_wave_LABEL {
+ width: 158px;
+ height: 39px;
+ left: 173px;
+ top: 14px;
+}
+
+#checkbox_sawtooth_wave_SPAN {
+ margin-left: 22px;
+ line-height: 18px;
+ font-size: 16px;
 }

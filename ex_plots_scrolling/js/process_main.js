@@ -1,4 +1,3 @@
-
 /*
   Design, text, images and code by Richard K. Herz, 2017
   Copyrights held by Richard K. Herz
@@ -6,183 +5,235 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-// uses object simParams from file process_units.js
+// DECLARE GLOBAL VARIABLES
+// in web labs, some may be declared as local variables in objects
+var runningFlag = false;
+var runButtonID = "button_Run";
+var resetFlag = 0; // 0 for no reset, 1 for reset lab
+var simTime = 0;
+var dt = 1;
 
-// this file contains common simulation functions
-// see file process_units.js for simulation parameter values and
-// definitions of the process units
+// DISPLAY INITIAL STATE ON OPEN WINDOW
+window.onload = openThisLab;
 
-  // DISPLAY INITIAL STATE ON OPEN WINDOW
-  window.onload = openThisLab;
+function openThisLab() {
+  resetFlag = 1; // 0 for no reset, 1 for reset lab
+  updateProcessUnits(resetFlag);
+  updateDisplay(resetFlag);
+} // END OF function openThisLab
 
-  function openThisLab() {
-    var resetFlag = 1; // 0 for no reset, 1 for reset lab
+// ----------------- HANDLE UI CONTROLS ----------------------
+
+// HANDLE RUN-PAUSE BUTTON CLICK
+function runThisLab() {
+  // CALLED BY UI RUN-PAUSE BUTTON DEFINED IN HTML
+  // TOGGLE runningFlag FIRST before doing stuff below
+  if (runningFlag) {
+    runningFlag = false;
+  } else {
+    runningFlag = true;
+  }
+  if (runningFlag) {
+    eval(runButtonID + '.value = "Pause"');
+    runSimulation();
+  } else {
+    eval(runButtonID + '.value = "Run"');
+  }
+} // END OF function runThisLab
+
+// HANDLE RESET BUTTON CLICK
+function resetThisLab() {
+  // uses object simParams from file process_units.js
+  // input argument is the RUN button ID, not the reset button ID
+  runningFlag = false;
+  resetSimTime();
+  resetFlag = 1; // 0 for no reset, 1 for reset lab
+  updateProcessUnits(resetFlag);
+  updateDisplay(resetFlag);
+  eval(runButtonID + '.value = "Run"');
+  // do NOT update process nor display again here (will take one step)
+} // END OF function resetThisLab
+
+// HANDLE CHECKBOXES WHICH SELECT DATA SHOWN
+function check_checkboxes() {
+  // check checkboxes and update display
+  var el1 = document.querySelector('#checkbox_sine_wave');
+  var el2 = document.querySelector('#checkbox_sawtooth_wave');
+  // global object plotsObj defined in process_plot_info.js
+  // and used in updateDisplay in this file
+  if (el1.checked) {
+    plotsObj[0]['varShow'][0] = 'show';
+  } else {
+    plotsObj[0]['varShow'][0] = 'hide';
+  }
+  if (el2.checked) {
+    plotsObj[0]['varShow'][1] = 'show';
+  } else {
+    plotsObj[0]['varShow'][1] = 'hide';
+  }
+  updateDisplay(0);
+} // END OF function check_checkboxes
+
+// ----------------- RUN SIMULATION ----------------------
+
+function resetSimTime() {
+  simTime = 0;
+}
+
+function runSimulation() {
+
+  // CALLED BY function runThisLab ON CLICK OF RUN-PAUSE BUTTON
+
+  // HERE, THE TIME STEP SIZE MUST BE CONSTANT WITHIN ONE DISPLAY
+  // INTERVAL TO MAINTAIN CORRESPONDENCE BETWEEN SIM TIME AND REAL TIME
+  // FOR A DIFFERENT CASE WHERE THE INTEGRATION TIME STEP SIZE CAN VARY
+  // BETWEEN updateProcessUnits YOU NEED
+  // THE MORE COMPLEX TIMING METHOD USED IN dynamic-process-v2.livecode
+
+  resetFlag = 0; // 0 for no reset, 1 for reset lab
+
+  // updateDisplayTimingMs is real time milliseconds between display updates
+  var updateDisplayTimingMs = 100;
+  var startDate = new Date(); // need this here
+  var startMs;
+  var currentMs;
+  var elapsedMs;
+  // updateMs is computed below in function updateProcess to be real time
+  // between finish last display update and start next update process
+  var updateMs = 0; // initialize as zero for first call immediately below
+
+  // first call to updateProcess, which then calls itself
+  // use setTimeout, since updateProcess by itself does not work
+  setTimeout(updateProcess, updateMs);
+
+  function updateProcess() {
+
+    if (!runningFlag) {
+      // exit if runningFlag is not true
+      // runningFlag can become not true by click of RUN-PAUSE or RESET buttons
+      return;
+    }
+
+    // get time at start of repeating updateProcessUnits
+    startDate = new Date(); // need this here
+    startMs = startDate.getTime();
+
     updateProcessUnits(resetFlag);
-    updateDisplay(resetFlag);
 
-    $.post("../webAppCurrentCount.lc",{webAppNumber: "7"}) .done(function(data) {
-      document.getElementById("field_run_counter").innerHTML = "<i>Total runs = " + data + "</i>"; } );
+    // repeating updateProcessUnits must finish before
+    // latest real time at which updateDisplay must occur in order
+    // to maintain correspondence between sim time and real time
 
-  } // END OF function openThisLab
+    // get time at end of repeating updateProcessUnits and call
+    // to updateDisplay from updateDisplay function return value
+    currentMs = updateDisplay(resetFlag);
 
-  function runSimulation() {
+    // Adjust wait until next updateProcess to allow for time taken
+    // to do updateProcessUnits and updateDisplay.
+    // In order to respond to user input, do not need updateMs > 0.
+    // BUT DO NEED updateMs > 0 to keep sync between sim time and real time.
+    elapsedMs = currentMs - startMs;
+    updateMs = updateDisplayTimingMs - elapsedMs;
 
-    // CALLED BY function runThisLab ON CLICK OF RUN-PAUSE BUTTON
+    var tIdleTime = 100*(1-elapsedMs/updateMs);
+    tIdleTime = Number(tIdleTime).toPrecision(2);
 
-    // HERE, THE INTEGRATION TIME STEP SIZE MUST BE CONSTANT WITHIN ONE DISPLAY
-    // INTERVAL TO MAINTAIN CORRESPONDENCE BETWEEN SIM TIME AND REAL TIME
-    // FOR A DIFFERENT CASE WHERE THE INTEGRATION TIME STEP SIZE CAN VARY
-    // BETWEEN updateProcessUnits YOU NEED
-    // THE MORE COMPLEX TIMING METHOD USED IN dynamic-process-v2.livecode
+    // END updateProcess WITH CALL TO ITSELF AFTER updateMs WAIT
+    setTimeout(updateProcess, updateMs);  // updateMs
 
-    var resetFlag = 0; // 0 for no reset, 1 for reset lab
-    // updateDisplayTimingMs is real time milliseconds between display updates
-    var updateDisplayTimingMs = simParams.updateDisplayTimingMs;
-    var startDate = new Date(); // need this here
-    var startMs;
-    var currentMs;
-    var elapsedMs;
-    // updateMs is computed below in function updateProcess to be real time
-    // between finish last display update and start next update process
-    var updateMs = 0; // initialize as zero for first call immediately below
+  } // END OF function updateProcess (inside function runSimulation)
 
-    // first call to updateProcess, which then calls itself
-    // use setTimeout, since updateProcess by itself does not work
-    setTimeout(updateProcess, updateMs);
+} // END OF function runSimulation
 
-    function updateProcess() {
-
-      var runningFlag = simParams.runningFlag;
-      if (!runningFlag) {
-        // exit if runningFlag is not true
-        // runningFlag can become not true by click of RUN-PAUSE or RESET buttons
-        return;
-      }
-
-      // get time at start of repeating updateProcessUnits
-      startDate = new Date(); // need this here
-      startMs = startDate.getTime();
-
-      // NEW - MOVE THE REPEAT THAT STEPS THE CATALYST LAYER INTO
-      // THE UPDATE STATE METHOD OF THE CATALYST
-
-      updateProcessUnits(resetFlag);
-
-      // repeating updateProcessUnits must finish before
-      // latest real time at which updateDisplay must occur in order
-      // to maintain correspondence between sim time and real time
-      //
-      // var i;
-      // var stepRepeats = simParams.stepRepeats;
-      // for (i = 0; i < stepRepeats; i += 1) {
-      //   updateProcessUnits(resetFlag);
-      // }
-
-      // // NEW - UPDATE SIM TIME IN THE CATALYST LAYERS LOOP
-      // // update simTime = simulation time elapsed
-      // simParams.updateSimTime();
-
-      // get time at end of repeating updateProcessUnits and call
-      // to updateDisplay from updateDisplay function return value
-      currentMs = updateDisplay(resetFlag);
-
-      // Adjust wait until next updateProcess to allow for time taken
-      // to do updateProcessUnits and updateDisplay.
-      // In order to respond to user input, do not need updateMs > 0.
-      // BUT DO NEED updateMs > 0 to keep sync between sim time and real time.
-      elapsedMs = currentMs - startMs;
-      updateMs = updateDisplayTimingMs - elapsedMs;
-
-      var tIdleTime = 100*(1-elapsedMs/updateMs);
-      tIdleTime = Number(tIdleTime).toPrecision(2);
-
-      // xxx DISPLAY TIMING DATA DURING DEVELOPMENT
-      // document.getElementById("dev01").innerHTML = "% idle = " + tIdleTime + "&nbsp;&nbsp;";
-      // document.getElementById("dev01").innerHTML = "elapsedMs = " + elapsedMs + "&nbsp;&nbsp;";
-
-      // END updateProcess WITH CALL TO ITSELF AFTER updateMs WAIT
-      setTimeout(updateProcess, updateMs);  // updateMs
-
-    } // END OF function updateProcess (inside function runSimulation)
-
-  } // END OF function runSimulation
+function updateDisplay(resetFlag) {
+  // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
+  var thisDate = new Date();
+  var thisMs = thisDate.getTime();
+  if (resetFlag) {
+    // do any actions needed to reset display
+  }
+  document.getElementById("field_output_field").innerHTML = simTime;
+  return thisMs;
+}  // END OF function updateDisplay
 
   function updateProcessUnits(resetFlag) {
     // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
-    // step all units but do not display
+    // update all units but do not display
 
-    var unitList = simParams.processUnits;
-    var tmpFunc = new Function();
+    // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
+    // var simTime
+    //
+    // THESE GLOBAL VARS ARE DEFINED IN process_plot_info.js
+    // var numStripVars
+    // var numStripPoints
+    // var stripData
 
-    // FIRST, have all units update their input connection values
-    unitList.forEach(fUpdateInputs);
-    function fUpdateInputs(unitName) {
-      tmpFunc = new Function(unitName + ".updateInputs();");
-      tmpFunc();
+    // INCREMENT SIMULATION TIME
+    if (resetFlag) {
+      resetSimTime();
+    } else {
+      simTime += dt; // increment simTime by time step value dt
     }
 
-    // SECOND, have all units update their state
-    unitList.forEach(fUpdateState);
-    function fUpdateState(unitName) {
+    // UPDATE PLOT y-axis VALUES - THE PROCESS HERE
+    if (resetFlag) {
+      stripData = initPlotData(numStripVars,numStripPoints);
+    } else {
 
-      if (resetFlag) {
-        tmpFunc = new Function(unitName + ".reset();");
-        tmpFunc();
+      var x = simTime/numStripPoints;
+      newSine = 0.5 + 0.5*Math.sin(2*Math.PI*2* x );
+      newSawtooth = 0.5 - 1/Math.PI * Math.atan(1/Math.tan(Math.PI* x /0.25));
+
+      // update stripData for first var
+      var v = 0;
+      var d = newSine;
+      tempArray = stripData[v]; // work on one plot variable at a time
+      // delete first and oldest element which is an [x,y] pair array
+      tempArray.shift();
+      // add the new [x,y] pair array at end
+      tempArray.push( [ 0, d ] );
+      // update the variable being processed
+      stripData[v] = tempArray;
+
+      // update stripData for second var
+      v = 1;
+      d = newSawtooth;
+      tempArray = stripData[v]; // work on one plot variable at a time
+      // delete first and oldest element which is an [x,y] pair array
+      tempArray.shift();
+      // add the new [x,y] pair array at end
+      tempArray.push( [ 0, d ] );
+      // update the variable being processed
+      stripData[v] = tempArray;
+
+      // re-number x-axis values
+      var k = 0;
+      for (k=0; k<=numStripPoints; k+=1) {
+        x = k/numStripPoints;
+        stripData[0][k][0] = x;
+        stripData[1][k][0] = x;
       }
 
-      tmpFunc = new Function(unitName + ".updateState();");
-      tmpFunc();
-    }
-
+    } // END OF if (resetFlag) {} else {}
   } // END OF updateProcessUnits
 
   function updateDisplay(resetFlag) {
-
-    var unitList = simParams.processUnits;
-
-    // display all units but do not step
-    unitList.forEach(fDisplay);
-    function fDisplay(unitName) {
-      if (resetFlag) {
-        var tmpFunc = new Function(unitName + ".reset();");
-        tmpFunc();
-      }
-      var tmpFunc = new Function(unitName + ".display();");
-      tmpFunc();
-      }
-
     // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info
     // plots are specified in object plotsObj in file process_plot_info.js
+    //
     var npl = Object.keys(plotsObj).length; // number of plots
     var p; // used as index
     var data;
     for (p = 0; p < npl; p += 1) {
-      data = getPlotData2(p);
-      plotPlotData2(data,p);
+      data = getPlotData(p);
+      plotPlotData(data,p);
     }
-
-    // NEW - plot space-time plots - NEW
-    plotSpaceTimePlot();
-
     // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
     var thisDate = new Date();
     var thisMs = thisDate.getTime();
+    if (resetFlag) {
+      // do any actions needed to reset display
+    }
     return thisMs;
 
   }  // END OF function updateDisplay
-
-  function updateUIparams() {
-    // Update user-entered inputs from UI to ALL units.
-    // Could be called from onclick or onchange in HTML element, if desired.
-    // Alternative: in HTML input tag onchange, send unitName.updateUIparams()
-    // to method updateUIparams of specific unit involved in that input.
-
-    var unitList = simParams.processUnits;
-
-    unitList.forEach(fUpdateUIparams);
-    function fUpdateUIparams(unitName) {
-      var tmpFunc = new Function(unitName + ".updateUIparams();");
-      tmpFunc();
-    }
-
-  }  // END OF function updateUIparams

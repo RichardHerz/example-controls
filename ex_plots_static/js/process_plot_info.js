@@ -21,7 +21,11 @@ var profileData = initPlotData(numberVariables,numberPoints); // holds data for 
 plotFlag = [0,0];
 var plot = [];
 
-// declare parent OBJECT to hold plot info
+// DECLARE PARENT OBJECT TO HOLD PLOT INFO
+// more than one plot can be put one one web page by
+// defining multiple object children, where the first index
+// plotsObj[0] is the plot number index (starting at 0)
+//
 var plotsObj = new Object();
   //
   // USE THIS TO GET NUMBER OF plots, i.e., top-level children of plotsObj
