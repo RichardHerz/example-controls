@@ -14,8 +14,8 @@
   <script language="javascript" src="js/process_main.js" type="text/javascript"></script>
 
   <!-- load plotting JAVASCRIPT for this lab -->
-  <script language="javascript" src="js/process_plot_info.js" type="text/javascript"></script>
   <script language="javascript" src="js/process_plotter.js" type="text/javascript"></script>
+  <script language="javascript" src="js/process_plot_info.js" type="text/javascript"></script>
 
 <!-- load flot PLOTTING LIBRARY -->
 <!-- need full jquery.js for flot.js to work -->
@@ -25,19 +25,29 @@
 
 </head>
 <body>
-  <p><a href="../index.html">Examples of web controls</a> &gt; plots</p>
+  <p><a href="../index.html">Examples of web controls</a> &gt; plots - static</p>
   <p id="field_example_label">
-  X-Y Plot example:
+  X-Y Plot example - static plot - profile plot:
   <br>
   </p>
+  <div id="div_checkbox_group_1">
+     <label id="checkbox_sine_wave_LABEL">
+        <input type="checkbox" id="checkbox_sine_wave" checked onchange="check_checkboxes()">
+        <span id="checkbox_sine_wave_SPAN">sine wave</span>
+     </label>
+     <label id="checkbox_sawtooth_wave_LABEL">
+        <input type="checkbox" id="checkbox_sawtooth_wave" checked onchange="check_checkboxes()">
+        <span id="checkbox_sawtooth_wave_SPAN">sawtooth wave</span>
+     </label>
+  </div> <!-- end of div div_checkbox_group_1 -->
   <div id="div_plot_group_1"> <!-- div for outer box around plot -->
     <div id="div_plotCanvas_1"> <!-- div that flot.js fills with plot -->
     </div> <!-- end of div div_plotCanvas_1 -->
   </div> <!-- end of div_plot_group_1 -->
-  <p id="field_output_label">
+  <!-- <p id="field_output_label">
   Output:
   </p>
   <p id="field_output_field">
-  </p>
+  </p> -->
 </body>
 </html>
