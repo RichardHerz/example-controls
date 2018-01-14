@@ -5,6 +5,10 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
+// declare plot array used below in function plotPlotData
+// does not work when declared inside function plotPlotData...
+var plot = [];
+
 function initPlotData(numVar,numPlotPoints) {
   // returns 3D array to hold x,y scatter plot data for multiple variables
   // inputs are list of variables and # of x,y point pairs per variable
@@ -186,16 +190,17 @@ function plotPlotData(pData,pNumber) {
     }
   }
 
-// only draw plot with axes and all options the first time /
-// after that just setData ad re-draw
-// for 4 plots, this runs in 60% of the time
-if (plotFlag[pNumber] == 0) {
-  plotFlag[pNumber] = 1;
-  // var plot = $.plot($(plotCanvasHtmlID), dataToPlot, options);
-  plot[pNumber] = $.plot($(plotCanvasHtmlID), dataToPlot, options);
-} else {
-  plot[pNumber].setData(dataToPlot);
-  plot[pNumber].draw();
-}
+  // only draw plot with axes and all options the first time /
+  // after that just setData ad re-draw
+  // for example, for 4 plots on page, this ran in 60% of time for full refresh
+  // array plotFlag declared in file process_plot_info.js
+  // array plot declared above in this file
+  if (plotFlag[pNumber] == 0) {
+    plotFlag[pNumber] = 1;
+    plot[pNumber] = $.plot($(plotCanvasHtmlID), dataToPlot, options);
+  } else {
+    plot[pNumber].setData(dataToPlot);
+    plot[pNumber].draw();
+  }
 
 } // END OF function plotPlotData
