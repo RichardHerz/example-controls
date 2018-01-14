@@ -25,7 +25,10 @@ var stripData = initPlotData2(numStripVars,numStripPoints);
 // INPUTS ARE: initPlotData2(numberVariables,numberPoints);
 var profileData = initPlotData2(4,puCatalystLayer.numNodes); // holds data for profile plots
 
-// declare parent OBJECT to hold plot info
+// DECLARE PARENT OBJECT TO HOLD PLOT INFO
+// more than one plot can be put one one web page by
+// defining multiple object children, where the first index
+// plotsObj[0] is the plot number index (starting at 0)
 var plotsObj = new Object();
   //
   // USE THIS TO GET NUMBER OF plots, i.e., top-level children of plotsObj

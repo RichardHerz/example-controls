@@ -42,6 +42,7 @@
     // var profileData
 
     var x = 0;
+    var k = 0;
     for (k=0; k<=numberPoints; k+=1) {
 
       // x-axis values
