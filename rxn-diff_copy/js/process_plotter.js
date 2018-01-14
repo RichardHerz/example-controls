@@ -5,27 +5,14 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-/* WARNING - WARNING 
+/* WARNING - WARNING
   This copy of process_plotter.js has additional lines for specific web lab
   See:  if (puCatalystLayer.model == 1 && plotsObjNum == 0 && v == 1)
   which is specific to reaction-diffusion web app
 */
 
-// set up flag and plot array so don't have to generate
-// entire plot everytime want to just change data (and not axes, etc.)
-// Speed change in desktop Chrome is 3 sec vs. 5 sec.
-// Speed change in iPhone Chrome is 11 sec vs. 16 sec
-
-// var npl = Object.keys(plotsObj).length; // number of plots
-// var p; // used as index
-// var plotFlag = [0];
-// for (p = 1; p < npl; p += 1) {
-//   plotFlag.push(0);
-// }
-// xxx getting error that plotsObj does't exist yet...
-// xxx so don't automate and enter 0's for each plot
-
-plotFlag = [0,0,0,0];
+// declare plot array used below in function plotPlotData
+// does not work when declared inside function plotPlotData...
 var plot = [];
 
 function initPlotData2(numVar,numPlotPoints) {

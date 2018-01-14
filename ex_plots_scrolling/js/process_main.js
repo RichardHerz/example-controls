@@ -71,7 +71,8 @@ function check_checkboxes() {
   } else {
     plotsObj[0]['varShow'][1] = 'hide';
   }
-  updateDisplay(0);
+  resetFlag = 0; // 0 for no reset, 1 for reset lab
+  updateDisplay(resetFlag);
 } // END OF function check_checkboxes
 
 // ----------------- RUN SIMULATION ----------------------
@@ -159,6 +160,9 @@ function updateDisplay(resetFlag) {
   function updateProcessUnits(resetFlag) {
     // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
     // update all units but do not display
+
+    // THIS EXAMPLE PROCESS simply updates simulation time
+    // and updates sine and sawtooth waves for plot
 
     // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
     // var simTime
