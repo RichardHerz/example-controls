@@ -115,5 +115,6 @@ function initPlotData(numVar,numPlotPoints) {
   //    plotDataStub [v] [p+1] [1] = 0; // etc.
 } // end function initPlotData
 
+// initialize data arrays - must follow function initPlotData in this file
 var profileData = initPlotData(numProfileVars,numProfilePts); // holds data for static profile plots
 var stripData = initPlotData(numStripVars,numStripPts); // holds data for scrolling strip chart plots
