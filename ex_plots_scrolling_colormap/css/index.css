@@ -2,9 +2,9 @@
   display: block;
   position: absolute;
   left: 60px;
-  top: 300px;
+  top: 240px;
   width: 546px;
-  height: 240px;
+  height: 200px;
   visibility: visible;
   border-width: 2px;
   border-style: outset;
@@ -12,19 +12,17 @@
   LCvScrollbar: false;
 }
 
-#div_plotCanvas_1 {
- display: block;
+#canvas_CANVAS_rate {
  position: absolute;
- left: 10px;
- top: 10px;
- width: 526px;
- height: 220px;
+ left: 20px;
+ top: 20px;
+ width: 510px;
+ height: 160px;
  visibility: visible;
- border-width: 2px;
- background-color: rgb(102,255,255);
- border-style: none;
+ border-width: 0px;
+ background-color: rgb(0,255,0);
+ border-style: outset;
  opacity: 1;
- LCvScrollbar: false;
 }
 
 #div_run_reset_group {
@@ -65,44 +63,4 @@
  border-style: outset;
  opacity: 1;
  font-size: 18px;
-}
-
-#div_checkbox_group_1 {
- display: block;
- position: absolute;
- left: 60px;
- top: 220px;
- width: 337px;
- height: 51px;
- visibility: visible;
- border-width: 2px;
- border-style: outset;
- opacity: 1;
- LCvScrollbar: false;
-}
-
-#checkbox_sine_wave_LABEL {
- width: 158px;
- height: 39px;
- left: 20px;
- top: 14px;
-}
-
-#checkbox_sine_wave_SPAN {
- margin-left: 22px;
- line-height: 18px;
- font-size: 16px;
-}
-
-#checkbox_sawtooth_wave_LABEL {
- width: 158px;
- height: 39px;
- left: 173px;
- top: 14px;
-}
-
-#checkbox_sawtooth_wave_SPAN {
- margin-left: 22px;
- line-height: 18px;
- font-size: 16px;
 }

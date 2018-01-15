@@ -39,6 +39,11 @@ function check_checkboxes() {
 // ----------------- RUN SIMULATON ----------------------
 
 function updateProcessUnits(resetFlag) {
+
+  if (resetFlag) {
+    // do any actions needed to reset update process units
+  }
+
   // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
   // update all units but do not display
 
@@ -63,13 +68,14 @@ function updateProcessUnits(resetFlag) {
     profileData[1][k][1] = 0.5 - 1/Math.PI * Math.atan(1/Math.tan(Math.PI* x /0.25));
   }
 
-  if (resetFlag) {
-    // do any actions needed to reset update process units
-  }
-
-} // END OF updateProcessUnits
+} // END OF function updateProcessUnits
 
 function updateDisplay(resetFlag) {
+
+  if (resetFlag) {
+    // do any actions needed to reset update display
+  }
+
   // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info
   // plots are specified in object plotsObj in file process_plot_info.js
   var npl = Object.keys(plotsObj).length; // number of plots
@@ -78,9 +84,6 @@ function updateDisplay(resetFlag) {
   for (p = 0; p < npl; p += 1) {
     data = getPlotData(p);
     plotPlotData(data,p);
-  }
-  if (resetFlag) {
-    // do any actions needed to reset update display
   }
 
 }  // END OF function updateDisplay

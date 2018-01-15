@@ -5,7 +5,7 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-function initSpaceTimeArray(numVar,numTimePts, numSpacePts) {
+function initSpaceTimeArray(numVars,numTimePts,numSpacePts) {
   // returns 3D array to hold data for multiple variables for SPACE-TIME plots
   // returns array with all elements for plot filled with zero
   //    index 1 specifies the variable,
@@ -17,7 +17,7 @@ function initSpaceTimeArray(numVar,numTimePts, numSpacePts) {
   var s;
   var t;
   var plotDataStub = new Array();
-  for (v = 0; v < numVar; v += 1) {
+  for (v = 0; v < numVars; v += 1) {
     plotDataStub[v] = new Array();
       for (t = 0; t <= numTimePts; t += 1) { // NOTE = AT t <=
       plotDataStub[v][t] = new Array();
@@ -31,14 +31,11 @@ function initSpaceTimeArray(numVar,numTimePts, numSpacePts) {
 } // end function initSpaceTimeArray
 
 // create array to hold space-time plot data
-// use same number of points as in strip charts as defined in process_plot_info.js
+// these become global vars used in process_main.js
 var numSpaceTimeVars = 1;
-// numStripPts defined in process_plot_info.js
-var spaceTimeData = initSpaceTimeArray(numSpaceTimeVars,numStripPts,puCatalystLayer.numNodes);
-// inputs are (numVar,numTimePts, numSpacePts)
-// numSpacePts should equal puCatalystLayer.numNodes
-// numTimePts should equal numPlotPts on strip chart plots
-// see file process_plot_info.js
+var numTimePts = 80;
+var numSpacePts = 40;
+var spaceTimeData = initSpaceTimeArray(numSpaceTimeVars,numTimePts,numSpacePts);
 
 function jetColorMap(n) {
   // input n should be value between 0 and 1
@@ -98,7 +95,7 @@ function plotSpaceTimePlot() {
   // context.fillStyle = 'rgba(0,0,200,0.5)';
   // context.fillRect(30,30,50,50);
   // get data from array spaceTimeData and plot
-  var v = 0; // v = 0 is rate
+  var v = 0; // v = 0 is the index number of the variable to plot
   var t;
   var s;
   var rate;
@@ -113,16 +110,23 @@ function plotSpaceTimePlot() {
   var tColor3;
   var tColor4;
   var tColor5 = ')';
-  var tMax = numStripPts; // numStripPts defined in process_plot_info.js
+  var tMax = numTimePts; // numTimePts is a GLOBAL var defined above
   var x;
-  var sMax = puCatalystLayer.numNodes;
+  var sMax = numSpacePts; // numSpacePts is a GLOBAL var defined above
   var y;
-  var tSize = 4;
-  var sSize = 3;
-  var maxRate = 1/puCatalystLayer.model/puCatalystLayer.model; // 1/1/1 or 1/2/2
-  // Model 1 max value of rate is 1 = max AS coverage
-  // Model 2 max value of rate is 0.25 = 0.5 AS coverage * 0.5 vacant sites
-  // xxx not sure how above 6 lines interact with css for canvas size...
+  // tSize and sSize are sizes in screen pixels of each fillRect rectangle
+  // xxx not sure yet how they relate to num pts and canvas size...
+  // see css file for size on screen of canvas in screen pixels
+  // e.g.,  width: 510px; height: 80px;
+  // alert('width, height '+canvas.width+' '+canvas.height);
+  // alert was giving 300 150 regardless of how I set values for canvas in css
+  var tSize = 3.7; // 510/(numTimePts+1) = 6.296 for 80 time pts
+  // for tSize < 3.7 do not fill the 510w,80h canvas horizontally
+  var sSize = 3.66; // 3.66 // 80/(numSpacePts+1) = 1.951 for 40 space pts
+  // for sSize = 6 only get 25 fillRect pixels vertically & fills canvas vertically
+  // for sSize = 3.66 get 40 (or so?) fillRect pixels vertically
+  // for sSize < 3.66 do not fill the 510w,80h canvas vertically
+  var maxRate = 1;
   for (t = 0; t <= tMax; t += 1) { // NOTE = at t <=
     for (s = 0; s <= sMax; s += 1) { // NOTE = AT s <=
       rate = spaceTimeData[v][t][s] / maxRate;

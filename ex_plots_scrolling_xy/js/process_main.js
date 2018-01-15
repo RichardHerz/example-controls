@@ -155,17 +155,6 @@ function updateProcessUnits(resetFlag) {
   // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
   // update all units but do not display
 
-  // THIS EXAMPLE PROCESS simply updates simulation time
-  // and updates sine and sawtooth waves for plot
-
-  // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
-  // var simTime
-  //
-  // THESE GLOBAL VARS ARE DEFINED IN process_plot_info.js
-  // var numStripVars
-  // var numStripPts
-  // var stripData
-
   // INCREMENT SIMULATION TIME
   if (resetFlag) {
     resetSimTime();
@@ -213,7 +202,7 @@ function updateProcessUnits(resetFlag) {
     }
 
   } // END OF if (resetFlag) {} else {}
-} // END OF updateProcessUnits
+} // END OF function updateProcessUnits
 
 function updateDisplay(resetFlag) {
   // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info

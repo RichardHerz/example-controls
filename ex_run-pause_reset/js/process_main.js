@@ -134,15 +134,19 @@ function updateProcessUnits(resetFlag) {
   } else {
     simTime += dt; // increment simTime by time step value dt
   }
-} // END OF updateProcessUnits
+} // END OF function updateProcessUnits
 
 function updateDisplay(resetFlag) {
-  // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
-  var thisDate = new Date();
-  var thisMs = thisDate.getTime();
+
   if (resetFlag) {
     // do any actions needed to reset display
   }
+
+  // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
+  var thisDate = new Date();
+  var thisMs = thisDate.getTime();
+
   document.getElementById("field_output_field").innerHTML = simTime;
   return thisMs;
+
 }  // END OF function updateDisplay

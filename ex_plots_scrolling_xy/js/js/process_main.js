@@ -8,9 +8,10 @@
   // DISPLAY INITIAL STATE ON OPEN WINDOW
   window.onload = openThisLab;
 
-  function openThisLab() {
-    updateProcessUnits();
-    updateDisplay();
+  function openThisLab(resetFlag) {
+    var resetFlag = 1; // 0 for no reset, 1 for reset lab
+    updateProcessUnits(resetFlag);
+    updateDisplay(resetFlag);
   } // END OF function openThisLab
 
   function check_checkboxes() {
@@ -29,10 +30,16 @@
     } else {
       plotsObj[0]['varShow'][1] = 'hide';
     }
-    updateDisplay(0);
+    var resetFlag = 0; // 0 for no reset, 1 for reset lab
+    updateDisplay(resetFlag);
   } // END OF function check_checkboxes
 
   function updateProcessUnits(resetFlag) {
+
+    if (resetFlag) {
+      // do any actions needed to reset update process units
+    }
+
     // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
     // update all units but do not display
 
@@ -59,7 +66,12 @@
 
   } // END OF updateProcessUnits
 
-  function updateDisplay() {
+  function updateDisplay(resetFlag) {
+
+    if (resetFlag) {
+      // do any actions needed to reset update display
+    }
+
     // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info
     // plots are specified in object plotsObj in file process_plot_info.js
     var npl = Object.keys(plotsObj).length; // number of plots
@@ -69,4 +81,10 @@
       data = getPlotData(p);
       plotPlotData(data,p);
     }
+
+    // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
+    var thisDate = new Date();
+    var thisMs = thisDate.getTime();
+    return thisMs;
+
   }  // END OF function updateDisplay
