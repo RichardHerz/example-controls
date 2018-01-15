@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <title>web control examples</title>
+  <meta name="description" content="Interactive Simulations">
+  <meta name="keywords" content="interactive,simulation,reactor,reaction,reactorlab">
+  <meta name="author" content="Richard Herz">
+
+  <!-- load CSS STYLE SHEETS for this lab  -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="../css/index.css">
+
+  <!-- load main JAVASCRIPT for this lab -->
+  <script language="javascript" src="js/process_main.js" type="text/javascript"></script>
+
+  <!-- load plotting JAVASCRIPT for this lab -->
+  <script language="javascript" src="js/process_plot_info.js" type="text/javascript"></script>
+  <script language="javascript" src="js/process_plotter.js" type="text/javascript"></script>
+
+<!-- load flot PLOTTING LIBRARY -->
+<!-- need full jquery.js for flot.js to work -->
+<script language="javascript" src="js/jquery.js" type="text/javascript"></script>
+<script language="javascript" src="js/flot_library/jquery.flot.js" type="text/javascript"></script>
+<script language="javascript" src="js/flot_library/jquery.flot.axislabels.js" type="text/javascript"></script>
+
+</head>
+<body>
+  <p><a href="../index.html">Examples of web controls</a> &gt; plots - scrolling</p>
+  <p id="field_example_label">
+  Scrolling plot - strip chart plot:
+  <br>
+  <br>
+  Click Run button to start plotting...
+  </p>
+  <div id="div_run_reset_group">
+    <input type="button" id="button_Run" value="Run" onclick="runThisLab()"></input>
+    <input type="button" id="button_Reset" value="Reset" onclick="resetThisLab()"></input>
+  </div>  <!-- end of div div_run_reset_group -->
+  <div id="div_checkbox_group_1">
+     <label id="checkbox_sine_wave_LABEL">
+        <input type="checkbox" id="checkbox_sine_wave" checked onchange="check_checkboxes()">
+        <span id="checkbox_sine_wave_SPAN">sine wave</span>
+     </label>
+     <label id="checkbox_sawtooth_wave_LABEL">
+        <input type="checkbox" id="checkbox_sawtooth_wave" checked onchange="check_checkboxes()">
+        <span id="checkbox_sawtooth_wave_SPAN">sawtooth wave</span>
+     </label>
+  </div> <!-- end of div div_checkbox_group_1 -->
+  <div id="div_plot_group_1"> <!-- div for outer box around plot -->
+    <div id="div_plotCanvas_1"> <!-- div that flot.js fills with plot -->
+    </div> <!-- end of div div_plotCanvas_1 -->
+  </div> <!-- end of div_plot_group_1 -->
+  <!-- <p id="field_output_label">
+  Output:
+  </p>
+  <p id="field_output_field">
+  </p> -->
+</body>
+</html>
