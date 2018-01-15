@@ -9,9 +9,13 @@
 //          unit that generates the plot data
 // where number plot points + 1 for origin are plotted
 
-var numberVariables = 2;
-var numberPoints = 80;
-var profileData = initPlotData(numberVariables,numberPoints); // holds data for profile plots
+// these vars used several places below in this file for static profile plot
+var numProfileVars = 2;
+var numProfilePts = 80;
+
+// these vars used several places below this file for scrolling strip chart plot
+var numStripVars = 0;
+var numStripPts = 0;
 
 // DECLARE PARENT OBJECT TO HOLD PLOT INFO
 // more than one plot can be put one one web page by
@@ -35,7 +39,7 @@ plotsObj[0] = new Object();
 plotsObj[0]['name'] = 'waves';
 plotsObj[0]['type'] = 'profile';
 plotsObj[0]['canvas'] = '#div_plotCanvas_1';
-plotsObj[0]['numberPoints'] = numberPoints; // should match numberPoints in process unit
+plotsObj[0]['numberPoints'] = numProfilePts;
 // plot has numberPoints + 1 pts!
 plotsObj[0]['xAxisLabel'] = 'x';
 plotsObj[0]['xAxisMin'] = 0;
@@ -77,3 +81,40 @@ var plotFlag = [0];
 for (p = 1; p < npl; p += 1) {
   plotFlag.push(0);
 }
+
+function initPlotData(numVar,numPlotPoints) {
+  // returns 3D array to hold x,y scatter plot data for multiple variables
+  // inputs are list of variables and # of x,y point pairs per variable
+  // returns array with all elements for plot filled with zero
+  //    index 1 specifies the variable,
+  //    index 2 specifies the data point pair
+  //    index 3 specifies x or y in x,y data point pair
+  var v;
+  var p;
+  var plotDataStub = new Array();
+  for (v = 0; v < numVar; v += 1) {
+    plotDataStub[v] = new Array();
+    for (p = 0; p <= numPlotPoints; p += 1) { // NOTE = AT p <=
+      plotDataStub[v][p] = new Array();
+      plotDataStub[v][p][0] = 0;
+      plotDataStub[v][p][1] = 0;
+    }
+  }
+  return plotDataStub;
+  // Note above initialize values for
+  //    plotDataStub [0 to numVar-1] [0 to numPlotPoints] [0 & 1]
+  // If want later outside this constructor to add new elements,
+  // then you can do easily for 3rd index, e.g.,
+  //    plotDataStub [v] [p] [2] = 0;
+  // But can NOT do assignment for [v] [p+1] [0] since p+1 element does not yet
+  // exist, where here p = numPlotPoints+1.
+  // Would have to first create new p+1 array
+  //    plotDataStub [v] [p+1] = new Array();
+  // Then can do
+  //    plotDataStub [v] [p+1] [0] = 0;
+  //    plotDataStub [v] [p+1] [1] = 0; // etc.
+} // end function initPlotData
+
+// initialize data arrays - must follow function initPlotData in this file
+var profileData = initPlotData(numProfileVars,numProfilePts); // holds data for static profile plots
+var stripData = initPlotData(numStripVars,numStripPts); // holds data for scrolling strip chart plots

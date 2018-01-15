@@ -9,39 +9,6 @@
 // does not work when declared inside function plotPlotData...
 var plot = [];
 
-function initPlotData(numVar,numPlotPoints) {
-  // returns 3D array to hold x,y scatter plot data for multiple variables
-  // inputs are list of variables and # of x,y point pairs per variable
-  // returns array with all elements for plot filled with zero
-  //    index 1 specifies the variable,
-  //    index 2 specifies the data point pair
-  //    index 3 specifies x or y in x,y data point pair
-  var v;
-  var p;
-  var plotDataStub = new Array();
-  for (v = 0; v < numVar; v += 1) {
-    plotDataStub[v] = new Array();
-    for (p = 0; p <= numPlotPoints; p += 1) { // NOTE = AT p <=
-      plotDataStub[v][p] = new Array();
-      plotDataStub[v][p][0] = 0;
-      plotDataStub[v][p][1] = 0;
-    }
-  }
-  return plotDataStub;
-  // Note above initialize values for
-  //    plotDataStub [0 to numVar-1] [0 to numPlotPoints] [0 & 1]
-  // If want later outside this constructor to add new elements,
-  // then you can do easily for 3rd index, e.g.,
-  //    plotDataStub [v] [p] [2] = 0;
-  // But can NOT do assignment for [v] [p+1] [0] since p+1 element does not yet
-  // exist, where here p = numPlotPoints+1.
-  // Would have to first create new p+1 array
-  //    plotDataStub [v] [p+1] = new Array();
-  // Then can do
-  //    plotDataStub [v] [p+1] [0] = 0;
-  //    plotDataStub [v] [p+1] [1] = 0; // etc.
-} // end function initPlotData
-
 // ----- GET DATA IN FORM NEEDED FOR PLOTTING ---------
 
 function getPlotData(plotsObjNum) {
@@ -137,23 +104,30 @@ function plotPlotData(pData,pNumber) {
   // only variables with property "show" will appear on plot
   for (k = 0; k < numVar; k += 1) {
     // add object for each plot variable to array dataToPlot
-    // e.g., { data: y1Data, label: y1DataLabel, yaxis: 1 },
+    // e.g., { data: y1Data, label: y1DataLabel, yaxis: 1 }
+    let newobj = {};
     if (vShow[k] === 'show') {
       // XXX THIS CHECK OF "SHOW" COULD BE MOVED UP INTO
       // getPlotData FUNCTION WHERE DATA SELECTED TO PLOT
       // SINCE BOTH FUNCTIONS ARE CALLED EACH PLOT UPDATE...
-      let newobj = {};
       // pData is not full profileData nor full stripData
       // pData has the variables specified in plotsObj[pNumber]['var']
       // now want to select the vars in pData with "show" property true
+      // *BUT* see "else" condition below
       newobj.data = pData[k];
       newobj.label = vLabel[k];
       if (yAxis[k] === 'right') {newobj.yaxis = 1;} else {newobj.yaxis = 2;}
-      dataToPlot[numToShow] = newobj;
-      // KEEP numToShow as well as for index k because not all k vars will show!
-      numToShow += 1;
+      dataToPlot[k] = newobj;
+    } else {
+      // do not plot this variable
+      // *BUT* need to add a single point in case no vars on this axis to show
+      // in which case no axis labels will show without this single point
+      newobj.data = [plotsObj[pNumber]['xAxisMax'],plotsObj[pNumber]['yLeftAxisMax']];
+      newobj.label = vLabel[k];
+      if (yAxis[k] === 'right') {newobj.yaxis = 1;} else {newobj.yaxis = 2;}
+      dataToPlot[k] = newobj;
     }
-  }
+  } // END OF for (k = 0; k < numVar; k += 1) {
 
   // set up the plot axis labels and plot legend
 
@@ -191,7 +165,7 @@ function plotPlotData(pData,pNumber) {
   }
 
   // only draw plot with axes and all options the first time /
-  // after that just setData ad re-draw
+  // after that just setData and re-draw
   // for example, for 4 plots on page, this ran in 60% of time for full refresh
   // array plotFlag declared in file process_plot_info.js
   // array plot declared above in this file
