@@ -1,0 +1,13 @@
+process_plotter.js only differs in profile and strip plots in an IF block selecting where to get data - from profileData or stripData array 
+
+As far as plotting, these data arrays are same except that they may differ in number of variables and points.
+
+In order to make plotter more general, consider adding a property of plot description in plot_info that specifies which array to get data... *BUT* that is exactly what I'm doing now... 
+
+How to change plotter to eliminate IF and explicit refs to profileData and stripData? Note plotter gets number points from plotObj. 
+
+Maybe change plotsObj[plotsObjNum]['type'] to point to actual name of data array and not simply profile or strip. Or somewhere else in plot_info, point profile to array name profileData... 
+
+Is this really an advantage? Is plotter script general enough to handle an arbitrary data array...? 
+
+
