@@ -48,6 +48,7 @@ function resetThisLab() {
   runningFlag = false;
   resetSimTime();
   resetFlag = 1; // 0 for no reset, 1 for reset lab
+  check_checkboxes(resetFlag);
   updateProcessUnits(resetFlag);
   updateDisplay(resetFlag);
   eval(runButtonID + '.value = "Run"');
@@ -55,8 +56,12 @@ function resetThisLab() {
 } // END OF function resetThisLab
 
 // HANDLE CHECKBOXES WHICH SELECT DATA SHOWN
-function check_checkboxes() {
+function check_checkboxes(resetFlag) {
   // check checkboxes and update display
+  if (resetFlag == 1) {
+    document.getElementById('checkbox_sine_wave').checked = true;
+    document.getElementById('checkbox_sawtooth_wave').checked = true;
+  }
   var el1 = document.querySelector('#checkbox_sine_wave');
   var el2 = document.querySelector('#checkbox_sawtooth_wave');
   // global object plotsObj defined in process_plot_info.js
@@ -146,98 +151,90 @@ function runSimulation() {
 
 } // END OF function runSimulation
 
+function updateProcessUnits(resetFlag) {
+  // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
+  // update all units but do not display
+
+  // THIS EXAMPLE PROCESS simply updates simulation time
+  // and updates sine and sawtooth waves for plot
+
+  // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
+  // var simTime
+  //
+  // THESE GLOBAL VARS ARE DEFINED IN process_plot_info.js
+  // var numStripVars
+  // var numStripPts
+  // var stripData
+
+  // INCREMENT SIMULATION TIME
+  if (resetFlag) {
+    resetSimTime();
+  } else {
+    simTime += dt; // increment simTime by time step value dt
+  }
+
+  // UPDATE PLOT y-axis VALUES - THE PROCESS HERE
+  if (resetFlag) {
+    stripData = initPlotData(numStripVars,numStripPts);
+  } else {
+
+    var x = simTime/numStripPts;
+    newSine = 0.5 + 0.5*Math.sin(2*Math.PI*2* x );
+    newSawtooth = 0.5 - 1/Math.PI * Math.atan(1/Math.tan(Math.PI* x /0.25));
+
+    // update stripData for first var
+    var v = 0;
+    var d = newSine;
+    tempArray = stripData[v]; // work on one plot variable at a time
+    // delete first and oldest element which is an [x,y] pair array
+    tempArray.shift();
+    // add the new [x,y] pair array at end
+    tempArray.push( [ 0, d ] );
+    // update the variable being processed
+    stripData[v] = tempArray;
+
+    // update stripData for second var
+    v = 1;
+    d = newSawtooth;
+    tempArray = stripData[v]; // work on one plot variable at a time
+    // delete first and oldest element which is an [x,y] pair array
+    tempArray.shift();
+    // add the new [x,y] pair array at end
+    tempArray.push( [ 0, d ] );
+    // update the variable being processed
+    stripData[v] = tempArray;
+
+    // re-number x-axis values
+    var k = 0;
+    for (k=0; k<=numStripPts; k+=1) {
+      x = k/numStripPts;
+      stripData[0][k][0] = x;
+      stripData[1][k][0] = x;
+    }
+
+  } // END OF if (resetFlag) {} else {}
+} // END OF updateProcessUnits
+
 function updateDisplay(resetFlag) {
+  // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info
+  // plots are specified in object plotsObj in file process_plot_info.js
+  //
+  var npl = Object.keys(plotsObj).length; // number of plots
+  var p; // used as index
+  var data;
+  for (p = 0; p < npl; p += 1) {
+    data = getPlotData(p);
+    plotPlotData(data,p);
+  }
+
   // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
   var thisDate = new Date();
   var thisMs = thisDate.getTime();
+
   if (resetFlag) {
-    // do any actions needed to reset display
+    // do any actions needed to reset update display
   }
-  document.getElementById("field_output_field").innerHTML = simTime;
+
   return thisMs;
+
 }  // END OF function updateDisplay
-
-  function updateProcessUnits(resetFlag) {
-    // DO COMPUTATIONS TO UPDATE STATE OF PROCESS
-    // update all units but do not display
-
-    // THIS EXAMPLE PROCESS simply updates simulation time
-    // and updates sine and sawtooth waves for plot
-
-    // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
-    // var simTime
-    //
-    // THESE GLOBAL VARS ARE DEFINED IN process_plot_info.js
-    // var numStripVars
-    // var numStripPoints
-    // var stripData
-
-    // INCREMENT SIMULATION TIME
-    if (resetFlag) {
-      resetSimTime();
-    } else {
-      simTime += dt; // increment simTime by time step value dt
-    }
-
-    // UPDATE PLOT y-axis VALUES - THE PROCESS HERE
-    if (resetFlag) {
-      stripData = initPlotData(numStripVars,numStripPoints);
-    } else {
-
-      var x = simTime/numStripPoints;
-      newSine = 0.5 + 0.5*Math.sin(2*Math.PI*2* x );
-      newSawtooth = 0.5 - 1/Math.PI * Math.atan(1/Math.tan(Math.PI* x /0.25));
-
-      // update stripData for first var
-      var v = 0;
-      var d = newSine;
-      tempArray = stripData[v]; // work on one plot variable at a time
-      // delete first and oldest element which is an [x,y] pair array
-      tempArray.shift();
-      // add the new [x,y] pair array at end
-      tempArray.push( [ 0, d ] );
-      // update the variable being processed
-      stripData[v] = tempArray;
-
-      // update stripData for second var
-      v = 1;
-      d = newSawtooth;
-      tempArray = stripData[v]; // work on one plot variable at a time
-      // delete first and oldest element which is an [x,y] pair array
-      tempArray.shift();
-      // add the new [x,y] pair array at end
-      tempArray.push( [ 0, d ] );
-      // update the variable being processed
-      stripData[v] = tempArray;
-
-      // re-number x-axis values
-      var k = 0;
-      for (k=0; k<=numStripPoints; k+=1) {
-        x = k/numStripPoints;
-        stripData[0][k][0] = x;
-        stripData[1][k][0] = x;
-      }
-
-    } // END OF if (resetFlag) {} else {}
-  } // END OF updateProcessUnits
-
-  function updateDisplay(resetFlag) {
-    // GET AND PLOT ALL PLOTS defined in plotsObj in process_plot_info
-    // plots are specified in object plotsObj in file process_plot_info.js
-    //
-    var npl = Object.keys(plotsObj).length; // number of plots
-    var p; // used as index
-    var data;
-    for (p = 0; p < npl; p += 1) {
-      data = getPlotData(p);
-      plotPlotData(data,p);
-    }
-    // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
-    var thisDate = new Date();
-    var thisMs = thisDate.getTime();
-    if (resetFlag) {
-      // do any actions needed to reset display
-    }
-    return thisMs;
-
-  }  // END OF function updateDisplay

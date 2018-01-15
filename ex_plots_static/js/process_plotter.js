@@ -191,7 +191,7 @@ function plotPlotData(pData,pNumber) {
   }
 
   // only draw plot with axes and all options the first time /
-  // after that just setData ad re-draw
+  // after that just setData and re-draw
   // for example, for 4 plots on page, this ran in 60% of time for full refresh
   // array plotFlag declared in file process_plot_info.js
   // array plot declared above in this file
