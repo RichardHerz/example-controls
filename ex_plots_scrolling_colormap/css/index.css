@@ -63,3 +63,17 @@
  opacity: 1;
  font-size: 18px;
 }
+
+#div_notes_group {
+  display: block;
+  position: absolute;
+  left: 60px;
+  top: 450px;
+  width: 600px;
+  height: 400px;
+  visibility: visible;
+  border-width: 0px;
+  border-style: outset;
+  opacity: 1;
+  LCvScrollbar: false;
+}
