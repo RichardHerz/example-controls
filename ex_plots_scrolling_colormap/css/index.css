@@ -16,7 +16,7 @@
  position: absolute;
  left: 20px;
  top: 20px;
- /* canvas width & height must be set in HTML */
+ /* canvas element width & height must be set in HTML and not in CSS */
  visibility: visible;
  border-width: 0px;
  background-color: rgb(0,255,0);

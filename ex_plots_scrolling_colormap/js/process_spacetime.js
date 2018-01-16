@@ -31,11 +31,11 @@ function initSpaceTimeArray(numVars,numTimePts,numSpacePts) {
 } // end function initSpaceTimeArray
 
 // create array to hold space-time plot data
-// these become global vars used in process_main.js
+// these become global vars used in other script files
 var numSpaceTimeVars = 1;
 var numTimePts = 128;
 var numSpacePts = 40;
-// if want square 'pixels' set time/space pt ratio = canvas width/height ratio
+// if want square canvas 'pixels' set time/space pt ratio = canvas width/height ratio
 var spaceTimeData = initSpaceTimeArray(numSpaceTimeVars,numTimePts,numSpacePts);
 
 function jetColorMap(n) {
@@ -104,6 +104,8 @@ function plotSpaceTimePlot() {
   var g;
   var b;
   var jet;
+  var x;
+  var y;
   // below we have to convert computed color values
   // to text string for fillStyle below, so get pieces ready
   var tColor1 = 'rgb(';
@@ -113,10 +115,9 @@ function plotSpaceTimePlot() {
   var tColor5 = ')';
   var tPixels = canvas.width;
   var sPixels = canvas.height;
+  // numTimePts and numStripPts are globals defined above in this file
   var tPixelsPerPoint = tPixels/(numTimePts+1); // pixels per point
   var sPixelsPerPoint = sPixels/(numSpacePts+1); // pixels per point
-  var x;
-  var y;
   var maxRate = 1;
   for (t = 0; t <= numTimePts; t += 1) { // NOTE = at t <=
     for (s = 0; s <= numSpacePts; s += 1) { // NOTE = AT s <=
