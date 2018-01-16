@@ -16,6 +16,8 @@
  position: absolute;
  left: 20px;
  top: 20px;
+ /* canvas needs width & height to be specified here
+ and to agree with those in HTML spec */
  width: 400px;
  height: 400px;
  visibility: visible;

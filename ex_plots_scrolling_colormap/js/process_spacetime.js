@@ -110,28 +110,16 @@ function plotSpaceTimePlot() {
   var tColor3;
   var tColor4;
   var tColor5 = ')';
-  var tMax = numTimePts; // numTimePts is a GLOBAL var defined above
+  var tPixels = canvas.width;
+  var sPixels = canvas.height;
+  var tPixelsPerPoint = tPixels/(numTimePts+1); // pixels per point
+  var sPixelsPerPoint = sPixels/(numSpacePts+1); // pixels per point
   var x;
-  var sMax = numSpacePts; // numSpacePts is a GLOBAL var defined above
   var y;
-  // tSize and sSize are sizes in screen pixels of each fillRect rectangle
-  // xxx not sure yet how they relate to num pts and canvas size...
-  // see css file for size on screen of canvas in screen pixels
-  // e.g.,  width: 510px; height: 80px;
-  // alert('width, height '+canvas.width+' '+canvas.height);
-  // alert was giving 300 150 regardless of how I set values for canvas in css
-  var tSize = 3.7; // 510/(numTimePts+1) = 6.296 for 80 time pts
-  // for tSize < 3.7 do not fill the 510w,80h canvas horizontally
-  var sSize = 3.66; // 3.66 // 80/(numSpacePts+1) = 1.951 for 40 space pts
-  // for sSize = 6 only get 25 fillRect pixels vertically & fills canvas vertically
-  // for sSize = 3.66 get 40 (or so?) fillRect pixels vertically
-  // for sSize < 3.66 do not fill the 510w,80h canvas vertically
   var maxRate = 1;
-  for (t = 0; t <= tMax; t += 1) { // NOTE = at t <=
-    for (s = 0; s <= sMax; s += 1) { // NOTE = AT s <=
+  for (t = 0; t <= numTimePts; t += 1) { // NOTE = at t <=
+    for (s = 0; s <= numSpacePts; s += 1) { // NOTE = AT s <=
       rate = spaceTimeData[v][t][s] / maxRate;
-      // document.getElementById("dev01").innerHTML = spaceTimeData[v][s][t];
-      // document.getElementById("dev01").innerHTML = rate;
       jet = jetColorMap(rate); // rate should be scaled 0 to 1
       r = jet[0];
       g = jet[1];
@@ -144,9 +132,9 @@ function plotSpaceTimePlot() {
       // document.getElementById("dev01").innerHTML = jetColorMap(1);
       context.fillStyle = tColor;
       // want to swap directions in plot from that in spaceTimeData array
-      x = tSize * (tMax - t);
-      y = sSize * (sMax - s);
-      context.fillRect(x,y,tSize,sSize);
+      x = tPixelsPerPoint * (numTimePts - t);
+      y = sPixelsPerPoint * (numSpacePts - s);
+      context.fillRect(x,y,tPixelsPerPoint,sPixelsPerPoint);
     } // end of inner FOR repeat
   } // end of outer FOR repeat
 } // end of function plotSpaceTimePlot

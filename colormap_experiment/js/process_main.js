@@ -19,19 +19,6 @@ function updateDisplay() {
   // context.fillStyle = 'rgba(0,0,200,0.5)';
   // context.fillRect(30,30,50,50);
 
-  // CSS canvas_CANVAS_rate
-  // width: 400px;
-  // height: 400px;
-
-  // BUT DEFAULT canvas size is 300x150
-  // regardless of css sizes...
-  // see https://www.w3schools.com/html/html5_canvas.asp
-
-  canvas.width = '400';
-  canvas.height = '400';
-
-  alert('canvas WxH = ' + canvas.width + ' ' + canvas.height);
-
   var x = 5;
   var y = 5;
   var tSize = 390;
