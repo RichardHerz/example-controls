@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="../css/index.css">
 
-  <!-- load plotting JAVASCRIPT for this lab -->
-  <script language="javascript" src="js/process_spacetime.js" type="text/javascript"></script>
-
   <!-- load main JAVASCRIPT for this lab -->
   <script language="javascript" src="js/process_main.js" type="text/javascript"></script>
+
+  <!-- load plotting JAVASCRIPT for this lab -->
+  <script language="javascript" src="js/process_spacetime.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -31,12 +31,18 @@
   </div>  <!-- end of div div_run_reset_group -->
   <div id="div_plot_group_1"> <!-- div for outer box around plot -->
     <canvas id="canvas_CANVAS_rate" width='510' height='160'></canvas> <!-- canvas for colormap graphic -->
-    <!-- canvas needs width & height to be specified here and not in CSS -->
+    <!-- canvas element width & height must be specified here in HTML and not in CSS -->
   </div> <!-- end of div_plot_group_1 -->
-  <!-- <p id="field_output_label">
-  Output:
-  </p>
-  <p id="field_output_field">
-  </p> -->
+  <div id="div_notes_group">
+    <p>
+      Time is on the horizontal (x) axis; Space is on the vertical (y) axis.
+      As time proceeds, a record of a sine wave that is scrolling down in the vertical
+      direction is shown. The value of the sine wave at each time and vertical
+      position is represented as a color value.
+      Random changes in the sine wave's value are made so that you know the
+      graphic values are being computed and that we are not simply showing you
+      an animated gif! :)
+    </p>
+  </div>
 </body>
 </html>
