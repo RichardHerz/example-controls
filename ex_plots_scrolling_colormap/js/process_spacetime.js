@@ -33,8 +33,9 @@ function initSpaceTimeArray(numVars,numTimePts,numSpacePts) {
 // create array to hold space-time plot data
 // these become global vars used in process_main.js
 var numSpaceTimeVars = 1;
-var numTimePts = 80;
+var numTimePts = 128;
 var numSpacePts = 40;
+// if want square 'pixels' set time/space pt ratio = canvas width/height ratio
 var spaceTimeData = initSpaceTimeArray(numSpaceTimeVars,numTimePts,numSpacePts);
 
 function jetColorMap(n) {
@@ -131,7 +132,7 @@ function plotSpaceTimePlot() {
       tColor = tColor1.concat(tColor2,',',tColor3,',',tColor4,tColor5);
       // document.getElementById("dev01").innerHTML = jetColorMap(1);
       context.fillStyle = tColor;
-      // want to swap directions in plot from that in spaceTimeData array
+      // swap directions in plot from that in spaceTimeData array
       x = tPixelsPerPoint * (numTimePts - t);
       y = sPixelsPerPoint * (numSpacePts - s);
       context.fillRect(x,y,tPixelsPerPoint,sPixelsPerPoint);

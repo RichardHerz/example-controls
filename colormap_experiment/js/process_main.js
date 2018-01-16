@@ -24,6 +24,8 @@ function updateDisplay() {
   var tSize = 390;
   var sSize = 390;
 
+  alert('W H = '+canvas.width+' '+canvas.height)
+
   context.fillStyle = 'rgb(200,0,0)';
   context.fillRect(x,y,tSize,sSize);
 
