@@ -43,8 +43,7 @@ function runThisLab() {
 
 // HANDLE RESET BUTTON CLICK
 function resetThisLab() {
-  // uses object simParams from file process_units.js
-  // input argument is the RUN button ID, not the reset button ID
+  // CALLED BY UI RESET BUTTON DEFINED IN HTML
   runningFlag = false;
   resetSimTime();
   resetFlag = 1; // 0 for no reset, 1 for reset lab
