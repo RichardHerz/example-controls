@@ -165,6 +165,7 @@ function updateProcessUnits(resetFlag) {
 
     var x = simTime/numSpacePts;
     var newSpacePt = 0.5 + 0.5*Math.sin(2*Math.PI*0.67* x );
+    
     // add randomness so this doesn't look like
     // an animated GIF!
     var randomNum = Math.random();
