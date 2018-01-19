@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <title>web control examples</title>
+  <meta name="description" content="Interactive Simulations">
+  <meta name="keywords" content="interactive,simulation,reactor,reaction,reactorlab">
+  <meta name="author" content="Richard Herz">
+
+  <!-- load CSS STYLE SHEETS for this lab  -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="../css/index.css">
+
+  <!-- load main JAVASCRIPT for this lab -->
+  <script language="javascript" src="js/process_main.js" type="text/javascript"></script>
+
+  <!-- load plotting JAVASCRIPT for this lab -->
+  <script language="javascript" src="js/process_spacetime.js" type="text/javascript"></script>
+
+</head>
+<body>
+  <p><a href="../index.html">Examples of web controls</a> &gt; plots - scrolling colormap</p>
+  <p id="field_example_label">
+  Scrolling colormap:
+  <br>
+  <br>
+  Click Run button to start plotting...
+  </p>
+  <div id="div_run_reset_group">
+    <input type="button" id="button_Run" value="Run" onclick="runThisLab()"></input>
+    <input type="button" id="button_Reset" value="Reset" onclick="resetThisLab()"></input>
+  </div>  <!-- end of div div_run_reset_group -->
+  <div id="div_plot_group_1"> <!-- div for outer box around plot -->
+    <canvas id="canvas_CANVAS_rate" width='510' height='160'></canvas> <!-- canvas for colormap graphic -->
+    <!-- canvas element width & height must be specified here in HTML and not in CSS -->
+  </div> <!-- end of div_plot_group_1 -->
+  <div id="div_notes_group">
+    <p>
+      This is an example of graphics using the HTML canvas element. In this scrolling space-time colormap, time is represented on the horizontal axis, and space on the vertical axis.
+      As time proceeds, a record of a sine wave that is scrolling down in the vertical
+      direction is shown. The value of the sine wave at each time and vertical
+      position is represented as a color value.
+      Random changes in the sine wave's value are made so that you know the
+      graphic values are being computed and that we are not simply showing you
+      an animated gif! :)
+    </p>
+  </div>
+</body>
+</html>
