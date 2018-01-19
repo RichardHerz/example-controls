@@ -132,8 +132,11 @@ function updateProcessUnits(resetFlag) {
   // THIS EXAMPLE PROCESS simply updates simulation time
   // and updates the spacetime plot
 
-  var t; // index
-  var s; // index
+  var s; // second index
+  var t; // third index
+  var spaceData = [];
+
+  var numSpacePts = 40;
 
   // THIS GLOBAL VAR IS DEFINED ELSEWHERE IN THIS file
   // var simTime
@@ -145,14 +148,16 @@ function updateProcessUnits(resetFlag) {
     simTime += dt; // increment simTime by time step value dt
   } // END OF if (resetFlag) {} else {}
 
-  // GLOBAL VARS DEFINED IN process_spacetime.js
-  // var numSpacePts = 40;
-  // var numTimePts = 80;
-  // var spaceTimeData
+  // GLOBAL VARS DEFINED IN process_plot_info.js
+  // var numColorCanvasVars
+  // var numColorCanvasPts
+  // var colorCanvasData
 
   if (resetFlag) {
 
-    spaceTimeData = initSpaceTimeArray(numSpaceTimeVars,numTimePts,numSpacePts);
+    var numIndex3 = 3 // 2 for x-y plots, 3 for color canvas plots
+    colorCanvasData = initDataArray(numColorCanvasVars,numColorCanvasPts,numIndex3);
+
     for (s = 0; s <= numSpacePts; s += 1) { // NOTE = at s <= numSpacePts
       spaceData[s] = 0;
     }
@@ -161,11 +166,11 @@ function updateProcessUnits(resetFlag) {
     // UPDATE SPACE TIME DATA ARRAY - THE PROCESS HERE
 
     // update an array which holds sine wave in space array
-    // then add that to spaceTimeData array...
+    // then add that to colorCanvasData array...
 
     var x = simTime/numSpacePts;
     var newSpacePt = 0.5 + 0.5*Math.sin(2*Math.PI*0.67* x );
-    
+
     // add randomness so this doesn't look like
     // an animated GIF!
     var randomNum = Math.random();
@@ -181,20 +186,22 @@ function updateProcessUnits(resetFlag) {
     // add the new element at end
     spaceData.push(newSpacePt);
 
-    // use repeats to update the spaceTimeData array
-    // spaceTimeData[v][t][s] - variable, time, space (profile in layer)
-    var tempArray = spaceTimeData[0];
-    for (t = 0; t < numTimePts; t += 1) { // NOTE < numTimePoints, don't do last one here
-      for (s = 0; s <= numSpacePts; s +=1) { // NOTE = in s <= numSpacePts
-        tempArray[t][s] = tempArray[t+1][s];
+    // use repeats to update the colorCanvasData array
+    // colorCanvasData[v][s][t] - [variable #], [pt #], x/y/z values in [0/1/2]
+    var tempArray = colorCanvasData[0];
+    var numIndex3 = 3 // 2 for x-y plots, 3 for color canvas plots
+    for (s = 0; s < numColorCanvasPts; s += 1) { // NOTE < numColorCanvasPts, don't do last one here
+      // just shift y and z values [t = 1,2], x [t=0] will be reassigned below
+      for (t = 1; t <= numIndex3; t +=1) { // NOTE = in t <= numIndex3
+        tempArray[s][t] = tempArray[s+1][t];
       }
     }
-    // now update the last time
+    // now update the last data points
     for (s = 0; s <= numSpacePts; s +=1) { // NOTE = in s <= numSpacePts
-      tempArray[numTimePts][s] = spaceData[s];
+      tempArray[numColorCanvasPts][s] = spaceData[s];
     }
     // update the variable being processed
-    spaceTimeData[0] = tempArray;
+    colorCanvasData[0] = tempArray;
 
   } // END OF if (resetFlag) {} else {}
 
@@ -206,8 +213,9 @@ function updateDisplay(resetFlag) {
     // do any actions needed to reset update display
   }
 
-  // plot space-time plots
-  plotSpaceTimePlot();
+  // plot color canvas plot
+  var varNum = 0;
+  plotColorCanvasPlot(varNum);
 
   // RETURN REAL TIME OF THIS DISPLAY UPDATE (milliseconds)
   var thisDate = new Date();
