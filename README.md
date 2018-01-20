@@ -7,4 +7,6 @@ Examples of individual controls are shown here so they are easier to inspect and
 
 See source files of a complete simulation at our reaction-diffusion project here at github.
 
+See this projects Wiki for more information.
+
 These examples are live on the web at the github.io link for this project at https://richardherz.github.io/example-controls/ 
