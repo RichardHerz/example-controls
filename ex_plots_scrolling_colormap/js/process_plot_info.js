@@ -59,9 +59,10 @@ plotsObj[0]['yAxisReversed'] = 0; // 0 false, 1 true, when true
 //
 // z is the value to be color encdoded
 //
-plotsObj[0]['zAxisLabel'] = '';
+plotsObj[0]['zAxisLabel'] = 'sine';
 plotsObj[0]['zAxisMin'] = 0;
 plotsObj[0]['zAxisMax'] = 1;
+plotsObj[0]['zAxisReversed'] = 0; // 0 false, 1 true, when true
 //
 plotsObj[0]['plotLegendPosition'] = 'ne';
 plotsObj[0]['var'] = new Array();
