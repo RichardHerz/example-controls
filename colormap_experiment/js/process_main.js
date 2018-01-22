@@ -19,14 +19,14 @@ function updateDisplay() {
   // context.fillStyle = 'rgba(0,0,200,0.5)';
   // context.fillRect(30,30,50,50);
 
-  var x = 5;
+  var x = 10;
   var y = 5;
-  var tSize = 390;
-  var sSize = 390;
+  var xSize = 20;
+  var ySize = 40;
 
-  alert('W H = '+canvas.width+' '+canvas.height)
+  // alert('W H = '+canvas.width+' '+canvas.height)
 
   context.fillStyle = 'rgb(200,0,0)';
-  context.fillRect(x,y,tSize,sSize);
+  context.fillRect(x,y,xSize,ySize);
 
 }  // END OF function updateDisplay
