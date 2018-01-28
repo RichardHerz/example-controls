@@ -74,9 +74,11 @@ canvas {
  top: 353px;
  width: 384px;
  height: 139px;
- border-width: 2px;
  visibility: visible;
- border-style: outset;
+ border-width: 1px;
+ border-style: dotted;
+ border-color: DodgerBlue;
+ padding: 10px;
  opacity: 1;
  LCvScrollbar: false;
  font-size: 20px;

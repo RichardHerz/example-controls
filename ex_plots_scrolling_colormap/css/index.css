@@ -6,8 +6,9 @@
   width: 546px;
   height: 200px;
   visibility: visible;
-  border-width: 2px;
-  border-style: outset;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: DodgerBlue;
   opacity: 1;
   LCvScrollbar: false;
 }
@@ -20,7 +21,7 @@
  visibility: visible;
  border-width: 0px;
  background-color: rgb(0,255,0);
- border-style: outset;
+ border-style: dotted;
  opacity: 1;
 }
 
@@ -33,7 +34,7 @@
   height: 100px;
   visibility: visible;
   border-width: 0px;
-  border-style: outset;
+  border-style: dotted;
   opacity: 1;
   LCvScrollbar: false;
 }
