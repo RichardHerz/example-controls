@@ -1,0 +1,107 @@
+What is going on with plotsObj in process_plot_info.js? 
+
+---------------
+https://www.w3schools.com/js/js_arrays.asp 
+
+WARNING !!
+If you use named indexes, JavaScript will redefine the array to a standard object.
+After that, some array methods and properties will produce incorrect results.
+
+The Difference Between Arrays and Objects
+  In JavaScript, arrays use numbered indexes.  
+  In JavaScript, objects use named indexes.
+  [NOTE: also objects can contain functions/methods]
+
+Arrays are a special kind of objects, with numbered indexes.
+
+When to Use Arrays. When to use Objects.
+  JavaScript does not support associative arrays.
+  You should use objects when you want the element names to be strings (text).
+  You should use arrays when you want the element names to be numbers.
+  
+------------------
+ALSO SEE THIS PAGE http://www.nfriedly.com/techblog/2009/06/advanced-javascript-objects-arrays-and-array-like-objects/ 
+
+var basicObj = {}; // an empty object - {} is a shortcut for "new Object()"
+basicObj.suprise= "cake!";
+basicObj['suprise']; // returns "cake!"
+
+TWO LINES ABOVE shows accessing object property with notation similar to that for associative arrays, which Javascript doesn't have. 
+
+---------------
+Current appraoch: 
+
+var plotsObj = new Object(); 
+
+plotsObj[0] = new Object(); 
+
+plotsObj[0]['plotLegendPosition'] = 'ne'; 
+
+plotsObj[0]['var'] = new Array();
+  plotsObj[0]['var'][0] = 0; // 1st var in profile data array
+  plotsObj[0]['var'][1] = 1; // 2nd var  
+  
+Can I - should I - do this differently? 
+
+var plotsObj {
+  0: {
+     plotLegendPosition: 'ne',
+     var {
+          0: 88,
+          1: 99
+          },
+     ...
+    },
+  1: {
+      ...
+      },
+  ...
+};
+
+THEN WOULD THIS WORK?
+
+If I did example values in my current structure
+
+var x = plotsObj[0]['var'][0] // this would return 88 
+
+But would this in example format return same?
+
+var x = plotsObj.0.var.0;  // would this return 88?
+
+
+---------------
+
+var plotsObj = new Object();
+//
+// USE THIS TO GET NUMBER OF plots, i.e., top-level children of plotsObj
+//    Object.keys(plotsObj).length;
+// except this will include any additional top level children
+
+// ADD A CHILD TO plotsObj FOR EACH PLOT TO APPEAR ON WEB PAGE
+//
+// WARNING: some of these object properties may be changed during
+//          operation of the program, e.g., show, scale
+//
+
+// plot 0 info
+plotsObj[0] = new Object();
+plotsObj[0]['name'] = 'waves';
+plotsObj[0]['type'] = 'profile';
+plotsObj[0]['canvas'] = '#div_plotCanvas_1';
+plotsObj[0]['numberPoints'] = numProfilePts;
+// plot has numberPoints + 1 pts!
+plotsObj[0]['xAxisLabel'] = 'x';
+plotsObj[0]['xAxisMin'] = 0;
+plotsObj[0]['xAxisMax'] = 1;
+plotsObj[0]['xAxisReversed'] = 0; // 0 false, 1 true, when true, xmax on left
+plotsObj[0]['yLeftAxisLabel'] = 'y';
+plotsObj[0]['yLeftAxisMin'] = 0;
+plotsObj[0]['yLeftAxisMax'] = 1;
+plotsObj[0]['yRightAxisLabel'] = '';
+plotsObj[0]['yRightAxisMin'] = 0;
+plotsObj[0]['yRightAxisMax'] = 1;
+plotsObj[0]['plotLegendPosition'] = 'ne';
+plotsObj[0]['var'] = new Array();
+  plotsObj[0]['var'][0] = 0; // 1st var in profile data array
+  plotsObj[0]['var'][1] = 1; // 2nd var 
+  

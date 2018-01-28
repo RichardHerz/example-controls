@@ -6,8 +6,10 @@
   width: 300px;
   height: 100px;
   visibility: visible;
-  border-width: 2px;
-  border-style: outset;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: DodgerBlue;
+  padding: 10px;
   opacity: 1;
   LCvScrollbar: false;
 }

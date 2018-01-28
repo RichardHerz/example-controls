@@ -6,8 +6,9 @@
   width: 546px;
   height: 240px;
   visibility: visible;
-  border-width: 2px;
-  border-style: outset;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: DodgerBlue;
   opacity: 1;
   LCvScrollbar: false;
 }
