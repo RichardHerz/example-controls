@@ -14,7 +14,7 @@ input, button {
 p {
  display: block;
  text-align: left;
- border-style: dotted;
+ border-style: none;
 }
 
 label {
