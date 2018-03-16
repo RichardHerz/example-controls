@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+
+  <title>web control examples</title>
+  <meta name="description" content="Interactive Simulations">
+  <meta name="keywords" content="interactive,simulation,reactor,reaction,reactorlab">
+  <meta name="author" content="Richard Herz">
+  <meta name='description' content='designed with lcCardLayoutToWeb project at GitHub'>
+
+<!-- load CSS style sheets for this lab  -->
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="../css/index.css">
+
+<!-- load JAVASCRIPT files for this lab  -->
+<script language='javascript' src='js/reactor.js' type='text/javascript'></script>
+
+</head>
+<body>
+<p>
+  <a href="../index.html">Examples of web controls</a> &gt; animation
+</p>
+<p>
+  Animation
+  <br><br>
+  One of several overlapping images is set to visible and the others hidden as
+  the size and color of an overlay div is changed by Javascript. Click the React button first,
+  then the Empty button, then Fill, then React.
+</p>
+</div>
+<div id="div_simFrame">
+   <img id="image_reactor_fill" class="reactor_images" src="images/reactor_fill.png">
+   <img id="image_reactor_mix_00" class="reactor_images" src="images/reactor_mix_00.png">
+   <img id="image_reactor_mix_01" class="reactor_images" src="images/reactor_mix_01.png">
+   <img id="image_reactor_empty" class="reactor_images" src="images/reactor_empty.png">
+   <input type="button" id="button_Fill" value="Fill" onclick="fillReactor()">
+   <input type="button" id="button_Empty" value="Empty" onclick="emptyReactor()">
+   <input type="button" id="button_React" value="React" onclick="reactReactor()">
+   <div id="div_PLOTDIV_reactor_contents">
+   </div> <!-- end of div div_PLOTDIV_reactor_contents -->
+</div> <!-- end of div div_simFrame -->
+</body>
+</html>
