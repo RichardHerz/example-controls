@@ -29,18 +29,20 @@
       See our main site at <a href="http://reactorlab.net">ReactorLab.net</a>.
     </p>
     <p>
-      First, an example of a minimal html file in which you just want to run Javascript.
-      This is all you need in your html file:
-      <br>
-      <pre>
+      First, an example of a minimal .html text file to run Javascript in your web browser.
+      All you need in the .html file is a script tag with your Javascript, using
+      document.write() to write html to the web page or console.log() to write to the
+      browser's Javascript console:
+    </p>
+    <pre>
       &lt;script&gt;
-        document.write('hello'); // use to display output on the page
         let a = 2;
-        let b = Math.pow(a,2);
+        console.log('minimal JS example, a = ' + a); // view in browser's Javascript console
+        let b = Math.pow(a,2); // raise a to power of 2
+        document.write('hello'); // display output on web page
         document.write('&lt;br&gt; b = ' + b); // note &lt;br&gt; to start new line
       &lt;/script&gt;
-      </pre>
-    </p>
+    </pre>
     <table>
       <tr>
         <td valign="top">
@@ -78,6 +80,6 @@
         </td>
       </tr>
     </table>
-    <p><br></p>
+    <br><br>
   </body>
 </html>
