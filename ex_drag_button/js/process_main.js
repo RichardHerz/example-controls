@@ -13,6 +13,9 @@ var lastY
 window.onload = fOpenThisLab; // can NOT use () after fOpenThisLab
 
 function fOpenThisLab() {
+  // when on touch screen, don't want touchmove to scroll screen
+  // so add next line 
+  document.ontouchmove = function(e){ e.preventDefault(); }
   // for unknown reason, style values set here are not set
   // automatically by css file when opening window
   // so do it here
@@ -50,7 +53,6 @@ function fDragging(e) {
 function fTouchMove(e) {
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
-  el.preventDefault(); // prevent viewport from scrolling also 
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
   fUpdateDisplay(); // call to update display
