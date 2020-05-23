@@ -1,0 +1,134 @@
+sup {
+  font-size: smaller;
+}
+
+sub {
+  font-size: smaller;
+}
+
+input {
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+input, button {
+  text-align: center;
+}
+
+/* do NOT write general style for div since interferes
+    with plotting by jquery.flot.js */
+
+p {
+  display: block;
+  text-align: left;
+}
+
+label {
+  display: block;
+  position: absolute;
+}
+
+img {
+  display: block;
+  position: absolute;
+}
+
+select {
+  display: block;
+  position: absolute;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  text-align: left;
+}
+
+::-ms-tooltip {
+  display: none;
+}
+
+#div_simFrame {
+  display: block;
+  position: relative;
+  float: left; /* flow text around, right or left*/
+  margin: 0px 20px 0px 0px; /* top right bottom left */
+  border-color: DodgerBlue;
+  width: 600px;
+  height: 600px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: none;
+  LCvScrollbar: false;
+}
+
+#svg_lines {
+  position: absolute;
+  top: 0px;
+  border : none;
+  border-width: 1px;
+  border-color : DodgerBlue;
+  z-index : -1; // need svg below input fields
+}
+
+#button_fixedOne {
+  position: absolute;
+  /* top & left set by fOpenThisLab */
+  /* left: 179px;
+  top: 121px; */
+  width: 20px;
+  height: 20px;
+  /* width: 26px;
+  height: 22px; */
+  visibility: hidden;
+  border-width: 2px;
+  border-style: outset;
+  opacity: 1;
+  LCthreeD: true;
+  LCshowBorder: true;
+}
+
+#button_fixedTwo {
+  position: absolute;
+  /* top & left set by fOpenThisLab */
+  /* left: 354px;
+  top: 457px; */
+  width: 20px;
+  height: 20px;
+  /* width: 22px;
+  height: 26px; */
+  visibility: hidden;
+  border-width: 2px;
+  border-style: outset;
+  opacity: 1;
+  LCthreeD: true;
+  LCshowBorder: true;
+}
+
+#button_dragBtn {
+  position: absolute;
+  /* top & left set by fOpenThisLab */
+  /* left: 251px;
+  top: 263px; */
+  width: 20px;
+  height: 20px;
+  /* width: 20px;
+  height: 20px; */
+  visibility: visible;
+  border-width: 2px;
+  border-style: outset;
+  opacity: 1;
+  LCthreeD: true;
+  LCshowBorder: true;
+}
+
+/* example @media for responsive design */
+/* requires meta viewport element in HTML head */
+@media(max-width: 640px) {
+  /* change the following when the screen width is <= 640px */
+  /* #div_controller {
+    top: 600px;
+    left: 20px;
+   } */
+}
