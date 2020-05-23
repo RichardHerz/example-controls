@@ -50,6 +50,7 @@ function fDragging(e) {
 function fTouchMove(e) {
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
+  el.preventDefault(); // prevent viewport from scrolling also 
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
   fUpdateDisplay(); // call to update display
