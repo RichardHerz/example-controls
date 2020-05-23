@@ -14,8 +14,29 @@ window.onload = fOpenThisLab; // can NOT use () after fOpenThisLab
 
 function fOpenThisLab() {
   // when on touch screen, don't want touchmove to scroll screen
-  // so add next line 
-  document.ontouchmove = function(e){ e.preventDefault(); }
+  // so add next line
+  // document.ontouchmove = function(e){ e.preventDefault(); }
+
+  document.ontouchmove = function(e) {
+    e.preventDefault();
+    // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
+    let el = document.querySelector("#button_dragBtn");
+    el.style.left = lastX + "px";
+    el.style.top = lastY + "px";
+    fUpdateDisplay(); // call to update display
+    // save current x,y position for next function call
+    let x = e.touches[0].clientX;
+    let y = e.touches[0].clientY;
+    // try to center button and button ghost over each other
+    // BUT depends on where in button you click...
+    lastX = x - 10 - 0; // minus width minus half border-width
+    lastY = y - 10 - 0; // minus height minus half border-width
+    // lastX = x - 20 - 1; // minus width minus half border-width
+    // lastY = y - 20 - 1; // minus height minus half border-width
+    // on last function call when mouse goes up, the ghost
+    // flies to starting position of this drag...
+  } // END OF function fTouchMove
+
   // for unknown reason, style values set here are not set
   // automatically by css file when opening window
   // so do it here
@@ -50,24 +71,24 @@ function fDragging(e) {
   // flies to starting position of this drag...
 } // END OF function fDragging
 
-function fTouchMove(e) {
-  // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
-  let el = document.querySelector("#button_dragBtn");
-  el.style.left = lastX + "px";
-  el.style.top = lastY + "px";
-  fUpdateDisplay(); // call to update display
-  // save current x,y position for next function call
-  let x = e.touches[0].clientX;
-  let y = e.touches[0].clientY;
-  // try to center button and button ghost over each other
-  // BUT depends on where in button you click...
-  lastX = x - 10 - 0; // minus width minus half border-width
-  lastY = y - 10 - 0; // minus height minus half border-width
-  // lastX = x - 20 - 1; // minus width minus half border-width
-  // lastY = y - 20 - 1; // minus height minus half border-width
-  // on last function call when mouse goes up, the ghost
-  // flies to starting position of this drag...
-} // END OF function fTouchMove
+// function fTouchMove(e) {
+//   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
+//   let el = document.querySelector("#button_dragBtn");
+//   el.style.left = lastX + "px";
+//   el.style.top = lastY + "px";
+//   fUpdateDisplay(); // call to update display
+//   // save current x,y position for next function call
+//   let x = e.touches[0].clientX;
+//   let y = e.touches[0].clientY;
+//   // try to center button and button ghost over each other
+//   // BUT depends on where in button you click...
+//   lastX = x - 10 - 0; // minus width minus half border-width
+//   lastY = y - 10 - 0; // minus height minus half border-width
+//   // lastX = x - 20 - 1; // minus width minus half border-width
+//   // lastY = y - 20 - 1; // minus height minus half border-width
+//   // on last function call when mouse goes up, the ghost
+//   // flies to starting position of this drag...
+// } // END OF function fTouchMove
 
 function fUpdateDisplay() {
 
