@@ -17,11 +17,12 @@ function fOpenThisLab() {
   // so add next line
   // document.ontouchmove = function(e){ e.preventDefault(); }
 
-  // try preventDefault
-  // SEE https://coderwall.com/p/w_likw/enable-disable-scrolling-in-iphone-ipad-s-safari
-  // SEE  https://www.w3schools.com/jsref/event_preventdefault.asp 
+  // // try preventDefault
+  // // SEE https://coderwall.com/p/w_likw/enable-disable-scrolling-in-iphone-ipad-s-safari
+  // // SEE  https://www.w3schools.com/jsref/event_preventdefault.asp 
+  // //
   // document.ontouchmove = function(e) {
-  //   e.preventDefault();
+  //   e.preventDefault(); // <<<<<<<<<<<<<<<<<<<< TRY THIS <<<<<<<<<<<
   //   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   //   let el = document.querySelector("#button_dragBtn");
   //   el.style.left = lastX + "px";
@@ -76,6 +77,7 @@ function fDragging(e) {
 
 function fTouchMove(e) {
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
+  document.ontouchmove.preventDefault(); 
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
