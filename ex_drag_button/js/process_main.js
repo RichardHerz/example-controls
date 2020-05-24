@@ -67,8 +67,8 @@ function fDragging(e) {
   let y = e.clientY;
   // try to center button and button ghost over each other
   // BUT depends on where in button you click...
-  lastX = x - 10 - 0; // minus width minus half border-width
-  lastY = y - 10 - 0; // minus height minus half border-width
+  lastX = x - 20 - 0; // minus width minus half border-width
+  lastY = y - 20 - 0; // minus height minus half border-width
   // lastX = x - 20 - 1; // minus width minus half border-width
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
@@ -77,7 +77,7 @@ function fDragging(e) {
 
 function fTouchMove(e) {
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
-  // document.ontouchmove.preventDefault(); 
+  // document.ontouchmove.preventDefault();
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
@@ -87,8 +87,8 @@ function fTouchMove(e) {
   let y = e.touches[0].clientY;
   // try to center button and button ghost over each other
   // BUT depends on where in button you click...
-  lastX = x - 10 - 0; // minus width minus half border-width
-  lastY = y - 10 - 0; // minus height minus half border-width
+  lastX = x - 20 - 0; // minus width minus half border-width
+  lastY = y - 20 - 0; // minus height minus half border-width
   // lastX = x - 20 - 1; // minus width minus half border-width
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
