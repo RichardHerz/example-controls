@@ -93,13 +93,14 @@ canvas {
 #button_dragBtn {
   position: absolute;
   /* top & left set by fOpenThisLab on window.onload*/
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 30px;
   /* width: 20px;
   height: 20px; */
   visibility: visible;
   border-width: 2px;
   border-style: outset;
+  background-color: MediumSeaGreen;
   opacity: 1;
   LCthreeD: true;
   LCshowBorder: true;
