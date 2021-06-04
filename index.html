@@ -36,13 +36,17 @@
     </p>
     <pre>
       &lt;script&gt;
-        let a = 2;
-        console.log('minimal JS example, a = ' + a); // view in browser's Javascript console
-        let b = Math.pow(a,2); // raise a to power of 2
-        document.write('hello'); // display output on web page
-        document.write('&lt;br&gt; b = ' + b); // note &lt;br&gt; to start new line
+      // two slashes start a comment to help you remember what you are doing, does not execute
+      document.write('hello'); // display output on web page
+      // values between '' or "" are "strings" of text characters
+      let aa = 3; // save value 3 in memory location you declare and label aa (aa is a "variable")
+      console.log('minimal JS example, aa = ' + aa); // display in browser's Javascript console
+      // now that a value is stored in new variable aa, we can use the value by using aa
+      let bb = 2*aa; // multiply 2 times the value in aa and store that value in new variable bb
+      document.write('&lt;br&gt; bb = ' + bb); // note html tag &lt;br&gt; to start new line
       &lt;/script&gt;
     </pre>
+    <p> Save the file and reload the browser window after each change you make.
     <table>
       <tr>
         <td valign="top">
