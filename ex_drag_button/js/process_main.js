@@ -57,7 +57,6 @@ function fOpenThisLab() {
 } // END OF function fOpenThisLab
 
 function fDragging(e) {
-  e.preventDefault(); // xxx TEST xxx
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
@@ -74,6 +73,7 @@ function fDragging(e) {
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
   // flies to starting position of this drag...
+  e.preventDefault(); // xxx TEST xxx
 } // END OF function fDragging
 
 function fTouchMove(e) {
