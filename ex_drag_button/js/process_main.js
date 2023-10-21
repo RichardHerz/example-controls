@@ -57,6 +57,7 @@ function fOpenThisLab() {
 } // END OF function fOpenThisLab
 
 function fDragging(e) {
+  e.preventDefault(); // xxx TEST xxx
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
