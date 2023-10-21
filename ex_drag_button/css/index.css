@@ -104,4 +104,9 @@ canvas {
   opacity: 1;
   LCthreeD: true;
   LCshowBorder: true;
+  /* thanks to https://jsgist.org/?src=96f9293f224c6354f62a658dac99db05 */
+  /* for next two lines of code which prevent touch screen from scrolling *?
+  /* while touch dragging this button on mobile device */ 
+  touch-action: none;  /* prevent zoom/scroll on this element */
+  user-select: none;  /* prevent selecting text on this element */
 }
