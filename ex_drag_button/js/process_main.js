@@ -73,7 +73,6 @@ function fDragging(e) {
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
   // flies to starting position of this drag...
-  e.preventDefault(); // xxx TEST xxx
 } // END OF function fDragging
 
 function fTouchMove(e) {
@@ -94,6 +93,7 @@ function fTouchMove(e) {
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
   // flies to starting position of this drag...
+    e.preventDefault(); // xxx TEST xxx
 } // END OF function fTouchMove
 
 function fUpdateDisplay() {
