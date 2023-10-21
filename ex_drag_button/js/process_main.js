@@ -49,7 +49,7 @@ function fDragging(e) {
 
 function fTouchMove(e) {
   // SEE CSS FOR button_dragBtn for touch-action & user-select settings
-  //    to none which prevent touch screen from scrolling when dragging button 
+  //    to none which prevent touch screen from scrolling when dragging button
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
