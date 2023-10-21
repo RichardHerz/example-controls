@@ -76,7 +76,7 @@ function fDragging(e) {
 } // END OF function fDragging
 
 function fTouchMove(e) {
-  e.stopPropagation(); // xxx TEST xxx
+  document.ontouchmove.stopPropagation(); // xxx TEST xxx
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   // THIS STOPS MOVE OF BUTTON >> document.ontouchmove.preventDefault();
   let el = document.querySelector("#button_dragBtn");
