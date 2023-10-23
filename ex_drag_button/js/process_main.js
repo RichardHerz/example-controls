@@ -28,6 +28,18 @@ function fOpenThisLab() {
   fUpdateDisplay(); // call to update display
 } // END OF function fOpenThisLab
 
+function dragStartHandler(e) {
+    // FROM https://docs.w3cub.com/dom/datatransfer/setdragimage.html 
+    // const img = new Image();
+    // img.src = "1x1-ffffff7f.png"; // 1x1 image 
+    // img.src = "screenshot_1374.jpg" // another image
+    // NOTE: same result whether use img above or el below in setDragImage()
+    // NOTE: get something initially flickering in upper-left of page either way
+    // here use img set in html
+    let el = document.querySelector("#dragImage");
+    e.dataTransfer.setDragImage(el,0,0); // digits are offset pixels
+}
+
 function fDragging(e) {
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
@@ -49,7 +61,7 @@ function fDragging(e) {
 
 function fTouchMove(e) {
   // SEE CSS FOR button_dragBtn for touch-action & user-select settings
-  //    to none which prevent touch screen from scrolling when dragging button
+  //    to none which prevent touch screen from scrolling when dragging button 
   // set loc to last loc because clientx = clienty = 0 at end drag on mouseUp
   let el = document.querySelector("#button_dragBtn");
   el.style.left = lastX + "px";
@@ -66,6 +78,7 @@ function fTouchMove(e) {
   // lastY = y - 20 - 1; // minus height minus half border-width
   // on last function call when mouse goes up, the ghost
   // flies to starting position of this drag...
+  // document.ontouchmove.stopPropagation();
 } // END OF function fTouchMove
 
 function fUpdateDisplay() {
