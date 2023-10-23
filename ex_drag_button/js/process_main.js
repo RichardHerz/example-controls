@@ -30,14 +30,19 @@ function fOpenThisLab() {
 
 function dragStartHandler(e) {
     // FROM https://docs.w3cub.com/dom/datatransfer/setdragimage.html 
+    //
     // const img = new Image();
     // img.src = "1x1-ffffff7f.png"; // 1x1 image 
-    // img.src = "screenshot_1374.jpg" // another image
-    // NOTE: same result whether use img above or el below in setDragImage()
-    // NOTE: get something initially flickering in upper-left of page either way
+    // img.src = "screenshot_1374.jpg" // a big image
+    // e.dataTransfer.setDragImage(img,0,0); // digits are offset pixels
+    //
+    // NOTE: same result with either img above or el below in setDragImage()
+    // NOTE: with both approaches get occasional flickering in upper-left of 
+    //       page of the html object image itself (not dragImage) being dragged  
+    //
     // here use img set in html
     let el = document.querySelector("#dragImage");
-    e.dataTransfer.setDragImage(el,0,0); // digits are offset pixels
+    e.dataTransfer.setDragImage(el,0,0); // digits are offset ghost to element
 }
 
 function fDragging(e) {
@@ -49,14 +54,8 @@ function fDragging(e) {
   // save current x,y position for next function call
   let x = e.clientX;
   let y = e.clientY;
-  // try to center button and button ghost over each other
-  // BUT depends on where in button you click...
-  lastX = x - 20 - 0; // minus width minus half border-width
-  lastY = y - 20 - 0; // minus height minus half border-width
-  // lastX = x - 20 - 1; // minus width minus half border-width
-  // lastY = y - 20 - 1; // minus height minus half border-width
-  // on last function call when mouse goes up, the ghost
-  // flies to starting position of this drag...
+  lastX = x - 20; // x - 20;
+  lastY = y - 20; // y - 20;
 } // END OF function fDragging
 
 function fTouchMove(e) {
@@ -70,15 +69,8 @@ function fTouchMove(e) {
   // save current x,y position for next function call
   let x = e.touches[0].clientX;
   let y = e.touches[0].clientY;
-  // try to center button and button ghost over each other
-  // BUT depends on where in button you click...
-  lastX = x - 20 - 0; // minus width minus half border-width
-  lastY = y - 20 - 0; // minus height minus half border-width
-  // lastX = x - 20 - 1; // minus width minus half border-width
-  // lastY = y - 20 - 1; // minus height minus half border-width
-  // on last function call when mouse goes up, the ghost
-  // flies to starting position of this drag...
-  // document.ontouchmove.stopPropagation();
+  lastX = x - 20; // x - 20;
+  lastY = y - 20; // y - 20;
 } // END OF function fTouchMove
 
 function fUpdateDisplay() {
