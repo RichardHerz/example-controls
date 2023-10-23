@@ -49,20 +49,18 @@ canvas {
   display: none;
 }
 
-/* #svg_lines {
+#img_coverlet { 
+  /* image to cover drag image flicker at top-left page */
   position: absolute;
   top: 0px;
-  border : none;
-  border-width: 1px;
-  border-color : DodgerBlue;
-  z-index : -1; // need svg below input fields
-} */
+  left: 0px;
+  /* set z-index high so flicker will occur underneath */
+  z-index: 99;
+}
 
 #button_fixedOne {
   position: absolute;
-  /* top & left set by fOpenThisLab */
-  /* left: 179px;
-  top: 121px; */
+  /* top & left set by fOpenThisLab on window.onload */
   width: 20px;
   height: 20px;
   /* width: 26px;
@@ -71,13 +69,11 @@ canvas {
   border-width: 2px;
   border-style: outset;
   opacity: 1;
-  LCthreeD: true;
-  LCshowBorder: true;
 }
 
 #button_fixedTwo {
   position: absolute;
-  /* top & left set by fOpenThisLab on window.onload*/
+  /* top & left set by fOpenThisLab on window.onload */
   width: 20px;
   height: 20px;
   /* width: 22px;
@@ -86,8 +82,6 @@ canvas {
   border-width: 2px;
   border-style: outset;
   opacity: 1;
-  LCthreeD: true;
-  LCshowBorder: true;
 }
 
 #button_dragBtn {
@@ -102,8 +96,7 @@ canvas {
   border-style: outset;
   background-color: MediumSeaGreen;
   opacity: 1;
-  LCthreeD: true;
-  LCshowBorder: true;
+
   /* thanks to https://jsgist.org/?src=96f9293f224c6354f62a658dac99db05 */
   /* for next two lines of code which prevent touch screen from scrolling */
   /* while touch dragging this button on mobile device */ 
