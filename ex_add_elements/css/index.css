@@ -74,3 +74,29 @@ canvas {
   background-color: tomato;
   opacity: 1;
 }
+
+#button_newerOne {
+  position: absolute;
+  top: 150px;
+  left: 250px;
+  width: 60px;
+  height: 60px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: outset;
+  background-color: yellow;
+  opacity: 1;
+}
+
+#button_palette {
+  position: absolute;
+  top: 220px;
+  left: 20px;
+  width: 200px;
+  height: 100px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: dashed;
+  background-color: pink;
+  opacity: 1;
+}

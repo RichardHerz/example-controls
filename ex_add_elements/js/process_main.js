@@ -6,15 +6,32 @@
 */
 
 function buttonClicked(event) {
+
+
   let elFixedOne = document.querySelector("#button_fixedOne");
   console.log('elFixedOne = ' + elFixedOne);
   console.log('event = ' + event);
+
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('mod key = ' + modkey);
+
+  // A FEW WAYS TO ADD NEW ELEMENT
 
   if (modkey) {
     document.getElementById("innerdiv").
       innerHTML += '<input type="button" id="button_newOne">';
+  }
+
+  if (modkey) {
+    const para = document.createElement("div");
+             para.innerText = "Hello World";
+             document.body.appendChild(para);
+  }
+
+  if (modkey) {
+    const para = document.createElement("div");
+             para.innerHTML = '<input type="button" id="button_newerOne">';
+             document.body.appendChild(para);
   }
 
 }

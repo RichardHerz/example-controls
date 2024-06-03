@@ -5,7 +5,7 @@ We use client-side technology (html, css, javascript) with no, or few, external 
 
 Examples of individual controls are shown here so they are easier to inspect and understand than those embedded in a complete simulation.
 
-See source files of a complete simulation at our reaction-diffusion project here at github.
+See source files of complete simulations at our web-labs project here at github and also at https://ReactorLab.net Web Labs. 
 
 See this projects Wiki for more information.
 
