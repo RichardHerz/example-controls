@@ -9,6 +9,10 @@ function innerDivClicked(event) {
   console.log('inner div was clicked, event = ' + event);
 }
 
+function outerDivClicked(event) {
+  console.log('outer div was clicked, event = ' + event);
+}
+
 function buttonClicked(event) {
 
   console.log('button_fixedOne clicked, event = ' + event);

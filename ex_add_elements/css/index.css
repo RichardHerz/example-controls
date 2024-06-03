@@ -70,7 +70,7 @@ canvas {
   left: 10px;
   width: 1000px;
   height: 700px;
-  visibility: hidden;
+  visibility: hidden; // gets no onclick when hidden 
 }
 
 #button_fixedOne {
