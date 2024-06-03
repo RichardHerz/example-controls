@@ -53,11 +53,24 @@ canvas {
   position: absolute;
   top: 100px;
   left: 100px;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   visibility: visible;
   border-width: 2px;
   border-style: outset;
-  /* border-color: tomato; */
+  background-color: dodgerblue;
+  opacity: 1;
+}
+
+#button_newOne {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  width: 80px;
+  height: 80px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: outset;
+  background-color: tomato;
   opacity: 1;
 }

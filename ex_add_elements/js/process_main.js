@@ -12,4 +12,9 @@ function buttonClicked(event) {
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('mod key = ' + modkey);
 
+  if (modkey) {
+    document.getElementById("innerdiv").
+      innerHTML += '<input type="button" id="button_newOne">';
+  }
+
 }
