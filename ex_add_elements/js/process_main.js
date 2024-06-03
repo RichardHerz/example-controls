@@ -5,21 +5,22 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
+function innerDivClicked(event) {
+  console.log('inner div was clicked, event = ' + event);
+}
+
 function buttonClicked(event) {
 
-
-  let elFixedOne = document.querySelector("#button_fixedOne");
-  console.log('elFixedOne = ' + elFixedOne);
-  console.log('event = ' + event);
+  console.log('button_fixedOne clicked, event = ' + event);
 
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('mod key = ' + modkey);
 
-  // A FEW WAYS TO ADD NEW ELEMENT
+  // A COUPLE WAYS TO ADD NEW ELEMENT
 
   if (modkey) {
-    document.getElementById("innerdiv").
-      innerHTML += '<input type="button" id="button_newOne">';
+    document.getElementById("div_outerdiv").
+      innerHTML += '<button type="button" id="button_newOne">newOne</button>';
   }
 
   if (modkey) {
@@ -30,7 +31,7 @@ function buttonClicked(event) {
 
   if (modkey) {
     const para = document.createElement("div");
-             para.innerHTML = '<input type="button" id="button_newerOne">';
+             para.innerHTML = '<button type="button" id="button_newerOne">newerOne</button>';
              document.body.appendChild(para);
   }
 
