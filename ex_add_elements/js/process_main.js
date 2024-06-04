@@ -13,7 +13,15 @@ function outerDivClicked(event) {
   console.log('outer div was clicked, event = ' + event);
 }
 
-function buttonClicked(event) {
+function newOneClicked(event) {
+  console.log('button newOne clicked, event = ' + event);
+}
+
+function newerOneClicked(event) {
+  console.log('button newerOne clicked, event = ' + event);
+}
+
+function fixedOneClicked(event) {
 
   console.log('button_fixedOne clicked, event = ' + event);
 
@@ -24,19 +32,19 @@ function buttonClicked(event) {
 
   if (modkey) {
     document.getElementById("div_outerdiv").
-      innerHTML += '<button type="button" id="button_newOne">newOne</button>';
+      innerHTML += '<button type="button" id="button_newOne" onclick="newOneClicked(event)"</button>';
   }
 
   if (modkey) {
-    const para = document.createElement("div");
-             para.innerText = "Hello World";
-             document.body.appendChild(para);
+    const newD = document.createElement("div");
+            newD.innerText = "Hello World";
+            document.body.appendChild(newD);
   }
 
   if (modkey) {
-    const para = document.createElement("div");
-             para.innerHTML = '<button type="button" id="button_newerOne">newerOne</button>';
-             document.body.appendChild(para);
+    const newD = document.createElement("div");
+            newD.innerHTML = '<button type="button" id="button_newerOne" onclick="newerOneClicked(event)">newerOne</button>';
+            document.body.appendChild(newD);
   }
 
 }

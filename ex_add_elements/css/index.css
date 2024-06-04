@@ -53,14 +53,14 @@ canvas {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 1000px;
-  height: 700px;
+  width: 800px;
+  height: 600px;
   visibility: visible;
   border-width: 2px;
   border-style: dashed;
   border-color: dodgerblue;
-  background-color: yellow;
-  opacity: 0.25;
+  background-color: white; 
+  opacity: 1;
   z-index: -1;
 }
 
@@ -70,7 +70,7 @@ canvas {
   left: 10px;
   width: 1000px;
   height: 700px;
-  visibility: hidden; // gets no onclick when hidden 
+  visibility: hidden;
 }
 
 #button_fixedOne {
@@ -84,7 +84,6 @@ canvas {
   border-style: outset;
   background-color: dodgerblue;
   opacity: 1;
-  /* z-index: -1; */
 }
 
 #button_newOne {
@@ -98,7 +97,6 @@ canvas {
   border-style: dashed;
   background-color: yellow;
   opacity: 1;
-  /* z-index: 1; */
 }
 
 #button_newerOne {

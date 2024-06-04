@@ -1,0 +1,24 @@
+NOTES
+
+A mouse click affects both an element and its parent div, 
+and each can have onclick attributes. 
+Such clicks are not passed down in z-level to lower divs and elements.
+
+Not sure yet about an element in a div that is nested in another div... 
+
+A hidden div gets no clicks unless it contains a visible element, in which case 
+the hidden div and its visible element both get the click 
+
+A hidden div on top layer (z-level) passes clicks down, unless the click is on a visible element in 
+that hidden div, 
+in which case the hidden div and its visible element both get the click, which is then 
+NOT passed down in z-level. 
+
+Using the createElement+appendChild method of adding new elements to a page, 
+you can create multiple new divs with the same name if you wish,
+e.g.,   const newD = document.createElement("div");
+            newD.innerHTML = '<button>new button</button>';
+            document.body.appendChild(newD);
+
+The other method of adding new elements to a page is appending to an existing div, e.g., 
+ document.getElementById("div_outerdiv").innerHTML += '<button>new button</button>'; 
