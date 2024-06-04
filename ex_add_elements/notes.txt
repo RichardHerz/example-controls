@@ -22,3 +22,27 @@ e.g.,   const newD = document.createElement("div");
 
 The other method of adding new elements to a page is appending to an existing div, e.g., 
  document.getElementById("div_outerdiv").innerHTML += '<button>new button</button>'; 
+
+
+--------------- 
+
+  // // A COUPLE WAYS TO ADD NEW ELEMENT
+
+  // if (modkey) {
+  //   document.getElementById("div_outerdiv").
+  //     innerHTML += '<button type="button" id="button_newOne" onclick="newOneClicked(event)">newOne</button>';
+  // }
+
+  // if (modkey) {
+  //   const newD = document.createElement("div");
+  //           newD.innerText = "Hello World";
+  //           document.body.appendChild(newD);
+  // }
+
+  // if (modkey) {
+  //   const newD = document.createElement("div");
+  //           newD.innerHTML = '<button type="button" id="button_newerOne" onclick="newerOneClicked(event)">newerOne</button>';
+  //           document.body.appendChild(newD);
+  // }
+
+  

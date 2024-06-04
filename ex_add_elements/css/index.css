@@ -51,9 +51,9 @@ canvas {
 
 #div_innerdiv {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 800px;
+  top: 100px;
+  left: 160px;
+  width: 600px;
   height: 600px;
   visibility: visible;
   border-width: 2px;
@@ -66,17 +66,17 @@ canvas {
 
 #div_outerdiv {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 1000px;
-  height: 700px;
+  top: 100px;
+  left: 160px;
+  width: 600px;
+  height: 600px;
   visibility: hidden;
 }
 
 #button_fixedOne {
   position: absolute;
   top: 100px;
-  left: 100px;
+  left: 40px;
   width: 100px;
   height: 100px;
   visibility: visible;
@@ -87,9 +87,8 @@ canvas {
 }
 
 #button_newOne {
-  position: absolute;
-  top: 150px;
-  left: 150px;
+  position: fixed;
+  /* top and left set by script */
   width: 80px;
   height: 80px;
   visibility: visible;

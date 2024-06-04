@@ -5,7 +5,7 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-var optClicked = 0;
+var optClicked = 0; // toggles 0-1
 
 function fixedOneClicked(event) {
   console.log('button_fixedOne clicked, event = ' + event);
@@ -17,51 +17,22 @@ function fixedOneClicked(event) {
   }
 }
 
-function innerDivClicked(event) {
-  // innerDiv got click when button fixedOne clicked, so wait for next click on innerDiv to add button 
+function innerDivClicked(event) { 
   console.log('inner div was clicked, optClicked = ' + optClicked);
   if (optClicked == 1) {
     console.log('optClicked is 1? = ' + optClicked);
-    optClicked = 2;
-    console.log('optClicked set to 2');
-  } else if (optClicked == 2) {
-    console.log('optClicked is 2? = ' + optClicked);
     optClicked = 0;
-    console.log('optClicked set to 0 & add button');
-    document.getElementById("div_outerdiv").
+    let x = event.clientX + 'px';
+    let y = event.clientY + 'px';
+    console.log('x,y = ' + x + ', ' + y);
+    document.getElementById("div_innerdiv").
     innerHTML += '<button type="button" id="button_newOne" onclick="newOneClicked(event)">newOne</button>';
+    let el = document.getElementById("button_newOne");
+    el.style.top = y;
+    el.style.left = x;
   }
-}
-
-function outerDivClicked(event) {
-  console.log('outer div was clicked, event = ' + event);
 }
 
 function newOneClicked(event) {
   console.log('button newOne clicked, event = ' + event);
 }
-
-function newerOneClicked(event) {
-  console.log('button newerOne clicked, event = ' + event);
-}
-
-  // // A COUPLE WAYS TO ADD NEW ELEMENT
-
-  // if (modkey) {
-  //   document.getElementById("div_outerdiv").
-  //     innerHTML += '<button type="button" id="button_newOne" onclick="newOneClicked(event)">newOne</button>';
-  // }
-
-  // if (modkey) {
-  //   const newD = document.createElement("div");
-  //           newD.innerText = "Hello World";
-  //           document.body.appendChild(newD);
-  // }
-
-  // if (modkey) {
-  //   const newD = document.createElement("div");
-  //           newD.innerHTML = '<button type="button" id="button_newerOne" onclick="newerOneClicked(event)">newerOne</button>';
-  //           document.body.appendChild(newD);
-  // }
-
-

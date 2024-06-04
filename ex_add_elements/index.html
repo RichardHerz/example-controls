@@ -16,15 +16,16 @@
 
   <p><a href="../index.html">Examples of web controls</a> &gt; click & add elements</p>
   
-  <p>hold down option/Alt key and click button to add new button</p>
+  <p>hold down option/Alt key and click button fixedOne, then click on canvas to add new button</p>
+
+  <button type="button" id="button_fixedOne" onclick="fixedOneClicked(event)">fixedOne</button>
 
   <div id="div_innerdiv" onclick="innerDivClicked(event)">
+    <!-- new button is added to this div by javascript -->
 
-    <button type="button" id="button_fixedOne" onclick="fixedOneClicked(event)">fixedOne</button>
+    <!-- <button type="button" id="button_newOne" style="top:300px;left:150px;" onclick="newOneClicked(event)">newOne</button>; -->
 
   </div>
-
-  <div id="div_outerdiv" onclick="outerDivClicked(event)"></div>
 
 </body>
 </html>
