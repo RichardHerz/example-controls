@@ -1,4 +1,16 @@
-NOTES
+NOTES 
+
+Want to be able to have multiple "fixed" elements and want to be able to place multiple copies
+of each of those elements. 
+
+Want to be able to delete copies of elements previously placed 
+
+Maybe have each type of "fixed" element be in a unique CSS class, then generate a new 
+element id by appending an incrementing number to a unique base id for that class 
+
+IS THERE A WAY to get the id of an element that is cliced? Get the class? 
+
+CLICK CAPTURE AND PASSING ---------- 
 
 A mouse click affects both an element and its parent div, 
 and each can have onclick attributes. 
