@@ -14,7 +14,9 @@ function fixedOneClicked(event) {
   if (modkey) {
     optClicked = 1;
     console.log('optClicked = ' + optClicked);
-    let el = document.getElementById("div_innerdiv");
+    let el = document.getElementById("button_fixedOne");
+    el.style.cursor = "copy";
+    el = document.getElementById("div_innerdiv");
     el.style.cursor = "copy";
   }
 }
@@ -33,6 +35,8 @@ function innerDivClicked(event) {
     el = document.getElementById("button_newOne");
     el.style.top = y;
     el.style.left = x;
+    el = document.getElementById("button_fixedOne");
+    el.style.cursor = "default";
   }
 }
 
