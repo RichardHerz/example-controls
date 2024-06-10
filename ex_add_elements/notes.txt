@@ -5,10 +5,12 @@ of each of those elements.
 
 Want to be able to delete copies of elements previously placed 
 
+Want to be able to move copies of elements previously placed 
+
 Maybe have each type of "fixed" element be in a unique CSS class, then generate a new 
 element id by appending an incrementing number to a unique base id for that class 
 
-IS THERE A WAY to get the id of an element that is cliced? Get the class? 
+FIND THE WAYS to get the id of an element that is clicked - and get the class 
 
 CLICK CAPTURE AND PASSING ---------- 
 
@@ -16,7 +18,7 @@ A mouse click affects both an element and its parent div,
 and each can have onclick attributes. 
 Such clicks are not passed down in z-level to lower divs and elements.
 
-Not sure yet about an element in a div that is nested in another div... 
+NOT SURE YET about an element in a div that is nested in another div... 
 
 A hidden div gets no clicks unless it contains a visible element, in which case 
 the hidden div and its visible element both get the click 

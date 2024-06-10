@@ -38,4 +38,10 @@ function innerDivClicked(event) {
 
 function newOneClicked(event) {
   console.log('button newOne clicked, event = ' + event);
+  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+  console.log('newOneClicked, mod key = ' + modkey);
+  if (modkey) {
+  let el = document.getElementById("button_newOne");
+    el.remove(); // remove() allows placing another one with same ID
+  }
 }
