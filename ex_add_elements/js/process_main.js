@@ -5,12 +5,13 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
+// DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1
 var elemCounter = 0; // number of elements placed on canvas including those removed 
 var clickedClass = '';
 var clickedID = '';
 
-function fixedClicked(event) {
+function fixedButtonClicked(event) {
   clickedClass = event.target.className;
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
@@ -27,19 +28,18 @@ function fixedClicked(event) {
 
 function canvasDivClicked(event) { 
   if (optClicked == 1) {
-    optClicked = 0; // toggles to 1 in fixedClicked() 
+    optClicked = 0; // toggles to 1 in fixedButtonClicked() 
   
     elemCounter += 1; 
     let el = document.getElementById("div_canvasDiv");
 
     let newID = clickedID + elemCounter;
-    let newClass = clickedClass;
 
     let x = event.clientX + 'px';
     let y = event.clientY + 'px';
 
     el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
-      +' " style="top: '+y+'; left: '+x+';" onclick="canvasClicked(event)">'
+      +' " style="top: '+y+'; left: '+x+';" onclick="canvasButtonClicked(event)">'
       +clickedClass+'</button>';
 
     el.style.cursor = "default";
@@ -49,7 +49,7 @@ function canvasDivClicked(event) {
   }
 }
 
-function canvasClicked(event) {
+function canvasButtonClicked(event) {
   let clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey) {
