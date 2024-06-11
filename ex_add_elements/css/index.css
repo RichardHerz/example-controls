@@ -86,7 +86,7 @@ canvas {
   opacity: 1;
 }
 
-#button_newOne {
+.newButton {
   position: fixed;
   /* top and left set by script */
   width: 80px;
