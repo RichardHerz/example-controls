@@ -47,14 +47,13 @@ function innerDivClicked(event) {
     let y = event.clientY + 'px';
     console.log('x,y = ' + x + ', ' + y);
 
-    // style="top: '+y+'; left: '+x+';"
-
-    el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID+' " style="top: '+y+'; left: '+x+';" onclick="paletteClicked(event)">'+clickedClass+'</button>';
+    el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
+      +' " style="top: '+y+'; left: '+x+';" onclick="paletteClicked(event)">'
+      +clickedClass+'</button>';
 
     el.style.cursor = "default";
-    el = document.getElementById(newID); 
-    el.style.top = y;
-    el.style.left = x;
+
+    el = document.getElementById(clickedID); 
     el.style.cursor = "default";
   }
 }
