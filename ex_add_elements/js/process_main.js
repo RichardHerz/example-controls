@@ -10,6 +10,7 @@ var elemCounter = 0; // number of elements on palette
 
 function fixedOneClicked(event) {
   console.log('button_fixedOne clicked, event = ' + event);
+  console.log('target id = ' + event.target.id)
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('fixedOneClicked, mod key = ' + modkey);
   if (modkey) {
@@ -34,13 +35,13 @@ function innerDivClicked(event) {
     console.log('elemCounter ON ADD = ' + elemCounter);
     let el = document.getElementById("div_innerdiv");
 
-    let newIDstring = "button_new_" + elemCounter;
-    console.log('newIDstring = ' + newIDstring);
+    let newID = "button_new_" + elemCounter;
+    console.log('newID = ' + newID);
 
-    el.innerHTML += '<button type="button" class="newButton" id="' + newIDstring + '" onclick="newOneClicked(event)">newOne</button>';
+    el.innerHTML += '<button type="button" class="newButton" id="' + newID + '" onclick="newOneClicked(event)">newOne</button>';
 
     el.style.cursor = "default";
-    el = document.getElementById(newIDstring); 
+    el = document.getElementById(newID); 
     el.style.top = y;
     el.style.left = x;
     el = document.getElementById("button_fixedOne");
@@ -52,12 +53,11 @@ function newOneClicked(event) {
   console.log('button newOne clicked, event = ' + event);
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('newOneClicked, mod key = ' + modkey);
+  let clickedID = event.target.id;
+  console.log('event.target.id = ' + event.target.id);
+  console.log('event.target.className = ' + event.target.className);
   if (modkey) {
-  let newID = "button_new_" + elemCounter;
-  let newIDstring = String(newID);
-  let el = document.getElementById(newIDstring);
-    el.remove(); // remove() allows placing another one with same ID
-    elemCounter -= 1; 
-    console.log('elemCounter ON REMOVE = ' + elemCounter);
+    let el = document.getElementById(clickedID);
+    el.remove();
   }
 }
