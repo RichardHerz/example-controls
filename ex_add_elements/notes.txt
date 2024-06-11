@@ -3,10 +3,9 @@ NOTES
 Want to be able to have multiple "fixed" elements and want to be able to place multiple copies
 of each of those elements. 
 
-Want to be able to move copies of elements previously placed 
+Maybe have each type of "fixed" element be in a unique CSS class 
 
-Maybe have each type of "fixed" element be in a unique CSS class, then generate a new 
-element id by appending an incrementing number to a unique base id for that class 
+Want to be able to move copies of elements previously placed 
 
 CLICK CAPTURE AND PASSING ---------- 
 

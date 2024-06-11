@@ -49,6 +49,10 @@ canvas {
   display: none;
 }
 
+#div_title {
+  
+}
+
 #div_innerdiv {
   position: absolute;
   top: 120px;
@@ -64,19 +68,9 @@ canvas {
   z-index: -1;
 }
 
-#div_outerdiv {
-  position: absolute;
-  top: 120px;
-  left: 160px;
-  width: 600px;
-  height: 600px;
-  visibility: hidden;
-}
-
-#button_fixedOne {
-  position: absolute;
-  top: 120px;
-  left: 40px;
+.c_fixedOne {
+  position: fixed;
+  /* top and left set by html or script */
   width: 100px;
   height: 100px;
   visibility: visible;
@@ -86,27 +80,16 @@ canvas {
   opacity: 1;
 }
 
-.newButton {
+.c_fixedTwo {
   position: fixed;
-  /* top and left set by script */
-  width: 80px;
-  height: 80px;
-  visibility: visible;
-  border-width: 4px;
-  border-style: dashed;
-  background-color: yellow;
-  opacity: 1;
-}
-
-#button_newerOne {
-  position: absolute;
-  top: 250px;
-  left: 350px;
-  width: 70px;
-  height: 60px;
+  /* top and left set by html or script */
+  width: 100px;
+  height: 100px;
   visibility: visible;
   border-width: 2px;
   border-style: outset;
-  background-color: whitesmoke;
+  background-color: red;
   opacity: 1;
 }
+
+

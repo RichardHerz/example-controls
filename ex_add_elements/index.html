@@ -14,17 +14,21 @@
 
 <body>
 
-  <p><a href="../index.html">Examples of web controls</a> &gt; click & add elements</p>
-  
-  <p>
-    Hold down option/Alt key and click button fixedOne, then click on canvas to add new button.
-    To remove new button, option/Alt click on the new button. Then place another one.
-  </p>
+  <div id="div_title">
+    <p><a href="../index.html">Examples of web controls</a> &gt; click & add elements</p>
+    <p></p>
+    <p>
+      Hold down option/Alt key and click a button on the left, 
+      then click on the canvas on the right to add the button to the canvas.
+      To remove a button, option/Alt click on the button. Then place another one.
+    </p>
+</div>
 
-  <button type="button" id="button_fixedOne" onclick="fixedOneClicked(event)">fixedOne</button>
-
+  <button type="button" class="c_fixedOne" id="b_fixedOne" style="top: 120px; left: 40px;" onclick="fixedClicked(event)">fixedOne</button>
+  <button type="button" class="c_fixedTwo" id="b_fixedTwo" style="top: 240px; left: 40px;" onclick="fixedClicked(event)">fixedTwo</button>
+ 
   <div id="div_innerdiv" onclick="innerDivClicked(event)">
-    <!-- new button is added to this div by javascript -->
+    <!-- new buttons are added to this div by javascript -->
   </div>
 
 </body>
