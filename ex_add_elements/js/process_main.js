@@ -11,6 +11,7 @@ var elemCounter = 0; // number of elements placed on canvas including those remo
 var clickedClass = '';
 var clickedID = '';
 
+
 function fixedButtonClicked(event) {
   clickedClass = event.target.className;
   clickedID = event.target.id;
@@ -39,21 +40,35 @@ function canvasDivClicked(event) {
     let y = event.clientY + 'px';
 
     el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
-      +' " style="top: '+y+'; left: '+x+';" onclick="canvasButtonClicked(event)">'
+      +' " style="top: '+y+'; left: '+x+';" onclick="canvasButtonClicked(event)" onmouseover="checkCursor(event)">'
       +clickedClass+'</button>';
 
     el.style.cursor = "default";
 
     el = document.getElementById(clickedID); 
     el.style.cursor = "default";
+
+  }
+}
+
+function checkCursor(event) {
+  let el = document.getElementById(event.target.id); 
+  if (optClicked==1) {
+      el.style.cursor = "copy";
+  } else {
+    el.style.cursor = "default";
   }
 }
 
 function canvasButtonClicked(event) {
-  let clickedID = event.target.id;
-  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-  if (modkey) {
-    let el = document.getElementById(clickedID);
-    el.remove();
+      // check optClicked because don't want to remove button if adding one on top of it
+      // apparently existing button gets click before the div gets it and toggles optClicked
+  if (optClicked == 0) {
+    let clickedID = event.target.id;
+    let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+    if (modkey) {
+      let el = document.getElementById(clickedID);
+      el.remove();
+    }
   }
 }
