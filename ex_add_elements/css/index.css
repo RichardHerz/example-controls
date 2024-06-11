@@ -53,7 +53,8 @@ canvas {
   
 }
 
-#div_innerdiv {
+#div_canvasDiv {
+  /* NOTE: "canvas" is used here for convenience and does NOT mean an HTML canvas element */
   position: absolute;
   top: 120px;
   left: 160px;

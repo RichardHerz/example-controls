@@ -1,10 +1,5 @@
 NOTES 
 
-Want to be able to have multiple "fixed" elements and want to be able to place multiple copies
-of each of those elements. 
-
-Maybe have each type of "fixed" element be in a unique CSS class 
-
 Want to be able to move copies of elements previously placed 
 
 CLICK CAPTURE AND PASSING ---------- 
