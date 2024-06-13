@@ -6,27 +6,12 @@
 */
 
 // DECLARE GLOBAL VARIABLES
-var optClicked = 0; // toggles 0-1
 
-function motherClicked(event) {
+function motherClicked(event, arg1) {
+  console.log('click function argument = ' + arg1);
   let clickedClass = event.target.className;
   let clickedID = event.target.id;
   let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
 
-}
-
-function childClicked(event) {
-  let clickedClass = event.target.className;
-  let clickedID = event.target.id;
-  let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
-  console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
-}
-
-function babyClicked(event,baby) {
-  console.log('babyClicked baby argument = ' + baby);
-  let clickedClass = event.target.className;
-  let clickedID = event.target.id;
-  let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
-  console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
 }

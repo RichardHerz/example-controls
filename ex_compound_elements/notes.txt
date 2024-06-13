@@ -6,14 +6,6 @@ as in onclick="babyClicked('baby')" which works to pass string 'baby'
 
 And you can pass multiple arguments, e.g., onclick="babyClicked(event,'baby')" 
 
-CAN WE HAVE DIFFERENT STRUCTURES IN DIFFERENT HTML FILES? 
-<link rel="import" href="import/doc.html"> 
-https://onextrapixel.com/html5-imports-embedding-an-html-file-inside-another-html-file/ 
-https://www.w3schools.com/howto/howto_html_include.asp 
-
-https://stackoverflow.com/questions/8988855/include-another-html-file-in-a-html-file#9003363 
-js/jquery-3.7.1 
-
 CLICK CAPTURE AND PASSING ---------- 
 
 A mouse click affects both an element and its parent div, 
@@ -27,6 +19,11 @@ and also the modKey (getModifierState) of the child
 For a baby div in a child div that is in a mother div and click on baby div, the baby gets click first with
 event id of the baby, then the child and then the mother div also gets the click, both with event id also that of baby
 and also the modKey (getModifierState) of the baby
+
+For both cases of the two paragraphs above, each of the nested div's get the top event but each div's 
+onclick function can have a unique argument listed in the div attributes passed to it. For example,
+in onclick="childClicked(event,'child')" in child div, when click is on baby div nested inside child,
+the child onclick gets the same event value as the baby but 'child' is passed to childClicked() function. 
 
 A hidden div gets no clicks unless it contains a visible element, in which case 
 the hidden div and its visible element both get the click 
