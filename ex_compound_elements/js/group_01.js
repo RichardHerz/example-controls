@@ -2,13 +2,15 @@
 // MAY WANT TO WRITE EACH SECTION IN DEDICATED FILE SO GET TEXT HIGHLIGHTING ON ENTRY 
 
 // NOTE the back-ticks ` required at starting (` and ending `); 
+// document.write(` `); 
+
 document.write(`
 
 <style>
     #div_child_01 {
-    position: relative;
-    top: 10px;
-    left: 10px;
+    position: absolute;
+    top: 60px;
+    left: 90px;
     width: 60px;
     height: 60px;
     visibility: visible;
@@ -50,9 +52,9 @@ document.write(`
 
 </script>
 
-<div id="div_child_01" onclick="childClicked(event, 'child')">
+<div id="div_child_01" onclick="childClicked(event, 'child_01')">
 
-        <div id="div_baby_01" onclick="babyClicked(event,'baby')">
+        <div id="div_baby_01" onclick="babyClicked(event,'baby_01')">
         </div>
 
 </div>

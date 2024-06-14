@@ -1,67 +1,14 @@
-sup {
-  font-size: smaller;
-}
-
-sub {
-  font-size: smaller;
-}
-
-input {
-  display: block;
-  position: absolute;
-  text-align: center;
-}
-
-input, button {
-  text-align: center;
-}
-
-/* do NOT write general style for div since interferes
-    with plotting by jquery.flot.js */
-
-p {
-  display: block;
-  text-align: left;
-}
-
-label {
-  display: block;
-  position: absolute;
-}
-
-img {
-  display: block;
-  position: absolute;
-}
-
-select {
-  display: block;
-  position: absolute;
-}
-
-canvas {
-  display: block;
-  position: absolute;
-  text-align: left;
-}
-
-::-ms-tooltip {
-  display: none;
-}
-
-#div_title {
-  
-}
-
 #div_mother_01 {
-  position: fixed;
-  top: 100px;
-  left: 200px;
-  width: 100px;
-  height: 100px;
+  position: relative;
+  top: 20px;
+  left: 20px;
+  width: 480px;
+  height: 400px;
   visibility: visible;
   border-width: 2px;
-  border-style: outset;
-  background-color: dodgerblue;
+  border-style: dashed;
+  border-color: dodgerblue;
+  background-color: white; 
   opacity: 1;
+  /* z-index: -1; */
 }

@@ -6,6 +6,9 @@ as in onclick="babyClicked('baby')" which works to pass string 'baby'
 
 And you can pass multiple arguments, e.g., onclick="babyClicked(event,'baby')" 
 
+check out alternative to document.write() ?? https://web.dev/articles/async-functions 
+https://developer.chrome.com/blog/removing-document-write 
+
 CLICK CAPTURE AND PASSING ---------- 
 
 A mouse click affects both an element and its parent div, 

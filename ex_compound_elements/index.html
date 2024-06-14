@@ -6,7 +6,7 @@
   <meta name="keywords" content="interactive,simulation,reactor,reaction,reactorlab">
   <meta name="author" content="Richard Herz">
   <!-- load CSS style sheets for this lab  -->
-  <link rel="stylesheet" href="../css/index.css">
+  <!-- <link rel="stylesheet" href="../css/index.css"> -->
   <link rel="stylesheet" href="css/index.css">
   <!-- load JAVASCRIPT files for this lab  -->
   <script language="javascript" src="js/process_main.js" type="text/javascript"></script>
@@ -18,14 +18,20 @@
   <div id="div_title">
     <p><a href="../index.html">Examples of web controls</a> &gt; compound elements</p>
     <p></p>
-    <p>
-      UNDER DEVELOPMENT - see browser javascript console for record of clicks 
+    <p> 
+      The goal is to have compound elements, each defined in a separate file, which can be
+      placed in the scene set by the index.html file. 
     </p>
   </div>
 
   <div id="div_mother_01" onclick="motherClicked(event, 'mother')">
 
-    <script src="group_01.js"></script>
+  <!-- <div id="div_mother_01" onclick="alert('hugs from mom')"> -->
+
+  <!-- <div id="div_mother_01" onclick="console.log('hugs from mom')"> -->
+
+    <script src="js/group_01.js"></script>
+    <script src="js/group_02.js"></script>
 
   </div>
 

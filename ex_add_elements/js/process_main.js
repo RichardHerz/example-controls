@@ -7,7 +7,7 @@
 
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1
-var elemCounter = 0; // number of elements placed on canvas including those removed 
+var elemCounter = 0; // number of elements placed on scene including those removed 
 var clickedClass = '';
 var clickedID = '';
 
@@ -17,22 +17,20 @@ function fixedButtonClicked(event) {
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey) {
-    optClicked = 1; // toggles to 0 in canvasDivClicked()
+    optClicked = 1; // toggles to 0 in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
-    el = document.getElementById("div_canvasDiv");
+    el = document.getElementById("div_sceneDiv");
     el.style.cursor = "copy";
   }
 }
 
-// NOTE: "canvas" is used here for convenience and does NOT mean an HTML canvas element
-
-function canvasDivClicked(event) { 
+function sceneDivClicked(event) { 
   if (optClicked == 1) {
     optClicked = 0; // toggles to 1 in fixedButtonClicked() 
   
     elemCounter += 1; 
-    let el = document.getElementById("div_canvasDiv");
+    let el = document.getElementById("div_sceneDiv");
 
     let newID = clickedID + elemCounter;
 
@@ -40,7 +38,7 @@ function canvasDivClicked(event) {
     let y = event.clientY + 'px';
 
     el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
-      +' " style="top: '+y+'; left: '+x+';" onclick="canvasButtonClicked(event)" onmouseover="checkCursor(event)">'
+      +' " style="top: '+y+'; left: '+x+';" onclick="sceneButtonClicked(event)" onmouseover="checkCursor(event)">'
       +clickedClass+'</button>';
 
     el.style.cursor = "default";
@@ -60,7 +58,7 @@ function checkCursor(event) {
   }
 }
 
-function canvasButtonClicked(event) {
+function sceneButtonClicked(event) {
       // check optClicked because don't want to remove button if adding one on top of it
       // apparently existing button gets click before the div gets it and toggles optClicked
   if (optClicked == 0) {

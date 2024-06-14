@@ -1,60 +1,4 @@
-sup {
-  font-size: smaller;
-}
-
-sub {
-  font-size: smaller;
-}
-
-input {
-  display: block;
-  position: absolute;
-  text-align: center;
-}
-
-input, button {
-  text-align: center;
-}
-
-/* do NOT write general style for div since interferes
-    with plotting by jquery.flot.js */
-
-p {
-  display: block;
-  text-align: left;
-}
-
-label {
-  display: block;
-  position: absolute;
-}
-
-img {
-  display: block;
-  position: absolute;
-}
-
-select {
-  display: block;
-  position: absolute;
-}
-
-canvas {
-  display: block;
-  position: absolute;
-  text-align: left;
-}
-
-::-ms-tooltip {
-  display: none;
-}
-
-#div_title {
-  
-}
-
-#div_canvasDiv {
-  /* NOTE: "canvas" is used here for convenience and does NOT mean an HTML canvas element */
+#div_sceneDiv {
   position: absolute;
   top: 120px;
   left: 160px;
@@ -92,5 +36,3 @@ canvas {
   background-color: red;
   opacity: 1;
 }
-
-
