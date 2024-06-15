@@ -5,8 +5,6 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-// DECLARE GLOBAL VARIABLES
-
 function motherClicked(event, arg1) {
   console.log('click function argument = ' + arg1);
   let clickedClass = event.target.className;
