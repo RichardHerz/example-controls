@@ -25,17 +25,19 @@ document.write(`
 
     <script>
 
-        function babyClicked(event, arg1) {
-            console.log('click function argument = ' + arg1);
+        function babyClicked_01(event, arg1) {
+            console.log('babyClicked_01 function argument = ' + arg1);
             let clickedClass = event.target.className;
             let clickedID = event.target.id;
             let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
-            console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
+            console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey);
+
+            moveChild_01(10,20);
         }
 
     </script>
 
-    <div id="div_baby_01" onclick="babyClicked(event,'baby_01')">
+    <div id="div_baby_01" onclick="babyClicked_01(event,'baby_01')">
     </div>
 
 `); 

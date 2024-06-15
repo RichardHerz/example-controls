@@ -6,10 +6,9 @@
 */
 
 function motherClicked(event, arg1) {
-  console.log('click function argument = ' + arg1);
+  console.log('motherClicked function argument = ' + arg1);
   let clickedClass = event.target.className;
   let clickedID = event.target.id;
   let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey);
-
 }

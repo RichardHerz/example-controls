@@ -10,8 +10,8 @@ document.write(`
 
         #div_child_01 {
             position: absolute;
-            top: 60px;
-            left: 90px;
+            top: 10px;
+            left: 20px;
             width: 60px;
             height: 60px;
             visibility: visible;
@@ -25,17 +25,27 @@ document.write(`
 
     <script>
 
-        function childClicked(event, arg1) {
-            console.log('click function argument = ' + arg1);
+        function childClicked_01(event, arg1) {
+            console.log('childClicked_01 function argument = ' + arg1);
             let clickedClass = event.target.className;
             let clickedID = event.target.id;
             let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
             console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
         }
 
+        function moveChild_01(dx,dy) {
+            let el = document.querySelector("#div_child_01");
+            let x = el.offsetLeft;
+            let y = el.offsetTop;
+            console.log('in moveChild_01 orig x,y = ' + x +', '+ y);
+            el.style.left = x + dx + 'px';
+            el.style.top = y + dy + 'px';
+            console.log('in moveChild_01 final x,y = ' + el.offsetLeft +', '+ el.offsetTop);
+        }
+
     </script>
 
-    <div id="div_child_01" onclick="childClicked(event, 'child_01')">
+    <div id="div_child_01" onclick="childClicked_01(event, 'child_01')">
 
         <script src="js/group_01_baby.js"></script>
 

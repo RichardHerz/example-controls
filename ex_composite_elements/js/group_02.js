@@ -10,8 +10,8 @@ document.write(`
 
         #div_child_02 {
             position: absolute;
-            top: 10px;
-            left: 20px;
+            top: 60px;
+            left: 90px;
             width: 60px;
             height: 60px;
             visibility: visible;
@@ -38,27 +38,39 @@ document.write(`
 
     <script>
     
-        function childClicked(event, arg1) {
-            console.log('click function argument = ' + arg1);
+        function childClicked_02(event, arg1) {
+            console.log('childClicked function argument = ' + arg1);
             let clickedClass = event.target.className;
             let clickedID = event.target.id;
             let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
             console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
         }
 
-        function babyClicked(event, arg1) {
-            console.log('click function argument = ' + arg1);
+        function moveChild_02(dx,dy) {
+            let el = document.querySelector("#div_child_02");
+            let x = el.offsetLeft;
+            let y = el.offsetTop;
+            console.log('in moveChild_02 orig x,y = ' + x +', '+ y);
+            el.style.left = x + dx + 'px';
+            el.style.top = y + dy + 'px';
+            console.log('in moveChild_02 final x,y = ' + el.offsetLeft +', '+ el.offsetTop);
+        }
+
+        function babyClicked_02(event, arg1) {
+            console.log('babyClicked_02 function argument = ' + arg1);
             let clickedClass = event.target.className;
             let clickedID = event.target.id;
             let modKey = event.getModifierState("Alt"); // Alt is Option on Mac
             console.log('class, ID, modKey = ' + clickedClass +', '+  clickedID +', '+  modKey)
+
+            moveChild_02(30,40);
         }
 
     </script>
 
-    <div id="div_child_02" onclick="childClicked(event, 'child_02')">
+    <div id="div_child_02" onclick="childClicked_02(event, 'child_02')">
 
-            <div id="div_baby_02" onclick="babyClicked(event,'baby_02')">
+            <div id="div_baby_02" onclick="babyClicked_02(event,'baby_02')">
             </div>
 
     </div>

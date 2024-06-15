@@ -51,7 +51,7 @@ function fDragging(e) {
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
   fUpdateDisplay(); // call to update display
-  // save current x,y position for next function call
+  // save current mouse pointer x,y position for next function call
   let x = e.clientX;
   let y = e.clientY;
   lastX = x - 20; // x - 20;
@@ -66,7 +66,7 @@ function fTouchMove(e) {
   el.style.left = lastX + "px";
   el.style.top = lastY + "px";
   fUpdateDisplay(); // call to update display
-  // save current x,y position for next function call
+  // save current mouse pointer x,y position for next function call
   let x = e.touches[0].clientX;
   let y = e.touches[0].clientY;
   lastX = x - 20; // x - 20;
