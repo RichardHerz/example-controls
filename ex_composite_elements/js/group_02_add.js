@@ -1,7 +1,7 @@
 xx += 1;
-var yy = xx.toString();
+yy = xx.toString();
 
-let buildText = `<style>
+buildText = `<style>
 
 #div_child_` + yy + ` {
     position: absolute;
@@ -75,9 +75,3 @@ function babyClicked_` + yy + `(event, arg1) {
 // alert(buildText);
 
 document.write(buildText); 
-
-// buildText = `moveChild_` + yy + `(100,100);`
-
-// alert(buildText);
-
-// document.write(buildText); 
