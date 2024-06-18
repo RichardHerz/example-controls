@@ -1,0 +1,14 @@
+#div_mother_01 {
+  position: relative;
+  top: 20px;
+  left: 20px;
+  width: 480px;
+  height: 400px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: dodgerblue;
+  background-color: white; 
+  opacity: 1;
+  /* z-index: -1; */
+}
