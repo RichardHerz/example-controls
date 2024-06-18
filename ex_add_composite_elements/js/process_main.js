@@ -20,7 +20,7 @@ function fixedButtonClicked(event) {
     optClicked = 1; // toggles to 0 in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
-    el = document.getElementById("div_sceneDiv");
+    el = document.getElementById("div_scene");
     el.style.cursor = "copy";
   }
 }
@@ -30,7 +30,7 @@ function sceneDivClicked(event) {
     optClicked = 0; // toggles to 1 in fixedButtonClicked() 
   
     elemCounter += 1; 
-    let el = document.getElementById("div_sceneDiv");
+    let el = document.getElementById("div_scene");
 
     let newID = clickedID + elemCounter;
 
