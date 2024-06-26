@@ -1,0 +1,53 @@
+<html>
+<body>
+
+<div id="parent">
+    Click parent
+    <div id="child">Click child
+        <div id="baby">Click baby</div>
+    </div>
+</div>
+    
+<button id="reset">Reset</button>
+<pre id="output"></pre>
+
+<script>
+
+    const output = document.querySelector("#output");
+    const parent = document.querySelector("#parent");
+    const baby = document.querySelector("#baby");
+    parent.addEventListener("click", (event) => {
+            const currentTarget = event.currentTarget.getAttribute("id");
+            const target = event.target.getAttribute("id");
+            output.textContent += `Current target: ${currentTarget} \n`;
+            output.textContent += `Target: ${target} \n`;
+        }
+    );
+
+    baby.addEventListener("click", (event) => {
+            const currentTarget = event.currentTarget.getAttribute("id");
+            const target = event.target.getAttribute("id");
+            output.textContent += `Baby Current target: ${currentTarget}\n`;
+            output.textContent += `Baby Target: ${target} \n`;
+        }
+    );
+
+    const reset = document.querySelector("#reset");
+    reset.addEventListener("click", () => document.location.reload());
+
+</script>
+
+<style>
+    button,
+    div,
+    pre {
+    margin: 0.5rem;
+    }
+    div {
+    padding: 1rem;
+    border: 1px solid black;
+    }
+</style>
+
+</body>
+</html>
