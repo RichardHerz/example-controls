@@ -1,0 +1,137 @@
+SEE UPDATES TO THIS ZOTERO NOTE
+
+
+------------------------------- 
+Zotero note "## Jquery load() for external html dynamically loaded" AS OF JUNE 30, 2024 
+
+## Jquery load() for external html dynamically loaded
+
+SEE RELATED ZOTERO REFS
+
+An alternative to calling a JS file to call document.write() and not using jquery.
+
+This load method would allow calling html-js-css files directly, rather than having to make them template literal strings with back ticks \`\`. This load method would allow writing html-js-css files in visual code editors with code highlighting, e.g., in Visual Code Studio and not then having to copy them to text.
+
+**NOTE: to use local files, go to Safari > Develop > Developer Settings and check box at Security: Disable local file restrictions**  
+
+[https://api.jquery.com/load/](https://api.jquery.com/load/)
+
+[https://duckduckgo.com/?q=Jquery+load()+function+for+external+dynamically+loaded+html&t=osx&ia=web](https://duckduckgo.com/?q=Jquery+load()+function+for+external+dynamically+loaded+html&t=osx&ia=web)
+
+* * *
+
+THIS LOOKS GOOD
+
+How to load external HTML file using jQuery ? [https://www.geeksforgeeks.org/how-to-load-external-html-file-using-jquery/](https://www.geeksforgeeks.org/how-to-load-external-html-file-using-jquery/) (DEC 2022)
+
+[https://www.geeksforgeeks.org/how-to-load-an-html-file-into-another-file-using-jquery/](https://www.geeksforgeeks.org/how-to-load-an-html-file-into-another-file-using-jquery/)
+
+Note: w3 schools has page that says .load() removed in jquery 3.0 BUT jquery site just says it was modified in v3.0 and example below uses v3.2.1 [https://api.jquery.com/load/](https://api.jquery.com/load/)
+
+MAIN FILE - note this loads JQUERY 3.2.1
+
+$$<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+
+	<!-- Some CSS -->
+	<style>
+		div {
+			border: 2px solid green;
+			width: fit-content;
+			margin: 20px auto;
+			padding: 2px 20px;
+			cursor: pointer;
+		}
+
+		p {
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- First div -->
+	<div id="div-1">
+		First Div
+		<p>Click to load first html</p>
+	</div>
+
+	<!-- Second div -->
+	<div id="div-2">
+		Second div
+		<p>Click to load first html</p>
+	</div>
+
+	<!-- Script -->
+	<script>
+
+		// Check if file is completely ready
+		$(document).ready(function () {
+
+			// Adding click event on id div-1
+			// if it clicked then anonymous
+			// function will be called
+			$('#div-1').click(function () {
+
+				// Load the external html
+				// here this refers to 
+				// current selector
+				$(this).load('div-1.html');
+			});
+
+			// Same as above
+			$('#div-2').click(function () {
+				$(this).load('div-2.html');
+			});
+		});
+	</script>
+</body>
+
+</html>$$
+
+* * *
+
+div-1.html
+
+<!DOCTYPE html>  
+<html lang="en">    
+<head>  
+<meta charset="UTF-8">  
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+<meta name="viewport" content=  
+"width=device-width, initial-scale=1.0">  
+<title>div-1</title>  
+</head>  
+ <body>  
+<p>This content is from first div.</p>  
+</body>  
+</html>
+
+* * *
+
+div-2.html
+
+<!DOCTYPE html>  
+<html lang="en">    
+<head>  
+<meta charset="UTF-8">  
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+<meta name="viewport" content=  
+"width=device-width, initial-scale=1.0">  
+<title>div-2</title>  
+</head>  
+ <body>  
+<p>This content is from second div.</p>  
+</body>  
+</html>
