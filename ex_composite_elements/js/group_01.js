@@ -4,8 +4,6 @@
 // NOTE the back-ticks ` required at starting (` and ending `); 
 // document.write(` `); 
 
-
-
 document.write(`
 
     <style>
