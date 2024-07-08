@@ -37,9 +37,12 @@ function sceneDivClicked(event) {
     let x = event.clientX + 'px';
     let y = event.clientY + 'px';
 
-    el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
-      +' " style="top: '+y+'; left: '+x+';" onclick="sceneButtonClicked(event)" onmouseover="checkCursor(event)">'
-      +clickedClass+'</button>';
+    let buildText = `
+      <button type="button" class="${clickedClass}" id="${newID}"
+      style="top: ${y}; left: ${x};" onclick="sceneButtonClicked(event)" 
+      onmouseover="checkCursor(event)">${clickedClass}</button>
+    `; // END buildText
+    el.innerHTML += buildText;
 
     el.style.cursor = "default";
 
@@ -59,11 +62,14 @@ function checkCursor(event) {
 }
 
 function sceneButtonClicked(event) {
+  console.log('enter function sceneButtonClicked');
       // check optClicked because don't want to remove button if adding one on top of it
       // apparently existing button gets click before the div gets it and toggles optClicked
   if (optClicked == 0) {
     let clickedID = event.target.id;
+    console.log('   clickedID = ' + clickedID);
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+    console.log('   modkey = ' + modkey);
     if (modkey) {
       let el = document.getElementById(clickedID);
       el.remove();
