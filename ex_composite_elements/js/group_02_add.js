@@ -1,33 +1,36 @@
-xx += 1;
-yy = xx.toString();
+yy += 1; // increment element counter
 
-buildText = `<style>
+// NOTE the back-ticks ` required at starting and ending of template string 
 
-#div_child_${yy} {
-    position: absolute;
-    top: 60px;
-    left: 90px;
-    width: 60px;
-    height: 60px;
-    visibility: visible;
-    border-width: 2px;
-    border-style: outset;
-    background-color: yellow;
-    opacity: 1;
-}
+buildText = ` 
 
-#div_baby_${yy} {
-    position: relative;
-    top: 20px;
-    left: 30px;
-    width: 20px;
-    height: 20px;
-    visibility: visible;
-    border-width: 2px;
-    border-style: outset;
-    background-color: blue;
-    opacity: 1;
-}
+<style>
+
+    #div_child_${yy} {
+        position: absolute;
+        top: 60px;
+        left: 90px;
+        width: 60px;
+        height: 60px;
+        visibility: visible;
+        border-width: 2px;
+        border-style: outset;
+        background-color: yellow;
+        opacity: 1;
+    }
+
+    #div_baby_${yy} {
+        position: relative;
+        top: 20px;
+        left: 30px;
+        width: 20px;
+        height: 20px;
+        visibility: visible;
+        border-width: 2px;
+        border-style: outset;
+        background-color: blue;
+        opacity: 1;
+    }
 
 </style>
 
@@ -70,8 +73,6 @@ function babyClicked_${yy}(event, arg1) {
 
 </div>
 
-` // END OF BUILDTEXT
-
-// alert(buildText);
+`; // END buildText
 
 document.write(buildText); 

@@ -1,10 +1,9 @@
 // THE IDEA IS TO PLACE DIFFERENT COMPONENT ELEMENTS IN THEIR OWN FILES 
 // MAY WANT TO WRITE EACH SECTION IN DEDICATED FILE SO GET TEXT HIGHLIGHTING ON ENTRY 
 
-// NOTE the back-ticks ` required at starting (` and ending `); 
-// document.write(` `); 
+// NOTE the back-ticks ` required at starting and ending of template string
 
-document.write(`
+buildText = `
 
     <style>
 
@@ -40,4 +39,6 @@ document.write(`
     <div id="div_baby_01" onclick="babyClicked_01(event,'baby_01')">
     </div>
 
-`); 
+`; // END buildText 
+
+document.write(buildText); 

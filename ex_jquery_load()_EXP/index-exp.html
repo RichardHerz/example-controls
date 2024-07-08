@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+
+	<!-- Some CSS -->
+	<style>
+		div {
+			border: 2px solid green;
+			width: fit-content;
+			margin: 20px auto;
+			padding: 2px 20px;
+			cursor: pointer;
+		}
+
+		p {
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- First div -->
+	<div id="div-1">
+		First Div
+		<p>Click to load first html</p>
+	</div>
+
+	<!-- Second div -->
+	<div id="div-2">
+		Second div
+		<p>Click to load first html</p>
+	</div>
+
+	<!-- Script -->
+	<script>
+
+		// Check if file is completely ready
+		$(document).ready(function () {
+
+			// Adding click event on id div-1
+			// if it clicked then anonymous
+			// function will be called
+			$('#div-1').click(function () {
+
+				// Load the external html
+				// here this refers to 
+				// current selector
+				$(this).load('div-1.html');
+				// $(this).load('div-1.js');
+			});
+
+			// Same as above
+			$('#div-2').click(function () {
+				$(this).load('div-2.html');
+				$(this).load('div-2-js.html');
+			});
+		});
+	</script>
+</body>
+
+</html>
