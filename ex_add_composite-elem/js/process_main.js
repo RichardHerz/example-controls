@@ -13,6 +13,7 @@ var clickedID = '';
 
 
 function fixedButtonClicked(event) {
+  console.log('enter fixedButtonClicked, event = ' + event);
   clickedClass = event.target.className;
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
@@ -26,6 +27,7 @@ function fixedButtonClicked(event) {
 }
 
 function sceneDivClicked(event) { 
+  console.log('enter sceneDivClicked, event = ' + event);
   if (optClicked == 1) {
     optClicked = 0; // toggles to 1 in fixedButtonClicked() 
   
@@ -34,12 +36,17 @@ function sceneDivClicked(event) {
 
     let newID = clickedID + elemCounter;
 
-    let x = event.clientX + 'px';
-    let y = event.clientY + 'px';
+    const styles = window.getComputedStyle(el);
+    console.log('styles.left = ' + styles.left);
+    console.log('event.clientX = ' + event.clientX);
 
-    el.innerHTML += '<button type="button" class=" '+clickedClass+' " id=" '+newID
-      +' " style="top: '+y+'; left: '+x+';" onclick="sceneButtonClicked(event)" onmouseover="checkCursor(event)">'
-      +clickedClass+'</button>';
+    // styles.left includes px, e.g., "160px" so use parseInt for math 
+    let x = event.clientX - parseInt(styles.left) + 'px';
+    let y = event.clientY - parseInt(styles.top) + 'px';
+
+    console.log('before call of function buildHTML, elemCounter = ' + elemCounter);
+    el.innerHTML += buildHTML(elemCounter,x,y);
+    console.log('after call of function buildHTML');
 
     el.style.cursor = "default";
 
@@ -50,6 +57,7 @@ function sceneDivClicked(event) {
 }
 
 function checkCursor(event) {
+  console.log('enter checkCursor, event = ' + event);
   let el = document.getElementById(event.target.id); 
   if (optClicked==1) {
       el.style.cursor = "copy";
@@ -58,15 +66,18 @@ function checkCursor(event) {
   }
 }
 
-function sceneButtonClicked(event) {
-      // check optClicked because don't want to remove button if adding one on top of it
-      // apparently existing button gets click before the div gets it and toggles optClicked
+function sceneObjectClicked(event) {
+  console.log('enter function sceneObjectClicked');
+  // check optClicked because don't want to remove button if adding one on top of it
+  // apparently existing button gets click before the div gets it and toggles optClicked
+  let clickedID = event.target.id;
+  console.log('   clickedID = ' + clickedID);
   if (optClicked == 0) {
-    let clickedID = event.target.id;
-    let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-    if (modkey) {
-      let el = document.getElementById(clickedID);
-      el.remove();
-    }
+  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+  console.log('   modkey = ' + modkey);
+  if (modkey) {
+    let el = document.getElementById(clickedID);
+    el.remove();
+  }
   }
 }

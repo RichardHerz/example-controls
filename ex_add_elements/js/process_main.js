@@ -37,12 +37,14 @@ function sceneDivClicked(event) {
     let x = event.clientX + 'px';
     let y = event.clientY + 'px';
 
-    let buildText = `
-      <button type="button" class="${clickedClass}" id="${newID}"
-      style="top: ${y}; left: ${x};" onclick="sceneButtonClicked(event)" 
-      onmouseover="checkCursor(event)">${clickedClass}</button>
-    `; // END buildText
-    el.innerHTML += buildText;
+    // let buildText = `
+    //   <button type="button" class="${clickedClass}" id="${newID}"
+    //   style="top: ${y}; left: ${x};" onclick="sceneButtonClicked(event)" 
+    //   onmouseover="checkCursor(event)">${clickedClass}</button>
+    // `; // END buildText
+    // el.innerHTML += buildText;
+    // OR CALL A FUNCTION INSTEAD OF BUILDING HERE 
+    el.innerHTML += buildHTML(clickedClass, newID, y, x);
 
     el.style.cursor = "default";
 
@@ -50,6 +52,15 @@ function sceneDivClicked(event) {
     el.style.cursor = "default";
 
   }
+}
+
+function buildHTML(clickedClass, newID, y, x) {
+  let buildText = `
+  <button type="button" class="${clickedClass}" id="${newID}"
+  style="top: ${y}; left: ${x};" onclick="sceneButtonClicked(event)" 
+  onmouseover="checkCursor(event)">${clickedClass}</button>
+` ; // END buildText
+  return buildText;
 }
 
 function checkCursor(event) {
