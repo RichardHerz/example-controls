@@ -34,14 +34,24 @@ function buildHTML(zz,x,y) {
     
     </style>
     
-    <div id="div_child_${zz}" onclick="sceneObjectClicked(event)">
-    
-        <div id="div_baby_${zz}">
-        </div>
-    
-    </div>
-    
     `; // END buildText
+
+    if (zz == 0) {
+        console.log('buildText if (zz == 0), zz =' + zz); 
+        buildText += ` 
+            <div id="div_child_${zz}" onclick="paletteObjectClicked(event)">
+            <div id="div_baby_${zz}">
+            </div>
+        `; 
+    } else {
+        console.log('buildText ELSE, zz = ' + zz); 
+        buildText += ` 
+            <div id="div_child_${zz}" onclick="sceneObjectClicked(event)">
+            <div id="div_baby_${zz}">
+            </div>
+            </div>
+        `; 
+    }
   
     console.log('at end function buildHTML');
     // alert('buildText in buildHTML = ' + buildText);

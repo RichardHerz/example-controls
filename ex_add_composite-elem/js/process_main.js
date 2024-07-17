@@ -26,6 +26,20 @@ function fixedButtonClicked(event) {
   }
 }
 
+function paletteDivClicked(event) {
+  console.log('enter fixedButtonClicked, event = ' + event);
+  clickedClass = event.target.className;
+  clickedID = event.target.id;
+  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+  if (modkey) {
+    optClicked = 1; // toggles to 0 in sceneDivClicked()
+    let el = document.getElementById(clickedID);
+    el.style.cursor = "copy";
+    el = document.getElementById("div_sceneDiv");
+    el.style.cursor = "copy";
+  }
+}
+
 function sceneDivClicked(event) { 
   console.log('enter sceneDivClicked, event = ' + event);
   if (optClicked == 1) {
@@ -81,3 +95,10 @@ function sceneObjectClicked(event) {
   }
   }
 }
+
+function buildPaletteChild01(elemCounter,x,y) {
+  console.log('buildPaletteChild01 before call of function buildHTML, elemCounter = ' + elemCounter);
+  let el = document.getElementById("div_paletteDiv");
+  el.innerHTML += buildHTML(elemCounter,x,y);
+  console.log('buildPaletteChild01, after call of function buildHTML');
+} 
