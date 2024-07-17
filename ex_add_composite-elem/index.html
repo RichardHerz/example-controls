@@ -18,8 +18,7 @@
 
 </head>
 
-<body 
-  onload="buildPaletteChild01(0,0,0)">
+<body onload="buildPalette()">
 
   <div id="div_title">
     <p><a href="../index.html">Examples of web controls</a> &gt; click to add & remove elements</p>
@@ -32,14 +31,7 @@
   </div>
 
   <div id="div_paletteDiv" onclick="paletteDivClicked(event)">
-
-    <!-- <img onload="onloadTest()" src="bogus.jpg" alt="!!!"> -->
-
-    <!-- with <img onload below, worked to add element when buildPaletteChild01() 
-     appended inside div BUT onload called again so infinte repeat of adding elements! -->
-    <!-- <img onload="buildPaletteChild01(0,0,0)" src="bogus.jpg" alt="!!!"> -->
-
-    <!-- <button type="button" class="c_fixedOne" id="b_fixedOne" style="top: 140px; left: 30px;" onclick="fixedButtonClicked(event)">fixedOne</button> -->
+    <!-- new elements are added to this div by javascript buildPalette() -->
     
     <button type="button" class="c_fixedTwo" id="b_fixedTwo" style="top: 260px; left: 30px;" onclick="fixedButtonClicked(event)">fixedTwo</button>
   </div>

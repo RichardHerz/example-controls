@@ -11,6 +11,11 @@ var elemCounter = 0; // number of elements placed on scene including those remov
 var clickedClass = '';
 var clickedID = '';
 
+function buildPalette() {
+  buildPaletteChild01(0,0,0)
+  buildPaletteChild01(1,40,30) // can't also be 0 because all will have same 0 style, position
+}
+
 
 function fixedButtonClicked(event) {
   console.log('enter fixedButtonClicked, event = ' + event);

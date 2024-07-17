@@ -8,8 +8,8 @@ function buildHTML(zz,x,y) {
     
         #div_child_${zz} {
             position: absolute;
-            top: ${y};
-            left: ${x};
+            top: ${y}px;
+            left: ${x}px;
             width: 60px;
             height: 60px;
             visibility: visible;
