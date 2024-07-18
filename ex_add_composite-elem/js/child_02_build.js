@@ -1,12 +1,12 @@
-function buildChild01HTML(zz,x,y) {
+function buildChild02HTML(zz,x,y) {
   
-    console.log('enter function buildChild01HTML, zz,x,y = ' + zz +', '+ x +', '+ y);
+    console.log('enter function buildChild02HTML, zz,x,y = ' + zz +', '+ x +', '+ y);
   
     buildText = ` 
     
     <style>
     
-        #div_child_01_${zz} {
+        #div_child_02_${zz} {
             position: absolute;
             top: ${y}px;
             left: ${x}px;
@@ -15,20 +15,20 @@ function buildChild01HTML(zz,x,y) {
             visibility: visible;
             border-width: 2px;
             border-style: outset;
-            background-color: yellow;
+            background-color: cyan;
             opacity: 1;
         }
     
-        #div_baby_01_${zz} {
+        #div_baby_02_${zz} {
             position: relative;
-            top: 20px;
-            left: 30px;
+            top: 10px;
+            left: 10px;
             width: 20px;
             height: 20px;
             visibility: visible;
             border-width: 2px;
             border-style: outset;
-            background-color: blue;
+            background-color: red;
             opacity: 1;
         }
     
@@ -39,22 +39,22 @@ function buildChild01HTML(zz,x,y) {
     if (zz == 0) {
         console.log('buildText if (zz == 0), zz =' + zz); 
         buildText += ` 
-            <div id="div_child_01_${zz}" onclick="paletteObjectClicked(event, 01)">
-            <div id="div_baby_01_${zz}">
+            <div id="div_child_02_${zz}" onclick="paletteObjectClicked(event, 02)">
+            <div id="div_baby_02_${zz}">
             </div>
         `; 
     } else {
         console.log('buildText ELSE, zz = ' + zz); 
         buildText += ` 
-            <div id="div_child_01_${zz}" onclick="sceneObjectClicked(event)">
-            <div id="div_baby_01_${zz}">
+            <div id="div_child_02_${zz}" onclick="sceneObjectClicked(event)">
+            <div id="div_baby_02_${zz}">
             </div>
             </div>
         `; 
     }
   
-    console.log('at end function buildChild01HTML');
-    // alert('buildText in buildChild01HTML = ' + buildText);
+    console.log('at end function buildChild02HTML');
+    // alert('buildText in buildChild02HTML = ' + buildText);
   
     return buildText;
 }

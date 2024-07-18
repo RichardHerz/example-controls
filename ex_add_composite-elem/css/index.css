@@ -28,7 +28,7 @@
   z-index: -1;
 }
 
-.c_fixedOne {
+.c_palette_01 {
   position: fixed;
   /* top and left set by html or script */
   width: 100px;
@@ -40,7 +40,7 @@
   opacity: 1;
 }
 
-.c_fixedTwo {
+..c_palette_02  {
   position: fixed;
   /* top and left set by html or script */
   width: 100px;

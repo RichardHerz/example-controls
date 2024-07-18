@@ -10,15 +10,30 @@ var optClicked = 0; // toggles 0-1
 var elemCounter = 0; // number of elements placed on scene including those removed 
 var clickedClass = '';
 var clickedID = '';
+var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 
 function buildPalette() {
-  buildPaletteChild01(0,0,0)
-  buildPaletteChild01(1,40,30) // can't also be 0 because all will have same 0 style, position
+  buildPaletteChild01(0,30,20);
+  buildPaletteChild02(0,30,120);
 }
 
+function buildPaletteChild01(elemCounter,x,y) {
+  console.log('buildPaletteChild01 before call of function buildChild01HTML, elemCounter = ' + elemCounter);
+  let el = document.getElementById("div_paletteDiv");
+  el.innerHTML += buildChild01HTML(elemCounter,x,y);
+  console.log('buildPaletteChild01, after call of function buildChild01HTML');
+} 
 
-function fixedButtonClicked(event) {
-  console.log('enter fixedButtonClicked, event = ' + event);
+function buildPaletteChild02(elemCounter,x,y) {
+  console.log('buildPaletteChild02 before call of function buildChild02HTML, elemCounter = ' + elemCounter);
+  let el = document.getElementById("div_paletteDiv");
+  el.innerHTML += buildChild02HTML(elemCounter,x,y);
+  console.log('buildPaletteChild02, after call of function buildChild02HTML');
+} 
+
+function paletteObjectClicked(event, theObject) {
+  console.log('enter paletteObjectClicked, theObject = ' + theObject);
+  paletteObject = theObject; // used in sceneDivClicked
   clickedClass = event.target.className;
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
@@ -29,43 +44,34 @@ function fixedButtonClicked(event) {
     el = document.getElementById("div_sceneDiv");
     el.style.cursor = "copy";
   }
-}
-
-function paletteDivClicked(event) {
-  console.log('enter fixedButtonClicked, event = ' + event);
-  clickedClass = event.target.className;
-  clickedID = event.target.id;
-  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-  if (modkey) {
-    optClicked = 1; // toggles to 0 in sceneDivClicked()
-    let el = document.getElementById(clickedID);
-    el.style.cursor = "copy";
-    el = document.getElementById("div_sceneDiv");
-    el.style.cursor = "copy";
-  }
+  console.log('exit paletteObjectClicked');
 }
 
 function sceneDivClicked(event) { 
-  console.log('enter sceneDivClicked, event = ' + event);
+  console.log('enter sceneDivClicked');
   if (optClicked == 1) {
-    optClicked = 0; // toggles to 1 in fixedButtonClicked() 
-  
-    elemCounter += 1; 
+
+    optClicked = 0; // toggles to 1 in paletteDivClicked() 
+    elemCounter += 1;
     let el = document.getElementById("div_sceneDiv");
-
-    let newID = clickedID + elemCounter;
-
     const styles = window.getComputedStyle(el);
-    console.log('styles.left = ' + styles.left);
-    console.log('event.clientX = ' + event.clientX);
 
     // styles.left includes px, e.g., "160px" so use parseInt for math 
-    let x = event.clientX - parseInt(styles.left) + 'px';
-    let y = event.clientY - parseInt(styles.top) + 'px';
+    let x = event.clientX - parseInt(styles.left);
+    let y = event.clientY - parseInt(styles.top);
 
-    console.log('before call of function buildHTML, elemCounter = ' + elemCounter);
-    el.innerHTML += buildHTML(elemCounter,x,y);
-    console.log('after call of function buildHTML');
+    // NEED SWITCH BLOCK USING global var paletteObject 
+    switch(paletteObject) {
+      case 1:
+        console.log('sceneDivClicked before call buildChild01HTML, elemCounter = ' + elemCounter);
+        el.innerHTML += buildChild01HTML(elemCounter,x,y);
+        break;
+      case 2:
+        console.log('sceneDivClicked before call buildChild02HTML, elemCounter = ' + elemCounter);
+        el.innerHTML += buildChild02HTML(elemCounter,x,y);
+        break;
+      default:
+    }
 
     el.style.cursor = "default";
 
@@ -95,15 +101,14 @@ function sceneObjectClicked(event) {
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   console.log('   modkey = ' + modkey);
   if (modkey) {
-    let el = document.getElementById(clickedID);
-    el.remove();
+    // a click on baby causes onclick of child div to fire
+    // but id is of baby so only baby would get removed 
+    // so get and remove parent element of baby
+    // see https://www.javatpoint.com/how-to-get-parent-element-in-javascript 
+    const el = document.getElementById(clickedID);
+    const parentElement = el.parentElement;
+    // el.remove();
+    parentElement.remove()
   }
   }
 }
-
-function buildPaletteChild01(elemCounter,x,y) {
-  console.log('buildPaletteChild01 before call of function buildHTML, elemCounter = ' + elemCounter);
-  let el = document.getElementById("div_paletteDiv");
-  el.innerHTML += buildHTML(elemCounter,x,y);
-  console.log('buildPaletteChild01, after call of function buildHTML');
-} 
