@@ -12,22 +12,22 @@ var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 
 function buildPalette() {
-  buildPaletteChild01(0,30,20);
-  buildPaletteChild02(0,30,120);
+  buildPaletteParent01(0,36,20);
+  buildPaletteParent02(0,36,120);
 }
 
-function buildPaletteChild01(elemCounter,x,y) {
-  console.log('buildPaletteChild01 before call of function buildChild01, elemCounter = ' + elemCounter);
+function buildPaletteParent01(elemCounter,x,y) {
+  console.log('buildPaletteParent01 before call of function buildParent01, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_paletteDiv");
-  el.innerHTML += buildChild01(elemCounter,x,y);
-  console.log('buildPaletteChild01, after call of function buildChild01');
+  el.innerHTML += buildParent01(elemCounter,x,y);
+  console.log('buildPaletteParent01, after call of function buildParent01');
 } 
 
-function buildPaletteChild02(elemCounter,x,y) {
-  console.log('buildPaletteChild02 before call of function buildChild02, elemCounter = ' + elemCounter);
+function buildPaletteParent02(elemCounter,x,y) {
+  console.log('buildPaletteParent02 before call of function buildParent02, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_paletteDiv");
-  el.innerHTML += buildChild02(elemCounter,x,y);
-  console.log('buildPaletteChild02, after call of function buildChild02');
+  el.innerHTML += buildParent02(elemCounter,x,y);
+  console.log('buildPaletteParent02, after call of function buildParent02');
 } 
 
 function paletteObjectClicked(event, theObject) {
@@ -61,12 +61,12 @@ function sceneDivClicked(event) {
     // NEED SWITCH BLOCK USING global var paletteObject 
     switch(paletteObject) {
       case 1:
-        console.log('sceneDivClicked before call buildChild01, elemCounter = ' + elemCounter);
-        el.innerHTML += buildChild01(elemCounter,x,y);
+        console.log('sceneDivClicked before call buildParent01, elemCounter = ' + elemCounter);
+        el.innerHTML += buildParent01(elemCounter,x,y);
         break;
       case 2:
-        console.log('sceneDivClicked before call buildChild02, elemCounter = ' + elemCounter);
-        el.innerHTML += buildChild02(elemCounter,x,y);
+        console.log('sceneDivClicked before call buildParent02, elemCounter = ' + elemCounter);
+        el.innerHTML += buildParent02(elemCounter,x,y);
         break;
       default:
     }
