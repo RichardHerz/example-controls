@@ -6,10 +6,9 @@
 */
 
 // DECLARE GLOBAL VARIABLES
-var optClicked = 0; // toggles 0-1
+var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
-var clickedClass = '';
-var clickedID = '';
+var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 
 function buildPalette() {
@@ -18,23 +17,22 @@ function buildPalette() {
 }
 
 function buildPaletteChild01(elemCounter,x,y) {
-  console.log('buildPaletteChild01 before call of function buildChild01HTML, elemCounter = ' + elemCounter);
+  console.log('buildPaletteChild01 before call of function buildChild01, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_paletteDiv");
-  el.innerHTML += buildChild01HTML(elemCounter,x,y);
-  console.log('buildPaletteChild01, after call of function buildChild01HTML');
+  el.innerHTML += buildChild01(elemCounter,x,y);
+  console.log('buildPaletteChild01, after call of function buildChild01');
 } 
 
 function buildPaletteChild02(elemCounter,x,y) {
-  console.log('buildPaletteChild02 before call of function buildChild02HTML, elemCounter = ' + elemCounter);
+  console.log('buildPaletteChild02 before call of function buildChild02, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_paletteDiv");
-  el.innerHTML += buildChild02HTML(elemCounter,x,y);
-  console.log('buildPaletteChild02, after call of function buildChild02HTML');
+  el.innerHTML += buildChild02(elemCounter,x,y);
+  console.log('buildPaletteChild02, after call of function buildChild02');
 } 
 
 function paletteObjectClicked(event, theObject) {
   console.log('enter paletteObjectClicked, theObject = ' + theObject);
   paletteObject = theObject; // used in sceneDivClicked
-  clickedClass = event.target.className;
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey) {
@@ -63,12 +61,12 @@ function sceneDivClicked(event) {
     // NEED SWITCH BLOCK USING global var paletteObject 
     switch(paletteObject) {
       case 1:
-        console.log('sceneDivClicked before call buildChild01HTML, elemCounter = ' + elemCounter);
-        el.innerHTML += buildChild01HTML(elemCounter,x,y);
+        console.log('sceneDivClicked before call buildChild01, elemCounter = ' + elemCounter);
+        el.innerHTML += buildChild01(elemCounter,x,y);
         break;
       case 2:
-        console.log('sceneDivClicked before call buildChild02HTML, elemCounter = ' + elemCounter);
-        el.innerHTML += buildChild02HTML(elemCounter,x,y);
+        console.log('sceneDivClicked before call buildChild02, elemCounter = ' + elemCounter);
+        el.innerHTML += buildChild02(elemCounter,x,y);
         break;
       default:
     }
@@ -91,24 +89,15 @@ function checkCursor(event) {
   }
 }
 
-function sceneObjectClicked(event) {
+function sceneObjectClicked(event, objectParent) {
   console.log('enter function sceneObjectClicked');
-  // check optClicked because don't want to remove button if adding one on top of it
-  // apparently existing button gets click before the div gets it and toggles optClicked
-  let clickedID = event.target.id;
-  console.log('   clickedID = ' + clickedID);
+  console.log('  objectParent = ' + objectParent);
   if (optClicked == 0) {
-  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-  console.log('   modkey = ' + modkey);
-  if (modkey) {
-    // a click on baby causes onclick of child div to fire
-    // but id is of baby so only baby would get removed 
-    // so get and remove parent element of baby
-    // see https://www.javatpoint.com/how-to-get-parent-element-in-javascript 
-    const el = document.getElementById(clickedID);
-    const parentElement = el.parentElement;
-    // el.remove();
-    parentElement.remove()
-  }
+    let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+    console.log('  modkey = ' + modkey);
+    if (modkey) {
+      const el = document.getElementById(objectParent);
+      el.remove();
+    }
   }
 }
