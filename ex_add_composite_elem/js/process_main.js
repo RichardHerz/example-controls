@@ -5,6 +5,10 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
+/* INFO ON HANDLING TOUCH ON PHONES/PADS 
+    https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events 
+*/
+
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
