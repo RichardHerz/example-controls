@@ -1,7 +1,24 @@
-#div_paletteDiv {
-  position: absolute;
-  top: 120px;
-  left: 10px;
+#div_title {
+  display: flex;
+  flex-flow: row wrap;
+  border-width: 0px;
+  border-style: dashed;
+  border-color: red;
+}
+
+#div_board {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  border-width: 0px;
+  border-style: dashed;
+  border-color: blue;
+}
+
+#div_palette {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
   width: 140px;
   height: 600px;
   visibility: visible;
@@ -13,10 +30,8 @@
   z-index: -1;
 }
 
-#div_sceneDiv {
-  position: absolute;
-  top: 120px;
-  left: 160px;
+#div_scene {
+
   width: 600px;
   height: 600px;
   visibility: visible;
