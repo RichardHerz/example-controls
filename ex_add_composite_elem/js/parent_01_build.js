@@ -21,13 +21,14 @@ function buildParent01(zz,x,y) {
                 onclick="paletteObjectClicked(event, 01)">
             <div id="div_child_01_${zz}" class="c_child_01">
             </div>
+            </div>
         `; 
     } else {
         console.log('buildText ELSE, zz = ' + zz); 
         buildText += ` 
             <div id="div_parent_01_${zz}" class="c_parent_01" 
                 onclick="sceneObjectClicked(event, 'div_parent_01_${zz}')">
-            <div id="div_child_01_${zz}" class="c_child_01">
+            <div id="div_child_01_${zz}" class="c_child_01" onclick="child_01_clicked(event,'#div_parent_01_${zz}')">
             </div>
             </div>
         `; 

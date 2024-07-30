@@ -29,7 +29,7 @@ function buildParent02(zz,x,y) {
         buildText += ` 
             <div id="div_parent_02_${zz}" class="c_parent_02" 
                 onclick="sceneObjectClicked(event, 'div_parent_02_${zz}')">
-            <div id="div_child_02_${zz}" class="c_child_02">
+            <div id="div_child_02_${zz}" class="c_child_02" onclick="child_02_clicked(event,'#div_parent_02_${zz}')">
             </div>
             </div>
         `; 

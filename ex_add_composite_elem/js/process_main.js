@@ -5,10 +5,6 @@
   https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-/* INFO ON HANDLING TOUCH ON PHONES/PADS 
-    https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events 
-*/
-
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
@@ -22,14 +18,14 @@ function buildPalette() {
 
 function buildPaletteParent01(elemCounter,x,y) {
   console.log('buildPaletteParent01 before call of function buildParent01, elemCounter = ' + elemCounter);
-  let el = document.getElementById("div_palette");
+  let el = document.getElementById("div_paletteDiv");
   el.innerHTML += buildParent01(elemCounter,x,y);
   console.log('buildPaletteParent01, after call of function buildParent01');
 } 
 
 function buildPaletteParent02(elemCounter,x,y) {
   console.log('buildPaletteParent02 before call of function buildParent02, elemCounter = ' + elemCounter);
-  let el = document.getElementById("div_palette");
+  let el = document.getElementById("div_paletteDiv");
   el.innerHTML += buildParent02(elemCounter,x,y);
   console.log('buildPaletteParent02, after call of function buildParent02');
 } 
@@ -43,7 +39,7 @@ function paletteObjectClicked(event, theObject) {
     optClicked = 1; // toggles to 0 in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
-    el = document.getElementById("div_scene");
+    el = document.getElementById("div_sceneDiv");
     el.style.cursor = "copy";
   }
   console.log('exit paletteObjectClicked');
@@ -55,7 +51,7 @@ function sceneDivClicked(event) {
 
     optClicked = 0; // toggles to 1 in paletteDivClicked() 
     elemCounter += 1;
-    let el = document.getElementById("div_scene");
+    let el = document.getElementById("div_sceneDiv");
     const styles = window.getComputedStyle(el);
 
     // styles.left includes px, e.g., "160px" so use parseInt for math 
