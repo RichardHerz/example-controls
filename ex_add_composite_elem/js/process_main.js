@@ -8,6 +8,8 @@
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
+var elemList = []; // elements on display = elemCounter value with added - values of those removed 
+// NOTE: elemList for future connections and actions involving elements on display
 var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 
@@ -58,6 +60,9 @@ function sceneDivClicked(event) {
     let x = event.clientX - parseInt(styles.left);
     let y = event.clientY - parseInt(styles.top);
 
+    // add elemCounter to list of elements
+    elemList.push(elemCounter);
+
     // NEED SWITCH BLOCK USING global var paletteObject 
     switch(paletteObject) {
       case 1:
@@ -89,15 +94,25 @@ function checkCursor(event) {
   }
 }
 
-function sceneObjectClicked(event, objectParent) {
+function sceneObjectClicked(event, thisElem, objectParent) {
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
   if (optClicked == 0) {
+    // optClicked might be non-zero if click on existing object to add new overlapping one
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-    console.log('  modkey = ' + modkey);
+    console.log('  in sceneObjectClicked, modkey = ' + modkey);
     if (modkey) {
       const el = document.getElementById(objectParent);
       el.remove();
+      console.log('  in sceneObjectClicked, old array elemList = ' + elemList);
+      console.log('  in sceneObjectClicked, thisElem = ' + thisElem);
+      const arrayWithoutThisElem = elemList.filter(function (newList) {
+        return newList !== thisElem;
+      });
+      console.log('  in sceneObjectClicked, arrayWithoutThisElem = ' + arrayWithoutThisElem);
+      // new replace original element list with new one with thisElem deleted
+      elemList = arrayWithoutThisElem;
+      console.log('  in sceneObjectClicked, new array elemList = ' + elemList);
     }
   }
 }
