@@ -1,6 +1,36 @@
+#div_title {
+  position: relative;
+  top: 5px;
+  left: 10px;
+  /* width: 200px;
+  height: 200px; */
+  visibility: visible;
+  border-width: 2px;
+  border-style: none;
+  border-color: dodgerblue;
+  background-color: white; 
+  opacity: 1;
+  /* z-index: -1; */
+}
+
+#div_scene {
+  position: relative;
+  /* top: 110px;
+  left: 10px; */
+  width: 650px;
+  height: 240px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: none;
+  border-color: greenyellow;
+  background-color: white; 
+  opacity: 1;
+  /* z-index: -1; */
+}
+
 #div_mother_01 {
   position: absolute;
-  top: 110px;
+  top: 10px;
   left: 10px;
   width: 200px;
   height: 200px;
@@ -15,7 +45,7 @@
 
 #div_sister {
   position: absolute;
-  top: 110px;
+  top: 10px;
   left: 220px;
   width: 200px;
   height: 200px;

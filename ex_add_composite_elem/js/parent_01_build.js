@@ -6,6 +6,7 @@ function buildParent01(zz,x,y) {
 
     <style>
         #div_parent_01_${zz} {
+            // position: absolute;
             position: absolute;
             top: ${y}px;
             left: ${x}px;

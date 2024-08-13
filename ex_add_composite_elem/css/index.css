@@ -1,6 +1,30 @@
+#div_title {
+  position: relative;
+  top: 5px;
+  left: 10px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: none;
+  border-color: dodgerblue;
+  background-color: white; 
+  opacity: 1;
+}
+
+#div_frame {
+  position: relative;
+  width: 778px;
+  height: 630px;
+  visibility: visible;
+  border-width: 2px;
+  border-style: none;
+  border-color: yellow;
+  background-color: yellow; 
+  opacity: 1;
+}
+
 #div_paletteDiv {
-  position: absolute;
-  top: 120px;
+  position: relative;
+  top: 10px;
   left: 10px;
   width: 140px;
   height: 600px;
@@ -10,12 +34,11 @@
   border-color: red;
   background-color: rgb(255,250,250,0.9); 
   opacity: 1;
-  z-index: -1;
 }
 
 #div_sceneDiv {
   position: absolute;
-  top: 120px;
+  top: 10px;
   left: 160px;
   width: 600px;
   height: 600px;
@@ -25,7 +48,6 @@
   border-color: dodgerblue;
   background-color: rgb(250,250,255,0.9); 
   opacity: 1;
-  z-index: -1;
 }
 
 .c_parent_01 {

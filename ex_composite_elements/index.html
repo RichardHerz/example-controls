@@ -23,34 +23,44 @@
       placed in the scene set by the index.html file. Click the small rectangle inside each  
       medium rectangle.
     </p>
+    <p>
+      This example uses document.write() of template literals to append script 
+      and html to the page. The examples of add & remove simple elements and add & 
+      remove composite elements use the alternative of adding template literals to specific 
+      elements on the page using innerHTML.
+    </p>
   </div>
 
-  <div id="div_mother_01" onclick="motherClicked(event, 'mother')">
+  <div id="div_scene">
 
-  <!-- <div id="div_mother_01" onclick="alert('hugs from mom')"> -->
+    <div id="div_mother_01" onclick="motherClicked(event, 'mother')">
 
-  <!-- <div id="div_mother_01" onclick="console.log('hugs from mom')"> -->
+    <!-- <div id="div_mother_01" onclick="alert('hugs from mom')"> -->
 
-    <script src="js/group_01.js"></script>
+    <!-- <div id="div_mother_01" onclick="console.log('hugs from mom')"> -->
 
-    <!-- WANT TO USE ONE SET OF JS FILES TO CREATE MULTIPLE ELEMENTS -->
+      <script src="js/group_01.js"></script>
 
-    <!-- INITIALIZE COUNTER -->
-    <script src="js/group_02_init.js"></script>
-    
-    <!-- INCREMENT COUNTER AND MAKE NEW ELEMWNT -->
-    <script src="js/group_02_add.js"></script>
-    <!-- NOW MOVE NEW ELEMENT -->
-    <script src="js/group_02_move_01.js"></script>
+      <!-- WANT TO USE ONE SET OF JS FILES TO CREATE MULTIPLE ELEMENTS -->
 
-  </div>
+      <!-- INITIALIZE COUNTER -->
+      <script src="js/group_02_init.js"></script>
+      
+      <!-- INCREMENT COUNTER AND MAKE NEW ELEMWNT -->
+      <script src="js/group_02_add.js"></script>
+      <!-- NOW MOVE NEW ELEMENT -->
+      <script src="js/group_02_move_01.js"></script>
 
-  <div id="div_sister">
+    </div>
 
-    <!-- INCREMENT COUNTER AND MAKE NEW ELEMWNT -->
-    <script src="js/group_02_add.js"></script>
-    <!-- NOW MOVE NEW ELEMENT -->
-    <script src="js/group_02_move_02.js"></script>
+    <div id="div_sister">
+
+      <!-- INCREMENT COUNTER AND MAKE NEW ELEMWNT -->
+      <script src="js/group_02_add.js"></script>
+      <!-- NOW MOVE NEW ELEMENT -->
+      <script src="js/group_02_move_02.js"></script>
+
+    </div>
 
   </div>
 

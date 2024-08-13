@@ -62,9 +62,26 @@ function sceneDivClicked(event) {
     let el = document.getElementById("div_sceneDiv");
     const styles = window.getComputedStyle(el);
 
-    // styles.left includes px, e.g., "160px" so use parseInt for math 
-    let x = event.clientX - parseInt(styles.left);
-    let y = event.clientY - parseInt(styles.top);
+    let elFrame = document.getElementById("div_frame");
+    const stylesFrame = window.getComputedStyle(elFrame);
+
+    let elTitle = document.getElementById("div_title");
+    const stylesTitle = window.getComputedStyle(elTitle);
+
+    // clientX,Y properties are relative to top-left of the page
+    // the constant numeric values subtracted here will change if 
+    // changes in css made, though could get them here instead
+    // styles include px, e.g., "160px" so use parseInt for math 
+    let x = event.clientX - parseInt(styles.left) - 14;
+    // title div changes height with width of page which moves frame div up/down
+    // and, thus, scene div up/down
+    let y = event.clientY - parseInt(stylesTitle.height) - 48;
+
+    // console.log('  event.clientX, event.clientY = ' + event.clientX +', '+ event.clientY);
+    // console.log('  styles.left, styles.top = ' + styles.left +', '+ styles.top);
+    // console.log('  stylesFrame.left, stylesFrame.top = ' + stylesFrame.left +', '+ stylesFrame.top);
+    // console.log('  stylesTitle.height = ' + stylesTitle.height);
+    // console.log('  x, y = ' + x +', '+ y);
 
     // add elemCounter to list of elements on display
     elemList.push(elemCounter);
