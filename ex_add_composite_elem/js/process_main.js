@@ -26,14 +26,14 @@ function buildPalette() {
 
 function buildPaletteParent01(elemCounter,x,y) {
   console.log('buildPaletteParent01 before call of function buildParent01, elemCounter = ' + elemCounter);
-  let el = document.getElementById("div_paletteDiv");
+  let el = document.getElementById("div_palette");
   el.innerHTML += buildParent01(elemCounter,x,y);
   console.log('buildPaletteParent01, after call of function buildParent01');
 } 
 
 function buildPaletteParent02(elemCounter,x,y) {
   console.log('buildPaletteParent02 before call of function buildParent02, elemCounter = ' + elemCounter);
-  let el = document.getElementById("div_paletteDiv");
+  let el = document.getElementById("div_palette");
   el.innerHTML += buildParent02(elemCounter,x,y);
   console.log('buildPaletteParent02, after call of function buildParent02');
 } 
@@ -47,7 +47,7 @@ function paletteObjectClicked(event, theObject) {
     optClicked = 1; // toggles to 0 in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
-    el = document.getElementById("div_sceneDiv");
+    el = document.getElementById("div_scene");
     el.style.cursor = "copy";
   }
   console.log('exit paletteObjectClicked');
@@ -59,7 +59,7 @@ function sceneDivClicked(event) {
 
     optClicked = 0; // toggles to 1 in paletteDivClicked() 
     elemCounter += 1;
-    let el = document.getElementById("div_sceneDiv");
+    let el = document.getElementById("div_scene");
     const styles = window.getComputedStyle(el);
 
     let elFrame = document.getElementById("div_frame");
@@ -72,16 +72,16 @@ function sceneDivClicked(event) {
     // the constant numeric values subtracted here will change if 
     // changes in css made, though could get them here instead
     // styles include px, e.g., "160px" so use parseInt for math 
-    let x = event.clientX - parseInt(styles.left) - 14;
+    let x = event.clientX - parseInt(styles.left) - 12;
     // title div changes height with width of page which moves frame div up/down
     // and, thus, scene div up/down
-    let y = event.clientY - parseInt(stylesTitle.height) - 48;
+    let y = event.clientY - parseInt(stylesTitle.height) - 36;
 
-    // console.log('  event.clientX, event.clientY = ' + event.clientX +', '+ event.clientY);
-    // console.log('  styles.left, styles.top = ' + styles.left +', '+ styles.top);
-    // console.log('  stylesFrame.left, stylesFrame.top = ' + stylesFrame.left +', '+ stylesFrame.top);
-    // console.log('  stylesTitle.height = ' + stylesTitle.height);
-    // console.log('  x, y = ' + x +', '+ y);
+    console.log('  event.clientX, event.clientY = ' + event.clientX +', '+ event.clientY);
+    console.log('  styles.left, styles.top = ' + styles.left +', '+ styles.top);
+    console.log('  stylesFrame.left, stylesFrame.top = ' + stylesFrame.left +', '+ stylesFrame.top);
+    console.log('  stylesTitle.height = ' + stylesTitle.height);
+    console.log('  x, y = ' + x +', '+ y);
 
     // add elemCounter to list of elements on display
     elemList.push(elemCounter);

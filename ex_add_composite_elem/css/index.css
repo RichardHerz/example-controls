@@ -12,22 +12,20 @@
 
 #div_frame {
   position: relative;
-  width: 778px;
-  height: 630px;
+  width: 600px;
+  height: 460px;
   visibility: visible;
   border-width: 2px;
   border-style: none;
-  border-color: yellow;
-  background-color: yellow; 
+  border-color: white;
+  background-color: white; 
   opacity: 1;
 }
 
-#div_paletteDiv {
+#div_palette {
   position: relative;
-  top: 10px;
-  left: 10px;
-  width: 140px;
-  height: 600px;
+  width: 130px;
+  height: 440px;
   visibility: visible;
   border-width: 4px;
   border-style: inset;
@@ -36,12 +34,12 @@
   opacity: 1;
 }
 
-#div_sceneDiv {
+#div_scene {
   position: absolute;
-  top: 10px;
-  left: 160px;
-  width: 600px;
-  height: 600px;
+  top: 0px;
+  left: 140px;
+  width: 450px;
+  height: 440px;
   visibility: visible;
   border-width: 4px;
   border-style: inset;
