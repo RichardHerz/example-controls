@@ -18,11 +18,13 @@
     <p><a href="../index.html">Examples of web controls</a> &gt; click to add & remove simple elements</p>
     <p></p>
     <p>
-      Hold down option/Alt key and click a button on the left, 
+      This works with keyboards only: Hold down option/Alt key and click a button on the left, 
       then click on the scene on the right to add the button to the scene.
       To remove a button, option/Alt click on the button. Then place another one.
     </p>
 </div>
+
+<div id="div_frame">
 
   <button type="button" class="c_fixedOne" id="b_fixedOne" style="top: 120px; left: 40px;" onclick="fixedButtonClicked(event)">fixedOne</button>
   <button type="button" class="c_fixedTwo" id="b_fixedTwo" style="top: 240px; left: 40px;" onclick="fixedButtonClicked(event)">fixedTwo</button>
@@ -30,6 +32,8 @@
   <div id="div_sceneDiv" onclick="sceneDivClicked(event)">
     <!-- new buttons are added to this div by javascript -->
   </div>
+
+</div>
 
 </body>
 </html>
