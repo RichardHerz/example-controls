@@ -8,8 +8,14 @@
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
+
 var elemList = []; // elements on display = elemCounter value with added - values of those removed 
 // NOTE: elemList for future connections and actions involving elements on display
+
+var parentList = []; // names of parent objects on display
+// NOTE: may be able to eliminate elemList by using parentList only...
+//   but may have some use of elemList in future
+
 var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 
@@ -60,7 +66,7 @@ function sceneDivClicked(event) {
     let x = event.clientX - parseInt(styles.left);
     let y = event.clientY - parseInt(styles.top);
 
-    // add elemCounter to list of elements
+    // add elemCounter to list of elements on display
     elemList.push(elemCounter);
 
     // NEED SWITCH BLOCK USING global var paletteObject 
@@ -68,10 +74,14 @@ function sceneDivClicked(event) {
       case 1:
         console.log('sceneDivClicked before call buildParent01, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent01(elemCounter,x,y);
+        // add parent name to list of parents on display
+        parentList.push('div_parent_01_'+ elemCounter); 
         break;
       case 2:
         console.log('sceneDivClicked before call buildParent02, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent02(elemCounter,x,y);
+        // add parent name to list of parents on display
+        parentList.push('div_parent_02_'+ elemCounter); 
         break;
       default:
     }
@@ -106,13 +116,17 @@ function sceneObjectClicked(event, thisElem, objectParent) {
       el.remove();
       console.log('  in sceneObjectClicked, old array elemList = ' + elemList);
       console.log('  in sceneObjectClicked, thisElem = ' + thisElem);
-      const arrayWithoutThisElem = elemList.filter(function (newList) {
-        return newList !== thisElem;
-      });
-      console.log('  in sceneObjectClicked, arrayWithoutThisElem = ' + arrayWithoutThisElem);
-      // new replace original element list with new one with thisElem deleted
-      elemList = arrayWithoutThisElem;
+
+      // need index to delete parent name from parentList array 
+      const tIndex = parentList.findIndex(finderFunc);
+      function finderFunc(thisOne) {
+        return thisOne == objectParent;
+      }
+
+      elemList.splice(tIndex, 1);
+      parentList.splice(tIndex, 1);
       console.log('  in sceneObjectClicked, new array elemList = ' + elemList);
+      console.log('  in sceneObjectClicked, new array parentList = ' + parentList);
     }
   }
 }
