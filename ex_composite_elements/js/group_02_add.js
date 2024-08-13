@@ -9,7 +9,7 @@ buildText = `
     #div_child_${yy} {
         position: absolute;
         top: 60px;
-        left: 90px;
+        left: 60px;
         width: 60px;
         height: 60px;
         visibility: visible;
