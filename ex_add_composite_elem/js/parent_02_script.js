@@ -18,6 +18,7 @@ function flashAllObjects() {
 }
 
 function flashOne(value, index, array) {
+  // arguments (value, index, array) required by parentList.foreach(flashOne) above 
   console.log('enter function flashOne');
   console.log('  value, index = ' + value +', '+ index);
   const tParent = parentList[index]; 

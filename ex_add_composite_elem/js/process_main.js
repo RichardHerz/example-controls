@@ -9,7 +9,7 @@
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
 
-var parentList = []; // ID's of parent objects on display
+var parentList = []; // ID's of parent objects currently on display
 var elemList = []; // elemCounter values of elements currently on display
 // NOTE: elemList is for future use for connections and actions involving elements on display
 
@@ -53,6 +53,7 @@ function paletteObjectClicked(event, theObject) {
 function sceneDivClicked(event) { 
   console.log('enter sceneDivClicked');
   if (optClicked == 1) {
+    // add new element to the scene
 
     optClicked = 0; // toggles to 1 in paletteDivClicked() 
     elemCounter += 1;
@@ -80,7 +81,7 @@ function sceneDivClicked(event) {
     // console.log('  stylesTitle.height = ' + stylesTitle.height);
     // console.log('  x, y = ' + x +', '+ y);
 
-    // add elemCounter to list of elements on display
+    // add elemCounter to list of parent elements on display
     elemList.push(elemCounter);
 
     // NEED SWITCH BLOCK USING global var paletteObject 
@@ -88,13 +89,13 @@ function sceneDivClicked(event) {
       case 1:
         console.log('sceneDivClicked before call buildParent01, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent01(elemCounter,x,y);
-        // add parent ID to list of parents on display
+        // add parent ID to list of parent elements on display
         parentList.push('div_parent_01_'+ elemCounter); 
         break;
       case 2:
         console.log('sceneDivClicked before call buildParent02, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent02(elemCounter,x,y);
-        // add parent ID to list of parents on display
+        // add parent ID to list of parent elements on display
         parentList.push('div_parent_02_'+ elemCounter); 
         break;
       default:
@@ -112,7 +113,7 @@ function checkCursor(event) {
   console.log('enter checkCursor, event = ' + event);
   let el = document.getElementById(event.target.id); 
   if (optClicked==1) {
-      el.style.cursor = "copy";
+    el.style.cursor = "copy";
   } else {
     el.style.cursor = "default";
   }
@@ -122,6 +123,7 @@ function sceneObjectClicked(event, thisElem, objectParent) {
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
   if (optClicked == 0) {
+    // delete parent element from display 
     // optClicked might be non-zero if click on existing object to add new overlapping one
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
     console.log('  in sceneObjectClicked, modkey = ' + modkey);
