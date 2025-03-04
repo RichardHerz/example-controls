@@ -1,0 +1,85 @@
+.parent_03 {
+    /* position set by indexed css for each parent */
+    width: 60px;
+    height: 60px;
+    background-color: green;
+  }
+  
+  .input_03_1 {
+    width: 11px;
+    height: 11px;
+    background-color: yellow;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  }
+  
+  .input_03_2 {
+    width: 11px;
+    height: 11px;
+    background-color: yellow;
+    position: absolute;
+    top: 25px;
+    left: 2px;
+  }
+  
+  .output_03_1 {
+    width: 11px;
+    height: 11px;
+    background-color: dodgerblue; /* Make output_1 dodgerblue */
+    position: absolute;
+    top: 2px;
+    left: 47px;
+    border-radius: 50%; /* Make output_1 round */
+  }
+  
+  .output_03_2 {
+    width: 11px;
+    height: 11px;
+    background-color: dodgerblue;
+    position: absolute;
+    top: 25px;
+    left: 47px;
+    border-radius: 50%;
+  }
+  
+  .info_03 {
+    width: 30px;
+    height: 30px;
+    background-color: white; /* Make info white */
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: black;
+  }
+  
+  .type_03 {
+    width: 26px;
+    height: 11px;
+    background-color: whitesmoke;
+    position: absolute;
+    top: 2px;
+    left: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+  }
+  
+  .num_03 {
+    width: 26px;
+    height: 11px;
+    background-color: whitesmoke;
+    position: absolute;
+    top: 47px;
+    left: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+  }
+  

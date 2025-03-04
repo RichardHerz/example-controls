@@ -3,7 +3,7 @@ function child_01_clicked(event,theParent) {
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey == false) {
     console.log('  in child_01_clicked, modkey is false');
-    let el = document.querySelector(theParent);
+    let el = document.getElementById(theParent);
     console.log('  in child_01_clicked, after querySelector, el = ' + el);
     let x = el.offsetLeft;
     let y = el.offsetTop;

@@ -19,6 +19,7 @@ var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 function buildPalette() {
   buildPaletteParent01(0,36,20);
   buildPaletteParent02(0,36,120);
+  buildPaletteParent03(0,36,220);
 }
 
 function buildPaletteParent01(elemCounter,x,y) {
@@ -33,6 +34,13 @@ function buildPaletteParent02(elemCounter,x,y) {
   let el = document.getElementById("div_palette");
   el.innerHTML += buildParent02(elemCounter,x,y);
   console.log('buildPaletteParent02, after call of function buildParent02');
+} 
+
+function buildPaletteParent03(elemCounter,x,y) {
+  console.log('buildPaletteParent03 before call of function buildParent03, elemCounter = ' + elemCounter);
+  let el = document.getElementById("div_palette");
+  el.innerHTML += buildParent03(elemCounter,x,y);
+  console.log('buildPaletteParent03, after call of function buildParent03');
 } 
 
 function paletteObjectClicked(event, theObject) {
@@ -90,14 +98,20 @@ function sceneDivClicked(event) {
         console.log('sceneDivClicked before call buildParent01, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent01(elemCounter,x,y);
         // add parent ID to list of parent elements on display
-        parentList.push('div_parent_01_'+ elemCounter); 
+        parentList.push('parent_01_'+ elemCounter); 
         break;
       case 2:
         console.log('sceneDivClicked before call buildParent02, elemCounter = ' + elemCounter);
         el.innerHTML += buildParent02(elemCounter,x,y);
         // add parent ID to list of parent elements on display
-        parentList.push('div_parent_02_'+ elemCounter); 
+        parentList.push('parent_02_'+ elemCounter); 
         break;
+      case 3:
+          console.log('sceneDivClicked before call buildParent03, elemCounter = ' + elemCounter);
+          el.innerHTML += buildParent03(elemCounter,x,y);
+          // add parent ID to list of parent elements on display
+          parentList.push('parent_03_'+ elemCounter); 
+          break;
       default:
     }
 

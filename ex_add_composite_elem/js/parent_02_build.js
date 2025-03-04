@@ -8,7 +8,7 @@ function buildParent02(zz,x,y) {
     
     <style>
     
-        #div_parent_02_${zz} {
+        #parent_02_${zz} {
             position: absolute;
             top: ${y}px;
             left: ${x}px;
@@ -21,17 +21,17 @@ function buildParent02(zz,x,y) {
     if (zz == 0) {
         console.log('buildText if (zz == 0), zz =' + zz); 
         buildText += ` 
-            <div id="div_parent_02_${zz}" class="c_parent_02" 
+            <div id="parent_02_${zz}" class="parent_02" 
                 onclick="paletteObjectClicked(event, 02)">
-            <div id="div_child_02_${zz}" class="c_child_02">
+            <div id="child_02_${zz}" class="child_02">
             </div>
         `; // END buildText << NOTE BACK-TICK BEFORE SEMICOLON 
     } else {
         console.log('buildText ELSE, zz = ' + zz); 
         buildText += ` 
-            <div id="div_parent_02_${zz}" class="c_parent_02" 
-                onclick="sceneObjectClicked(event, ${zz}, 'div_parent_02_${zz}')">
-            <div id="div_child_02_${zz}" class="c_child_02" onclick="child_02_clicked(event, '#div_parent_02_${zz}')">
+            <div id="parent_02_${zz}" class="parent_02" 
+                onclick="sceneObjectClicked(event, ${zz}, 'parent_02_${zz}')">
+            <div id="child_02_${zz}" class="child_02" onclick="child_02_clicked(event, 'parent_02_${zz}')">
             </div>
             </div>
         `; // END buildText << NOTE BACK-TICK BEFORE SEMICOLON 
