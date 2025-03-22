@@ -43,20 +43,3 @@ function buildParent01(zz,x,y) {
     return buildText;
     }
 
-// -----------OLD CODE BELOW---------------- 
-// } else {
-//     console.log('buildText ELSE, zz = ' + zz); 
-//     buildText += ` 
-//         <div id="parent_01_${zz}" class="parent_01" 
-//             onclick="sceneObjectClicked(event, ${zz}, 'parent_01_${zz}')">
-//         <div id="child_01_${zz}" class="child_01" onclick="child_01_clicked(event, 'parent_01_${zz}')">
-//         </div>
-//         </div>
-//     `; // END buildText << NOTE BACK-TICK BEFORE SEMICOLON  
-// }
-
-// console.log('at end function buildParent01');
-// // alert('buildText in buildParent01 = ' + buildText);
-
-// return buildText;
-// }

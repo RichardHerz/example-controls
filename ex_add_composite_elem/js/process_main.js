@@ -1,5 +1,5 @@
 /*
-  Design, text, images and code by Richard K. Herz, 2024
+  Design, text, images and code by Richard K. Herz, 2024-2025
   Copyrights held by Richard K. Herz
   Licensed for use under the GNU General Public License v3.0
   https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -15,6 +15,26 @@ var elemList = []; // elemCounter values of elements currently on display
 
 var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
+
+// ==========================================================================
+
+// need sceneobjectClicked to check class of clicked object
+// and only delete parent if class is not boxOUT or boxIN
+
+/// START variables from connect_2 for "piping" connections between objects
+var isPiping = false;
+var boxOUT = null;
+var boxIN = null;
+var boxOUTid = null;
+var boxINid = null;
+var pipeNameList = [];
+var svg = null;
+var svgNS = "http://www.w3.org/2000/svg";
+var outPortList = [];
+var inPortList = [];
+// let optClicked = false; // ALSO DECLARED ABOVE IN PROCESS_MAIN.JS
+// END variables from connect_2 for "piping" connections between objects
+// ==========================================================================
 
 function buildPalette() {
   buildPaletteParent01(0,36,20);
@@ -136,13 +156,18 @@ function checkCursor(event) {
 function sceneObjectClicked(event, thisElem, objectParent) {
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
-  if (optClicked == 0) {
+  if (optClicked == 0) { 
+    console.log('  in sceneObjectClicked, optClicked == 0');
     // delete parent element from display 
     // optClicked might be non-zero if click on existing object to add new overlapping one
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
     console.log('  in sceneObjectClicked, modkey = ' + modkey);
     if (modkey) {
       const el = document.getElementById(objectParent);
+
+      const elClassName = el.className;
+      console.log('  in sceneObjectClicked, elClassName = ' + elClassName);
+
       el.remove();
       console.log('  in sceneObjectClicked, old array elemList = ' + elemList);
       console.log('  in sceneObjectClicked, thisElem = ' + thisElem);
@@ -159,4 +184,96 @@ function sceneObjectClicked(event, thisElem, objectParent) {
       console.log('  in sceneObjectClicked, new array parentList = ' + parentList);
     }
   }
+
 }
+
+function removeLine(pBoxINid) {
+  console.log('enter removeLine');
+  console.log('  pBoxINid = ' + pBoxINid);
+
+  // Check if SVG container exists, if not exit
+  if (!svg) {
+    console.log('   svg does not exist, so RETURN');
+    return;
+  }
+
+  // get index of pBoxINid in inPortList
+  const tIndex = inPortList.findIndex(finderFunc);
+  function finderFunc(thisOne) {
+    return thisOne == pBoxINid;
+  } 
+  console.log('  index of pBoxINid in inPortList, tIndex = ' + tIndex);
+
+  // now use index to get corresponding elements
+  const line = pipeNameList[tIndex];
+
+  // remove line from svg
+  svg.removeChild(line); 
+
+  // for debugging, show what out port at this index
+  const temp = outPortList[tIndex];
+  console.log('  boxOUTid in outPortList at this index = ' + temp);
+
+  // remove deleted elements from lists
+  outPortList.splice(tIndex, 1);
+  inPortList.splice(tIndex, 1);
+  pipeNameList.splice(tIndex, 1);
+
+  // Reset variables for next line
+  isPiping = false;
+  boxOUTid = null;
+  boxINid = null;
+}
+
+function drawLine() {
+
+  console.log('enter drawLine');
+  console.log('  outPort = ' + boxOUTid);
+  console.log('  inPort = ' + boxINid);
+
+  // Get centers of both boxes
+  const boxOUTRect = boxOUT.getBoundingClientRect();
+  const boxOUTCenterX = boxOUTRect.left + boxOUTRect.width / 2;
+  const boxOUTCenterY = boxOUTRect.top + boxOUTRect.height / 2;
+
+  const boxINRect = boxIN.getBoundingClientRect();
+  const boxINCenterX = boxINRect.left + boxINRect.width / 2;
+  const boxINCenterY = boxINRect.top + boxINRect.height / 2;
+
+  // Check if SVG container already exists, if not create it
+  if (!svg) {
+    svg = document.createElementNS(svgNS, "svg");
+    svg.style.position = 'absolute';
+    svg.style.left = '0';
+    svg.style.top = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none'; // Allow clicks to pass through
+    svg.style.zIndex = '1000'; // Add z-index to ensure SVG is on top
+    document.body.appendChild(svg); // Append to end of body instead of beginning
+  }
+
+  // Create line element
+  const line = document.createElementNS(svgNS, "line");
+  line.setAttribute('x1', boxOUTCenterX);
+  line.setAttribute('y1', boxOUTCenterY);
+  line.setAttribute('x2', boxINCenterX);
+  line.setAttribute('y2', boxINCenterY);
+  line.setAttribute('stroke', 'black');
+  line.setAttribute('stroke-width', '2');
+  svg.appendChild(line);
+
+  // add line description to pipeNameList
+  // at same index as outPortList and inPortList
+  pipeNameList.push(line);
+
+  // Reset variables for next line
+  boxOUT = null;
+  boxIN = null;
+  boxOUTid = null;
+  boxINid = null;
+  
+} 
+
+// END functions from connect_2 for "piping" connections between objects
+// ==========================================================================

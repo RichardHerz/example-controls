@@ -27,6 +27,8 @@ function flashOne(value, index, array) {
 
   // to get current style/color of tParent, see 
   // https://attacomsian.com/blog/javascript-get-css-styles 
+  // or. if use jQuery, you can use, e.g., $(el).css('background-color','red') 
+  // https://www.geeksforgeeks.org/how-to-apply-styles-on-an-element-using-jquery/
 
   const styles = window.getComputedStyle(el);
   const backgroundColor = styles.backgroundColor; 
