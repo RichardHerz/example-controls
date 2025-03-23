@@ -8,20 +8,11 @@
 // DECLARE GLOBAL VARIABLES
 var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
-
 var parentList = []; // ID's of parent objects currently on display
 var elemList = []; // elemCounter values of elements currently on display
 // NOTE: elemList is for future use for connections and actions involving elements on display
-
 var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
-
-// ==========================================================================
-
-// need sceneobjectClicked to check class of clicked object
-// and only delete parent if class is not boxOUT or boxIN
-
-/// START variables from connect_2 for "piping" connections between objects
 var isPiping = false;
 var boxOUT = null;
 var boxIN = null;
@@ -32,36 +23,33 @@ var svg = null;
 var svgNS = "http://www.w3.org/2000/svg";
 var outPortList = [];
 var inPortList = [];
-// let optClicked = false; // ALSO DECLARED ABOVE IN PROCESS_MAIN.JS
-// END variables from connect_2 for "piping" connections between objects
-// ==========================================================================
 
 function buildPalette() {
   buildPaletteParent01(0,36,20);
   buildPaletteParent02(0,36,120);
   buildPaletteParent03(0,36,220);
-}
+} // END OF FUNCTION buildPalette
 
 function buildPaletteParent01(elemCounter,x,y) {
   console.log('buildPaletteParent01 before call of function buildParent01, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_palette");
   el.innerHTML += buildParent01(elemCounter,x,y);
   console.log('buildPaletteParent01, after call of function buildParent01');
-} 
+} // END OF FUNCTION buildPaletteParent01
 
 function buildPaletteParent02(elemCounter,x,y) {
   console.log('buildPaletteParent02 before call of function buildParent02, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_palette");
   el.innerHTML += buildParent02(elemCounter,x,y);
   console.log('buildPaletteParent02, after call of function buildParent02');
-} 
+} // END OF FUNCTION buildPaletteParent02
 
 function buildPaletteParent03(elemCounter,x,y) {
   console.log('buildPaletteParent03 before call of function buildParent03, elemCounter = ' + elemCounter);
   let el = document.getElementById("div_palette");
   el.innerHTML += buildParent03(elemCounter,x,y);
   console.log('buildPaletteParent03, after call of function buildParent03');
-} 
+} // END OF FUNCTION buildPaletteParent03
 
 function paletteObjectClicked(event, theObject) {
   console.log('enter paletteObjectClicked, theObject = ' + theObject);
@@ -76,7 +64,7 @@ function paletteObjectClicked(event, theObject) {
     el.style.cursor = "copy";
   }
   console.log('exit paletteObjectClicked');
-}
+} // END OF FUNCTION paletteObjectClicked
 
 function sceneDivClicked(event) { 
   console.log('enter sceneDivClicked');
@@ -141,7 +129,7 @@ function sceneDivClicked(event) {
     el.style.cursor = "default";
 
   }
-}
+} // END OF FUNCTION sceneDivClicked
 
 function checkCursor(event) {
   console.log('enter checkCursor, event = ' + event);
@@ -151,9 +139,13 @@ function checkCursor(event) {
   } else {
     el.style.cursor = "default";
   }
-}
+} // END OF FUNCTION checkCursor
 
 function sceneObjectClicked(event, thisElem, objectParent) {
+
+  // TO DO: when removing this element, also 
+  // remove any and all lines/pipes connected to this element
+
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
   if (optClicked == 0) { 
@@ -182,10 +174,11 @@ function sceneObjectClicked(event, thisElem, objectParent) {
       parentList.splice(tIndex, 1);
       console.log('  in sceneObjectClicked, new array elemList = ' + elemList);
       console.log('  in sceneObjectClicked, new array parentList = ' + parentList);
+  
     }
   }
 
-}
+} // END OF FUNCTION sceneObjectClicked
 
 function removeLine(pBoxINid) {
   console.log('enter removeLine');
@@ -223,7 +216,7 @@ function removeLine(pBoxINid) {
   isPiping = false;
   boxOUTid = null;
   boxINid = null;
-}
+} // END OF FUNCTION removeLine
 
 function drawLine() {
 
@@ -273,7 +266,63 @@ function drawLine() {
   boxOUTid = null;
   boxINid = null;
   
-} 
+} // END OF FUNCTION drawLine
 
-// END functions from connect_2 for "piping" connections between objects
-// ==========================================================================
+
+function output_clicked(event,theParent) {  
+  
+  console.log('enter output_03_clicked');
+
+  // if not already piping and mod key down, set isPiping to true
+
+  let modkey = event.getModifierState("Alt"); // Alt is Option on Mac // NEW LINE
+  if (modkey && !isPiping) { 
+      boxOUT = event.target;
+      boxOUTid = boxOUT.id;
+      isPiping = true;
+      console.log('  set isPiping = true');
+      console.log('  event.target = boxOUT = ' + boxOUT); // [an html ref, not var]
+      console.log('  boxOUTid = ' + boxOUTid)
+  }
+
+  console.log('   stopPropagation');
+  event.stopPropagation(); // stops event bubbling up to parent
+
+} // END OF FUNCTION output_clicked
+
+function input_clicked(event,theParent) { 
+
+  // if piping, set isPiping to false and draw line
+  // if not piping and mod key down, remove line
+  // if not piping and no mod key, do nothing
+
+  console.log('enter input_03_clicked');
+
+  boxIN = event.target;
+  boxINid = boxIN.id;
+  console.log('  event.target = boxIN = ' + boxIN); // [an html ref, not var]
+  console.log('  boxINid = ' + boxINid);
+
+  if (isPiping) {
+    isPiping = false;
+    // drawLine at end sets boxIN and boxOUT to null
+    // add output and input ports to lists
+    console.log('  just before drawLine');
+    console.log('  boxOUTid = ' + boxOUTid);
+    console.log('  boxINid = ' + boxINid);
+    outPortList.push(boxOUTid);
+    inPortList.push(boxINid);
+    drawLine();
+  } else {
+    let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
+    if (modkey) {
+        console.log('  modkey is true');
+        console.log('  just before removeLine');
+        removeLine(boxINid);
+    }
+  }
+
+  console.log('   stopPropagation');
+  event.stopPropagation(); // stops event bubbling up to parent
+
+} // END OF FUNCTION input_clicked
