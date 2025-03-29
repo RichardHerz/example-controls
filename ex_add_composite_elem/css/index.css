@@ -2,6 +2,8 @@
   position: relative;
   top: 5px;
   left: 10px;
+  width: 600px;
+  height: 250px;
   visibility: visible;
   border-width: 2px;
   border-style: none;
@@ -12,6 +14,8 @@
 
 #div_frame {
   position: relative;
+  /* top: 250px;
+  left: 50px; */
   width: 600px;
   height: 460px;
   visibility: visible;
@@ -23,7 +27,9 @@
 }
 
 #div_palette {
-  position: relative;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 130px;
   height: 440px;
   visibility: visible;
@@ -47,3 +53,18 @@
   background-color: white; 
   opacity: 1;
 }
+
+#svg_pipes {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  border : none;
+  border-width: 1px;
+  border-color: DodgerBlue;
+  /* setting z-index here doesn't work */
+  /* set in process_main.js >> svg.style.zIndex = '1000'; */
+  /* next line allows clicks to pass through to the div below */
+  /* pointer-events: none; */
+  /* or set in process_main.js >> svg.style.pointerEvents = 'none'; */
+}
+  

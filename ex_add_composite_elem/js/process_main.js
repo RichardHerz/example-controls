@@ -6,23 +6,25 @@
 */
 
 // DECLARE GLOBAL VARIABLES
-var optClicked = 0; // toggles 0-1 for option key down (1) or not (0) on click
+var optClicked = false; // toggles for option key down (true) or not (false) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
-var parentList = []; // ID's of parent objects currently on display
 var elemList = []; // elemCounter values of elements currently on display
-// NOTE: elemList is for future use for connections and actions involving elements on display
+var parentList = []; // ID's of parent objects currently on display
 var clickedID; // used to identify object clicked
 var paletteObject; // assigned in paletteObjectClicked, used in sceneDivClicked
 var isPiping = false;
 var boxOUT = null;
 var boxIN = null;
 var boxOUTid = null;
+var boxOUTparentID = null;
 var boxINid = null;
 var pipeNameList = [];
 var svg = null;
 var svgNS = "http://www.w3.org/2000/svg";
 var outPortList = [];
 var inPortList = [];
+var inParentPortList = [];
+var outParentPortList = [];
 
 function buildPalette() {
   buildPaletteParent01(0,36,20);
@@ -57,7 +59,7 @@ function paletteObjectClicked(event, theObject) {
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey) {
-    optClicked = 1; // toggles to 0 in sceneDivClicked()
+    optClicked = true; // toggles to false in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
     el = document.getElementById("div_scene");
@@ -68,37 +70,30 @@ function paletteObjectClicked(event, theObject) {
 
 function sceneDivClicked(event) { 
   console.log('enter sceneDivClicked');
-  if (optClicked == 1) {
-    // add new element to the scene
 
-    optClicked = 0; // toggles to 1 in paletteDivClicked() 
+  if (optClicked) { 
+
+    console.log('  optClicked true, toggle to false, add element to scene');
+
+    optClicked = false; // toggles to true in paletteDivClicked() 
+
+    // increment elemCounter and add to elemList array
     elemCounter += 1;
-    let el = document.getElementById("div_scene");
-    const styles = window.getComputedStyle(el);
-
-    let elFrame = document.getElementById("div_frame");
-    const stylesFrame = window.getComputedStyle(elFrame);
-
-    let elTitle = document.getElementById("div_title");
-    const stylesTitle = window.getComputedStyle(elTitle);
-
-    // clientX,Y properties are relative to top-left of the page
-    // the constant numeric values subtracted here will change if 
-    // changes in css made, though could get them here instead
-    // styles include px, e.g., "160px" so use parseInt for math 
-    let x = event.clientX - parseInt(styles.left) - 12;
-    // title div changes height with width of page which moves frame div up/down
-    // and, thus, scene div up/down
-    let y = event.clientY - parseInt(stylesTitle.height) - 36;
-
-    // console.log('  event.clientX, event.clientY = ' + event.clientX +', '+ event.clientY);
-    // console.log('  styles.left, styles.top = ' + styles.left +', '+ styles.top);
-    // console.log('  stylesFrame.left, stylesFrame.top = ' + stylesFrame.left +', '+ stylesFrame.top);
-    // console.log('  stylesTitle.height = ' + stylesTitle.height);
-    // console.log('  x, y = ' + x +', '+ y);
-
-    // add elemCounter to list of parent elements on display
     elemList.push(elemCounter);
+
+    console.log('  elemCounter = ' + elemCounter);
+
+    // get x,y coordinates of click in sceneDiv
+    // note both rect and event.clientX & Y vary with page scroll
+    // but their difference is independent of page scroll 
+    // so x,y are relative to sceneDiv
+    const rect = event.target.getBoundingClientRect();
+    const x = Math.round(event.clientX - rect.left);
+    const y = Math.round(event.clientY - rect.top);
+   
+    console.log('  x, y = ' + x +', '+ y);
+
+    let el = document.getElementById("div_scene");
 
     // NEED SWITCH BLOCK USING global var paletteObject 
     switch(paletteObject) {
@@ -134,7 +129,7 @@ function sceneDivClicked(event) {
 function checkCursor(event) {
   console.log('enter checkCursor, event = ' + event);
   let el = document.getElementById(event.target.id); 
-  if (optClicked==1) {
+  if (optClicked) {
     el.style.cursor = "copy";
   } else {
     el.style.cursor = "default";
@@ -143,37 +138,86 @@ function checkCursor(event) {
 
 function sceneObjectClicked(event, thisElem, objectParent) {
 
-  // TO DO: when removing this element, also 
+  // when removing this element, also 
   // remove any and all lines/pipes connected to this element
 
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
-  if (optClicked == 0) { 
-    console.log('  in sceneObjectClicked, optClicked == 0');
+  if (!optClicked) { 
+    console.log('  optClicked is false');
     // delete parent element from display 
-    // optClicked might be non-zero if click on existing object to add new overlapping one
+    // optClicked might be true if click on existing object to add new overlapping one
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
-    console.log('  in sceneObjectClicked, modkey = ' + modkey);
+    console.log('  modkey = ' + modkey);
     if (modkey) {
       const el = document.getElementById(objectParent);
 
       const elClassName = el.className;
-      console.log('  in sceneObjectClicked, elClassName = ' + elClassName);
+      console.log('  elClassName = ' + elClassName);
 
       el.remove();
-      console.log('  in sceneObjectClicked, old array elemList = ' + elemList);
-      console.log('  in sceneObjectClicked, thisElem = ' + thisElem);
+      console.log('  old array elemList = ' + elemList);
+      console.log('  thisElem = ' + thisElem);
+
+      // search index of object to be deleted in list of pipe IN parents
+      // if there, remove the pipe
+      // since two inputs, parent may be listed for pipe to each input
+      // repeat until tIndex = -1
+      let tIndex = 0;
+      while(tIndex != -1) {
+        console.log('  at top of *IN* while (tIndex != -1), tIndex = ' + tIndex);
+        // get index of objectParent in inParentPortList
+        tIndex = inParentPortList.findIndex(finderFunc);
+          function finderFunc(thisOne) {
+          return thisOne == objectParent;
+        }
+        console.log('    inPortList = ' + inPortList);
+        console.log('    objectParent = ' + objectParent);
+        console.log('    inParentPortList = ' + inParentPortList);
+        console.log('    objectParent in inParentPortList index = ' + tIndex);
+        // if found, remove the pipe
+        if (tIndex != -1) {
+          console.log('    remove inPortList[tIndex] = ' + inPortList[tIndex]);
+          removeLine(inPortList[tIndex]);
+        }
+        console.log('  at bottom of *IN* while (tIndex != -1), tIndex = ' + tIndex);
+      }
+
+      // search index of object to be deleted in list of pipe OUT parents
+      // if there, remove the pipe
+      // since two outputs, parent may be listed for pipe to each output
+      // repeat until tIndex = -1
+      tIndex = 0;
+      while(tIndex != -1) {
+        console.log('  at top of *OUT* while (tIndex != -1), tIndex = ' + tIndex);
+        // get index of objectParent in outParentPortList
+        tIndex = outParentPortList.findIndex(finderFunc);
+          function finderFunc(thisOne) {
+          return thisOne == objectParent;
+        }
+        console.log('    inPortList = ' + inPortList);
+        console.log('    objectParent = ' + objectParent);
+        console.log('    outParentPortList = ' + outParentPortList);
+        console.log('    objectParent in outParentPortList index = ' + tIndex);
+        // if found, remove the pipe
+        if (tIndex != -1) {
+          console.log('    remove inPortList[tIndex] = ' + inPortList[tIndex]);
+          removeLine(inPortList[tIndex]);
+        }
+        console.log('  at bottom of *OUT* while (tIndex != -1), tIndex = ' + tIndex);
+      }
 
       // delete the element from the lists 
       // need array index to delete parent ID from parentList array 
-      const tIndex = parentList.findIndex(finderFunc);
+      tIndex = parentList.findIndex(finderFunc);
       function finderFunc(thisOne) {
         return thisOne == objectParent;
       }
+      console.log('  remove object from lists, tIndex = ' + tIndex);
       elemList.splice(tIndex, 1);
       parentList.splice(tIndex, 1);
-      console.log('  in sceneObjectClicked, new array elemList = ' + elemList);
-      console.log('  in sceneObjectClicked, new array parentList = ' + parentList);
+      console.log('  new array elemList = ' + elemList);
+      console.log('  new array parentList = ' + parentList);
   
     }
   }
@@ -210,51 +254,67 @@ function removeLine(pBoxINid) {
   // remove deleted elements from lists
   outPortList.splice(tIndex, 1);
   inPortList.splice(tIndex, 1);
+  inParentPortList.splice(tIndex, 1);
+  outParentPortList.splice(tIndex, 1);
   pipeNameList.splice(tIndex, 1);
-
+ 
   // Reset variables for next line
   isPiping = false;
   boxOUTid = null;
   boxINid = null;
+  boxOUTparentID = null;
+
+  console.log('just before end removeLine');
+  
 } // END OF FUNCTION removeLine
 
 function drawLine() {
 
   console.log('enter drawLine');
-  console.log('  outPort = ' + boxOUTid);
-  console.log('  inPort = ' + boxINid);
+  console.log('  boxOUTid = ' + boxOUTid);
+  console.log('  boxINid = ' + boxINid);
 
-  // Get centers of both boxes
-  const boxOUTRect = boxOUT.getBoundingClientRect();
-  const boxOUTCenterX = boxOUTRect.left + boxOUTRect.width / 2;
-  const boxOUTCenterY = boxOUTRect.top + boxOUTRect.height / 2;
+  const divScene = document.getElementById('div_scene');
+  const divOUT = document.getElementById(boxOUTid);
+  const divIN = document.getElementById(boxINid);
+  
+  const divSceneRect = divScene.getBoundingClientRect();
+  const divOUTRect = divOUT.getBoundingClientRect();
+  const divINRect = divIN.getBoundingClientRect();
+  
+  // Calculate centers relative to divScene's top-left corner
+  const nudge = -4; // nudge to center line on div
+  const x1 = Math.round(nudge + divOUTRect.left - divSceneRect.left + divOUTRect.width/2);
+  const y1 = Math.round(nudge + divOUTRect.top - divSceneRect.top + divOUTRect.height/2);
+  const x2 = Math.round(nudge + divINRect.left - divSceneRect.left + divINRect.width/2);
+  const y2 = Math.round(nudge + divINRect.top - divSceneRect.top + divINRect.height/2);
 
-  const boxINRect = boxIN.getBoundingClientRect();
-  const boxINCenterX = boxINRect.left + boxINRect.width / 2;
-  const boxINCenterY = boxINRect.top + boxINRect.height / 2;
+  console.log('  x1, y1 = ' + x1 +', '+ y1);
+  console.log('  x2, y2 = ' + x2 +', '+ y2);
 
-  // Check if SVG container already exists, if not create it
-  if (!svg) {
-    svg = document.createElementNS(svgNS, "svg");
-    svg.style.position = 'absolute';
-    svg.style.left = '0';
-    svg.style.top = '0';
-    svg.style.width = '100%';
-    svg.style.height = '100%';
-    svg.style.pointerEvents = 'none'; // Allow clicks to pass through
-    svg.style.zIndex = '1000'; // Add z-index to ensure SVG is on top
-    document.body.appendChild(svg); // Append to end of body instead of beginning
-  }
+  svg = document.getElementById("svg_pipes");
+
+  // setting z-index in CSS file didn't work
+  // next line works to put lines on top of scene objects
+  svg.style.zIndex = '1000'; // Add z-index to ensure SVG is on top
+  // but also need to disable pointer events for svg
+  // so clicks go to objects in scene and not stop on svg
+  svg.style.pointerEvents = 'none'; 
+  
+  console.log('  just before create line element');
 
   // Create line element
   const line = document.createElementNS(svgNS, "line");
-  line.setAttribute('x1', boxOUTCenterX);
-  line.setAttribute('y1', boxOUTCenterY);
-  line.setAttribute('x2', boxINCenterX);
-  line.setAttribute('y2', boxINCenterY);
+  line.setAttribute('x1', x1);
+  line.setAttribute('y1', y1);
+  line.setAttribute('x2', x2);
+  line.setAttribute('y2', y2);
   line.setAttribute('stroke', 'black');
-  line.setAttribute('stroke-width', '2');
+  line.setAttribute('stroke-width', '3');
+
   svg.appendChild(line);
+
+  console.log('  just after create line & before push arrays');
 
   // add line description to pipeNameList
   // at same index as outPortList and inPortList
@@ -265,13 +325,22 @@ function drawLine() {
   boxIN = null;
   boxOUTid = null;
   boxINid = null;
+
+  console.log('  outPortList = ' + outPortList);
+  console.log('  outParentPortList = ' + inParentPortList);
+  console.log('  inPortList = ' + inPortList);
+  console.log('  inParentPortList = ' + inParentPortList);
+  console.log('  pipeNameList = ' + pipeNameList);
+
+  console.log('just before end drawLine');
   
 } // END OF FUNCTION drawLine
 
-
-function output_clicked(event,theParent) {  
+function output_clicked(event, theParent) {  
   
-  console.log('enter output_03_clicked');
+  console.log('enter output_clicked');
+  console.log('  theParent.id = ' + theParent.id); // theParent is an html ref, not var
+  boxOUTparentID = theParent.id;
 
   // if not already piping and mod key down, set isPiping to true
 
@@ -285,7 +354,7 @@ function output_clicked(event,theParent) {
       console.log('  boxOUTid = ' + boxOUTid)
   }
 
-  console.log('   stopPropagation');
+  console.log('just before end output_clicked, stopPropagation');
   event.stopPropagation(); // stops event bubbling up to parent
 
 } // END OF FUNCTION output_clicked
@@ -296,12 +365,14 @@ function input_clicked(event,theParent) {
   // if not piping and mod key down, remove line
   // if not piping and no mod key, do nothing
 
-  console.log('enter input_03_clicked');
-
+  console.log('enter input_clicked');
+ 
   boxIN = event.target;
   boxINid = boxIN.id;
-  console.log('  event.target = boxIN = ' + boxIN); // [an html ref, not var]
-  console.log('  boxINid = ' + boxINid);
+  const theParentID = theParent.id;
+
+  console.log('  boxINid = ' + boxINid)
+  console.log('  theParentID = ' + theParentID);
 
   if (isPiping) {
     isPiping = false;
@@ -312,7 +383,11 @@ function input_clicked(event,theParent) {
     console.log('  boxINid = ' + boxINid);
     outPortList.push(boxOUTid);
     inPortList.push(boxINid);
+    inParentPortList.push(theParentID);
+    outParentPortList.push(boxOUTparentID);
+
     drawLine();
+
   } else {
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
     if (modkey) {
@@ -322,7 +397,7 @@ function input_clicked(event,theParent) {
     }
   }
 
-  console.log('   stopPropagation');
+  console.log('just before end input_clicked, stopPropagation');
   event.stopPropagation(); // stops event bubbling up to parent
 
 } // END OF FUNCTION input_clicked

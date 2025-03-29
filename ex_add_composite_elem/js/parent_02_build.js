@@ -19,7 +19,7 @@ function buildParent02(zz,x,y) {
     `; // END buildText << NOTE BACK-TICK BEFORE SEMICOLON 
 
     if (zz == 0) {
-        console.log('buildText if (zz == 0), zz =' + zz); 
+        console.log('buildText if (zz == 0), zz = ' + zz); 
         buildText += ` 
             <div id="parent_02_${zz}" class="parent_02" 
                 onclick="paletteObjectClicked(event, 02)">
@@ -38,7 +38,6 @@ function buildParent02(zz,x,y) {
     }
   
     console.log('at end function buildParent02');
-    // alert('buildText in buildParent02 = ' + buildText);
   
     return buildText;
-}
+} // END OF FUNCTION buildParent02
