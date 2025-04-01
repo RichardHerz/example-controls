@@ -6,7 +6,7 @@
 */
 
 // DECLARE GLOBAL VARIABLES
-var optClicked = false; // toggles for option key down (true) or not (false) on click
+var addingUnit = false; // toggles for option key down (true) or not (false) on click
 var elemCounter = 0; // number of elements placed on scene including those removed 
 var elemList = []; // elemCounter values of elements currently on display
 var parentList = []; // ID's of parent objects currently on display
@@ -17,10 +17,12 @@ var boxOUT = null;
 var boxIN = null;
 var boxOUTid = null;
 var boxOUTparentID = null;
+var boxINparentID = null;
 var boxINid = null;
 var pipeNameList = [];
 var svg = null;
 var svgNS = "http://www.w3.org/2000/svg";
+var line = null;
 var outPortList = [];
 var inPortList = [];
 var inParentPortList = [];
@@ -59,7 +61,7 @@ function paletteObjectClicked(event, theObject) {
   clickedID = event.target.id;
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
   if (modkey) {
-    optClicked = true; // toggles to false in sceneDivClicked()
+    addingUnit = true; // toggles to false in sceneDivClicked()
     let el = document.getElementById(clickedID);
     el.style.cursor = "copy";
     el = document.getElementById("div_scene");
@@ -71,11 +73,22 @@ function paletteObjectClicked(event, theObject) {
 function sceneDivClicked(event) { 
   console.log('enter sceneDivClicked');
 
-  if (optClicked) { 
+  if (isPiping) {
+    // want to delete the line before connection
+    svg.removeChild(line); 
+    // Reset variables for next line
+    isPiping = false;
+    boxOUTid = null;
+    boxINid = null;
+    boxOUTparentID = null;
+    event.stopPropagation(); // stops event bubbling up to parent
+  }
 
-    console.log('  optClicked true, toggle to false, add element to scene');
+  if (addingUnit) { 
 
-    optClicked = false; // toggles to true in paletteDivClicked() 
+    console.log('  addingUnit true, toggle to false, add element to scene');
+
+    addingUnit = false; // toggles to true in paletteDivClicked() 
 
     // increment elemCounter and add to elemList array
     elemCounter += 1;
@@ -129,7 +142,7 @@ function sceneDivClicked(event) {
 function checkCursor(event) {
   console.log('enter checkCursor, event = ' + event);
   let el = document.getElementById(event.target.id); 
-  if (optClicked) {
+  if (addingUnit) {
     el.style.cursor = "copy";
   } else {
     el.style.cursor = "default";
@@ -143,10 +156,10 @@ function sceneObjectClicked(event, thisElem, objectParent) {
 
   console.log('enter function sceneObjectClicked');
   console.log('  objectParent = ' + objectParent);
-  if (!optClicked) { 
-    console.log('  optClicked is false');
+  if (!addingUnit) { 
+    console.log('  addingUnit is false');
     // delete parent element from display 
-    // optClicked might be true if click on existing object to add new overlapping one
+    // addingUnit might be true if click on existing object to add new overlapping one
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
     console.log('  modkey = ' + modkey);
     if (modkey) {
@@ -268,29 +281,21 @@ function removeLine(pBoxINid) {
   
 } // END OF FUNCTION removeLine
 
-function drawLine() {
+function drawLine(event) {
 
   console.log('enter drawLine');
   console.log('  boxOUTid = ' + boxOUTid);
-  console.log('  boxINid = ' + boxINid);
 
   const divScene = document.getElementById('div_scene');
   const divOUT = document.getElementById(boxOUTid);
-  const divIN = document.getElementById(boxINid);
   
   const divSceneRect = divScene.getBoundingClientRect();
   const divOUTRect = divOUT.getBoundingClientRect();
-  const divINRect = divIN.getBoundingClientRect();
   
   // Calculate centers relative to divScene's top-left corner
   const nudge = -4; // nudge to center line on div
   const x1 = Math.round(nudge + divOUTRect.left - divSceneRect.left + divOUTRect.width/2);
   const y1 = Math.round(nudge + divOUTRect.top - divSceneRect.top + divOUTRect.height/2);
-  const x2 = Math.round(nudge + divINRect.left - divSceneRect.left + divINRect.width/2);
-  const y2 = Math.round(nudge + divINRect.top - divSceneRect.top + divINRect.height/2);
-
-  console.log('  x1, y1 = ' + x1 +', '+ y1);
-  console.log('  x2, y2 = ' + x2 +', '+ y2);
 
   svg = document.getElementById("svg_pipes");
 
@@ -303,34 +308,47 @@ function drawLine() {
   
   console.log('  just before create line element');
 
-  // Create line element
-  const line = document.createElementNS(svgNS, "line");
+  // Create marker definition if it doesn't exist
+  if (!document.getElementById("arrowhead")) {
+    const defs = document.createElementNS(svgNS, "defs");
+    const marker = document.createElementNS(svgNS, "marker");
+    marker.setAttribute("id", "arrowhead");
+    marker.setAttribute("markerWidth", "5");    // changed from 10 to 5
+    marker.setAttribute("markerHeight", "3.5"); // changed from 7 to 3.5
+    marker.setAttribute("refX", "4.5");         // changed from 9 to 4.5
+    marker.setAttribute("refY", "1.75");        // changed from 3.5 to 1.75
+    marker.setAttribute("orient", "auto");
+    
+    const polygon = document.createElementNS(svgNS, "polygon");
+    polygon.setAttribute("points", "0 0, 5 1.75, 0 3.5"); // changed from "0 0, 10 3.5, 0 7"
+    polygon.setAttribute("fill", "black");
+    
+    marker.appendChild(polygon);
+    defs.appendChild(marker);
+    svg.appendChild(defs);
+  }
+
+  // Create line element with arrowhead
+  line = document.createElementNS(svgNS, "line");
   line.setAttribute('x1', x1);
   line.setAttribute('y1', y1);
+
+  // Calculate line end position relative to scene div, accounting for scroll
+  const x2 = Math.round(nudge + event.clientX - divSceneRect.left);
+  const y2 = Math.round(nudge + event.clientY - divSceneRect.top);
   line.setAttribute('x2', x2);
   line.setAttribute('y2', y2);
+
+  console.log('  line start x1, y1 = ' + x1 +', '+ y1);
+  console.log('  line start x2, y2 = ' + x2 +', '+ y2);
+
   line.setAttribute('stroke', 'black');
   line.setAttribute('stroke-width', '3');
+  line.setAttribute('marker-end', 'url(#arrowhead)');  // Add arrowhead
 
   svg.appendChild(line);
 
-  console.log('  just after create line & before push arrays');
-
-  // add line description to pipeNameList
-  // at same index as outPortList and inPortList
-  pipeNameList.push(line);
-
-  // Reset variables for next line
-  boxOUT = null;
-  boxIN = null;
-  boxOUTid = null;
-  boxINid = null;
-
-  console.log('  outPortList = ' + outPortList);
-  console.log('  outParentPortList = ' + inParentPortList);
-  console.log('  inPortList = ' + inPortList);
-  console.log('  inParentPortList = ' + inParentPortList);
-  console.log('  pipeNameList = ' + pipeNameList);
+  document.addEventListener('mousemove', updateLine);
 
   console.log('just before end drawLine');
   
@@ -346,12 +364,14 @@ function output_clicked(event, theParent) {
 
   let modkey = event.getModifierState("Alt"); // Alt is Option on Mac // NEW LINE
   if (modkey && !isPiping) { 
-      boxOUT = event.target;
-      boxOUTid = boxOUT.id;
-      isPiping = true;
-      console.log('  set isPiping = true');
-      console.log('  event.target = boxOUT = ' + boxOUT); // [an html ref, not var]
-      console.log('  boxOUTid = ' + boxOUTid)
+    boxOUT = event.target;
+    boxOUTid = boxOUT.id;
+    isPiping = true;
+    console.log('  set isPiping = true');
+    console.log('  event.target = boxOUT = ' + boxOUT); // [an html ref, not var]
+    console.log('  boxOUTid = ' + boxOUTid)
+
+    drawLine(event);
   }
 
   console.log('just before end output_clicked, stopPropagation');
@@ -369,10 +389,26 @@ function input_clicked(event,theParent) {
  
   boxIN = event.target;
   boxINid = boxIN.id;
-  const theParentID = theParent.id;
+  boxINparentID = theParent.id;
 
   console.log('  boxINid = ' + boxINid)
-  console.log('  theParentID = ' + theParentID);
+  console.log('  boxINparentID = ' + boxINparentID);
+  console.log('  boxOUTparentID = ' + boxOUTparentID); 
+
+  if (boxINparentID == boxOUTparentID) {
+    // don't allow pipe to same parent
+    // want to delete the line before connection
+    svg.removeChild(line); 
+    // Reset variables for next line
+    isPiping = false;
+    boxOUTid = null;
+    boxINid = null;
+    boxOUTparentID = null;
+    boxINparentID = null;
+    event.stopPropagation(); // stops event bubbling up to parent
+    console.log('  RETURN clicked same parent');
+    return;
+  }
 
   if (isPiping) {
     isPiping = false;
@@ -383,10 +419,26 @@ function input_clicked(event,theParent) {
     console.log('  boxINid = ' + boxINid);
     outPortList.push(boxOUTid);
     inPortList.push(boxINid);
-    inParentPortList.push(theParentID);
+    inParentPortList.push(boxINparentID);
     outParentPortList.push(boxOUTparentID);
 
-    drawLine();
+    document.removeEventListener('mousemove', updateLine);
+
+    // add line description to pipeNameList
+    // at same index as outPortList and inPortList
+    pipeNameList.push(line);
+
+    // Reset variables for next line
+    boxOUT = null;
+    boxIN = null;
+    boxOUTid = null;
+    boxINid = null;
+
+    console.log('  outPortList = ' + outPortList);
+    console.log('  outParentPortList = ' + inParentPortList);
+    console.log('  inPortList = ' + inPortList);
+    console.log('  inParentPortList = ' + inParentPortList);
+    console.log('  pipeNameList = ' + pipeNameList);
 
   } else {
     let modkey = event.getModifierState("Alt"); // Alt is Option on Mac
@@ -400,4 +452,17 @@ function input_clicked(event,theParent) {
   console.log('just before end input_clicked, stopPropagation');
   event.stopPropagation(); // stops event bubbling up to parent
 
-} // END OF FUNCTION input_clicked
+} // END OF FUNCTION input_clicked 
+
+function updateLine(event) {
+  const divScene = document.getElementById('div_scene');
+  const divSceneRect = divScene.getBoundingClientRect();
+  const nudge = -4; // match nudge used in drawLine
+
+  // Calculate position relative to scene div, accounting for scroll
+  const x2 = Math.round(nudge + event.clientX - divSceneRect.left);
+  const y2 = Math.round(nudge + event.clientY - divSceneRect.top);
+
+  line.setAttribute('x2', x2);
+  line.setAttribute('y2', y2);
+}
