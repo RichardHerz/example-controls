@@ -1,0 +1,95 @@
+On an update state, go down the parentList from process_main 
+and run an update state process in each parent script file - that shouldn't
+be a problem will all the parent script files active in memory 
+
+each parent script will have to access each copy of that parent in the scene 
+each parent copy will have to get info from each of its connected input ports,
+do calculations, then update the info stored in its output ports 
+
+on send messages, each parent copy in the scene will have to have each of its 
+inputs get info from that inputs connected output 
+
+we have a list of all the parents in the scene, as well as the elemList 
+now how does a parent script access each parents stored state and stored 
+stored info for each of its ports and of the ports to which it's connected 
+
+each time a parent copy is added to the scene, an object that holds that copy's methods 
+and data must be created
+
+looks like every time a new parent is added to the scene, 
+in sceneDivClicked switch(paletteObject), at each case.
+e.g., 03, have a line similar to processUnits[i] = new parent_constructor_03(i) 
+
+then, the parent/unit constructors will need to have data arrays for each input and 
+output port and for state of the unit itself 
+
+now have to figure out how a unit constructor can access the connected port
+data arrays using the element IDs in the current arrays for connections: 
+    inPortList, outPortList, inParentPortList, outParentPortList 
+
+seems each parent script can search for itself in the connection arrays, get the
+associated IDs for each connection, and use the IDs to access the data arrays
+
+
+
+=============================== 
+
+NOTE THE TWO DIFFERENT METHODS OF CREATING OBJECTS in Lab 8 vs. Lab 9  have different 
+methods of declaring variables
+SEE https://www.geeksforgeeks.org/creating-objects-in-javascript-4-different-ways/ 
+MY CLAUDE QUESTIONS > https://claude.ai/share/90d18693-622c-4f83-addb-ab14f7c366dd 
+
+===============================  
+FROM WEB LAB 8
+
+processUnits[0] = Object.create(puAdiabaticPackedBedPFR);
+processUnits[0].unitIndex = 0;
+
+let puAdiabaticPackedBedPFR = {
+  unitIndex : 0, // index of this unit as child in processUnits parent object
+
+---------------
+processUnits[1] = puCounterCurrentHeatExchanger;
+processUnits[1].unitIndex = 1; 
+
+QUESTION: will this method w/o Object.create only be able to have this one object? 
+      that is, could I do processUnits[2] = puCounterCurrentHeatExchanger; ?? 
+      APPARENTLY NOT, OR NOT ADVISABLE
+
+let puCounterCurrentHeatExchanger = {
+  unitIndex : 0, // index of this unit as child in processUnits parent object
+
+  // define variables that are to receive input values from other units
+  Tin : 320,
+
+   updateInputs : function() {
+    this.Tin = processUnits[1].ToutCold; 
+
+=============================== 
+
+FROM WEB LAB 9 - for multiple copies of same unit 
+
+for (let i = 1; i <= numRxrs; i += 1) {
+  processUnits[i] = new puCSTR(i);
+} 
+
+NOTE: could have used Object.create in a loop also, e.g.,
+for (let i = 1; i <= numRxrs; i += 1) {
+  processUnits[i] = Object.create(OBJ_CSTR);
+  processUnits[i].unitIndex = i;
+} 
+
+function puCSTR(pUnitIndex) {
+  // constructor function for process unit 
+  
+  // define this unit's variables that are to RECEIVE INPUT values from other units
+  let concIn = 0; // conc from upstream CSTR
+  let feed = 0; // feed to first CSTR to calc this unit's conversion 
+
+  //  define OUTPUT CONNECTIONS to other units
+  this.conc = 0; // output conc inside this reactor to next reactor
+
+  this.updateInputs = function() {
+    concIn = processUnits[pUnitIndex - 1].conc; // upstream cstr conc to this unit
+    feed = processUnits[0].conc; // feed unit 0 conc to calc this unit's conversion
+  }
