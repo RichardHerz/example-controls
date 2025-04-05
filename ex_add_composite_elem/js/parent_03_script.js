@@ -1,5 +1,6 @@
-// see process_main.js for handling clicks on general IN and OUT ports 
-// this file will be used for handling actions specific to each type of parent element 
+// see process_main.js for handling clicks on general 
+// IN and OUT ports this file will be used for handling 
+// actions specific to each type of parent element 
 // such as in web labs process units 
 
 // QUESTION: what should happen when an object is 
@@ -10,14 +11,21 @@
 // for large sims, would it be better to delete objects
 // to save memory, although mine won't get that big... 
 
-function makeParent03(parentID) { 
-  // constructor function for process unit 
+// SEE Claude 3.5 Sonnet answer about placing functions 
+// in zotero: 
+//   where to place function definitions in javascript classes
+// SEE // https://www.w3schools.com/Js/js_classes.asp
 
-  this.parentID = parentID;
+class parent03 {
 
-  this.initialize = function() {
-    console.log('enter makeParent03 initialize function');
-    console.log('  this.parentID = ' + this.parentID);
-  }
+    constructor(parentID) { 
+        this.parentID = parentID;
+    } // END OF constructor function of class parent03
 
-} // END OF function makeParent03 
+    initialize() {
+        console.log('enter parent03 initialize function');
+        console.log('  this.parentID = ' + this.parentID);
+        console.log('end parent03 initialize function');
+    }
+
+} // END OF class parent03

@@ -5,11 +5,11 @@
   background-color: green;
 }
 
-.boxIN {
+.portIN {
   /* only used for class selector, document.querySelectorAll  */
 }
 
-.boxOUT {
+.portOUT {
   /* only used for class selector, document.querySelectorAll */
 } 
 

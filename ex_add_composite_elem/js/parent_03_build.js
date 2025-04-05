@@ -36,16 +36,16 @@ function buildParent03(zz,x,y) {
         buildText += ` 
            <div id="parent_03_${zz}" class="parent_03" 
                 onclick="sceneObjectClicked(event, ${zz}, 'parent_03_${zz}')">
-                <div id="input_03_${zz}_1" class="boxIN input_03_1"
+                <div id="input_03_${zz}_1" class="portIN input_03_1"
                     onclick="input_clicked(event, parent_03_${zz})">
                 </div>
-                <div id="input_03_${zz}_2" class="boxIN input_03_2" 
+                <div id="input_03_${zz}_2" class="portIN input_03_2" 
                     onclick="input_clicked(event, parent_03_${zz})">
                 </div>
-                <div id="output_03_${zz}_1" class="boxOUT output_03_1"
+                <div id="output_03_${zz}_1" class="portOUT output_03_1"
                     onclick="output_clicked(event, parent_03_${zz})">
                 </div>
-                <div id="output_03_${zz}_2" class="boxOUT output_03_2"
+                <div id="output_03_${zz}_2" class="portOUT output_03_2"
                    onclick="output_clicked(event, parent_03_${zz})">
                 </div>
                 <div id="info_03_${zz}" class="info_03">info</div>
