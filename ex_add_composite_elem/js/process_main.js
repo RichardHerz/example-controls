@@ -131,7 +131,7 @@ function sceneDivClicked(event) {
           // add parent ID to list of parent elements on display
           parentList.push('parent_03_'+ elemCounter); 
           // add an object to processUnits[] for this new parent
-          processUnits[elemCounter] = new parent03('parent_03_'+ elemCounter); 
+          processUnits[elemCounter] = new Parent03(elemCounter, 'parent_03_'+ elemCounter); 
           // let's make sure it's alive - check the console log 
           processUnits[elemCounter].initialize();
           console.log('  sceneDivClicked, processUnits[elemCounter].parentID = ' + processUnits[elemCounter].parentID);

@@ -16,11 +16,22 @@
 //   where to place function definitions in javascript classes
 // SEE // https://www.w3schools.com/Js/js_classes.asp
 
-class parent03 {
+class Parent03 {
 
-    constructor(parentID) { 
+    constructor(elemCounter, parentID) {
+        console.log('enter class Parent03 constructor');
+        this.elemCounter = elemCounter;
         this.parentID = parentID;
-    } // END OF constructor function of class parent03
+        console.log('  this class parentID = ' + this.parentID);
+        const fieldID= "num_03_" + this.elemCounter;
+        console.log('  fieldID = ' + fieldID);
+        const el = document.getElementById(fieldID);
+        if (el) {
+            el.innerHTML = this.elemCounter;
+        } else {
+            console.error(`Element with ID ${this.fieldID} not found.`);
+        }
+    } // END OF FUNCTION constructor()
 
     initialize() {
         console.log('enter parent03 initialize function');
