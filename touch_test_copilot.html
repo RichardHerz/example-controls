@@ -41,6 +41,10 @@
             } else {
                 output.value = 'simple click';
             }
+            // Clear the field after 2 seconds
+            setTimeout(() => {
+                output.value = '';
+            }, 2000);
         });
 
         // Handle touch events (mobile)
@@ -48,6 +52,10 @@
             e.preventDefault();
             longPressTimer = setTimeout(() => {
                 output.value = 'option touch';
+                // Clear the field after 2 seconds
+                setTimeout(() => {
+                    output.value = '';
+                }, 2000);
             }, LONG_PRESS_DURATION);
         });
 
@@ -58,6 +66,10 @@
                 // Only show simple click if it wasn't a long press
                 if (output.value !== 'option touch') {
                     output.value = 'simple click';
+                    // Clear the field after 2 seconds
+                    setTimeout(() => {
+                        output.value = '';
+                    }, 2000);
                 }
             }
         });
