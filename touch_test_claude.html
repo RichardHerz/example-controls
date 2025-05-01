@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch Modifier Click Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .touch-area {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+        }
+        
+        .output {
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            min-height: 100px;
+        }
+        
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 10px 15px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button.active {
+            background-color: #2e5a9e;
+        }
+        
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.5s;
+        }
+        
+        .normal-click {
+            background-color: #4a90e2;
+        }
+        
+        .alt-click {
+            background-color: #e24a4a;
+        }
+        
+        .option-click {
+            background-color: #4ae24a;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .instruction {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb74d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Touch Modifier Click Demo</h1>
+        
+        <div class="instruction">
+            <p>This demo provides several ways to simulate alt-click, option-click, or other modifier+click combinations on touch screens:</p>
+            <ol>
+                <li><strong>Mode buttons:</strong> Select a click mode before touching</li>
+                <li><strong>Long press:</strong> Hold your finger for 500ms to activate alt-click</li>
+                <li><strong>Multi-finger touch:</strong> Use two fingers for option-click, three for alt-click</li>
+                <li><strong>Double tap:</strong> Double tap for alt-click</li>
+            </ol>
+        </div>
+        
+        <h2>1. Select Click Mode</h2>
+        <div class="button-row">
+            <button id="normalBtn" class="active">Normal Click</button>
+            <button id="altBtn">Alt Click</button>
+            <button id="optionBtn">Option Click</button>
+        </div>
+        
+        <h2>2. Touch Area</h2>
+        <div id="touchArea" class="touch-area">
+            <p>Touch here to test</p>
+        </div>
+        
+        <h2>3. Result</h2>
+        <div id="output" class="output">Results will appear here...</div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const touchArea = document.getElementById('touchArea');
+        const output = document.getElementById('output');
+        const normalBtn = document.getElementById('normalBtn');
+        const altBtn = document.getElementById('altBtn');
+        const optionBtn = document.getElementById('optionBtn');
+        
+        // State variables
+        let currentMode = 'normal';
+        let longPressTimer = null;
+        let lastTapTime = 0;
+        const doubleTapDelay = 300; // ms between taps to count as double tap
+        const longPressDelay = 500; // ms to count as long press
+        
+        // Set up button event listeners
+        normalBtn.addEventListener('click', () => setMode('normal'));
+        altBtn.addEventListener('click', () => setMode('alt'));
+        optionBtn.addEventListener('click', () => setMode('option'));
+        
+        function setMode(mode) {
+            currentMode = mode;
+            // Update button UI
+            normalBtn.classList.toggle('active', mode === 'normal');
+            altBtn.classList.toggle('active', mode === 'alt');
+            optionBtn.classList.toggle('active', mode === 'option');
+        }
+        
+        // Handle touch events
+        touchArea.addEventListener('touchstart', handleTouchStart, false);
+        touchArea.addEventListener('touchend', handleTouchEnd, false);
+        touchArea.addEventListener('touchcancel', handleTouchCancel, false);
+        
+        function handleTouchStart(event) {
+            event.preventDefault(); // Prevent default behavior
+            
+            // Start long press timer
+            clearTimeout(longPressTimer);
+            longPressTimer = setTimeout(() => {
+                handleClick('alt', event.touches[0].clientX, event.touches[0].clientY);
+            }, longPressDelay);
+            
+            // Check for multi-finger touch
+            if (event.touches.length === 2) {
+                handleClick('option', event.touches[0].clientX, event.touches[0].clientY);
+                clearTimeout(longPressTimer);
+            } else if (event.touches.length === 3) {
+                handleClick('alt', event.touches[0].clientX, event.touches[0].clientY);
+                clearTimeout(longPressTimer);
+            }
+        }
+        
+        function handleTouchEnd(event) {
+            event.preventDefault();
+            clearTimeout(longPressTimer);
+            
+            // If it wasn't a multi-finger touch or long press
+            if (event.touches.length === 0 && event.changedTouches.length === 1) {
+                const now = Date.now();
+                
+                // Check for double tap
+                if (now - lastTapTime < doubleTapDelay) {
+                    handleClick('alt', event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                    lastTapTime = 0; // Reset to prevent triple tap
+                } else {
+                    // Single tap - use the currently selected mode
+                    handleClick(currentMode, event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                    lastTapTime = now;
+                }
+            }
+        }
+        
+        function handleTouchCancel() {
+            clearTimeout(longPressTimer);
+        }
+        
+        function handleClick(mode, clientX, clientY) {
+            // Create visual feedback
+            const rect = touchArea.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+            
+            createRipple(x, y, mode);
+            
+            // Log the action
+            const timestamp = new Date().toLocaleTimeString();
+            const message = `${timestamp}: ${mode} click at position (${Math.round(x)}, ${Math.round(y)})`;
+            
+            output.innerHTML = message + '<br><br>' + output.innerHTML;
+            
+            // Limit output history
+            if (output.innerHTML.split('<br>').length > 10) {
+                const lines = output.innerHTML.split('<br><br>');
+                output.innerHTML = lines.slice(0, 5).join('<br><br>');
+            }
+        }
+        
+        function createRipple(x, y, mode) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            
+            if (mode === 'alt') {
+                circle.classList.add('alt-click');
+            } else if (mode === 'option') {
+                circle.classList.add('option-click');
+            } else {
+                circle.classList.add('normal-click');
+            }
+            
+            circle.style.left = `${x}px`;
+            circle.style.top = `${y}px`;
+            
+            touchArea.appendChild(circle);
+            
+            // Remove the circle after animation
+            setTimeout(() => {
+                circle.style.opacity = '0';
+                setTimeout(() => {
+                    touchArea.removeChild(circle);
+                }, 500);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
