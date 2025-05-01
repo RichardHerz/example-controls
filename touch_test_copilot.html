@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Button Page</title>
+    <style>
+        .container {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .button {
+            width: 100px;
+            height: 40px;
+            font-size: 16px;
+        }
+        .text-field {
+            font-size: 16px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="myButton" class="button">Click Me</button>
+        <input id="outputField" type="text" class="text-field" value="hello" readonly>
+    </div>
+
+    <script>
+        const button = document.getElementById('myButton');
+        const output = document.getElementById('outputField');
+        let longPressTimer;
+        const LONG_PRESS_DURATION = 500; // milliseconds
+
+        // Handle mouse events (desktop)
+        button.addEventListener('click', (e) => {
+            if (e.altKey) {
+                output.value = 'option touch';
+            } else {
+                output.value = 'simple click';
+            }
+        });
+
+        // Handle touch events (mobile)
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            longPressTimer = setTimeout(() => {
+                output.value = 'option touch';
+            }, LONG_PRESS_DURATION);
+        });
+
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                // Only show simple click if it wasn't a long press
+                if (output.value !== 'option touch') {
+                    output.value = 'simple click';
+                }
+            }
+        });
+
+        // Cancel long press if touch is canceled
+        button.addEventListener('touchcancel', (e) => {
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+            }
+        });
+    </script>
+</body>
+</html>
