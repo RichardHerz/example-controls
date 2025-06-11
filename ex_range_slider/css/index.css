@@ -1,5 +1,4 @@
 #range_range_slider {
- transform: rotate(90deg);
  left: 72px;
  top: 210px;
  width: 249px;
@@ -31,5 +30,12 @@
  border-style: none;
  opacity: 1;
  LCvScrollbar: false;
+ font-size: 20px;
+}
+
+#note {
+ position: absolute;
+ top: 100px;
+ left: 63px;
  font-size: 20px;
 }
